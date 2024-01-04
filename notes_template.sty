@@ -1,0 +1,234 @@
+
+
+% setting up variables
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{
+ family=MCS,
+ prefix=MCS@
+}
+\DeclareStringOption{class}[]
+\DeclareStringOption{doctype}[]
+\ProcessKeyvalOptions*
+
+% needed packages
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{multicol}
+\usepackage[margin=1in, top = 1in]{geometry}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{array}
+\usepackage{float}
+\usepackage{bigints}
+\usepackage{lastpage}
+\usepackage{ulem}
+\usepackage[many]{tcolorbox}
+
+% paragraph indentation
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1em}
+
+
+% header
+
+\setlength{\headheight}{36pt}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\ \\ \ \\\MCS@class}
+\rhead{\ \\\ \\Arthur Xu}
+\chead{Page \thepage \space of \pageref{LastPage} \\  \ \\\MCS@doctype}
+
+% boxes
+
+\newtcbtheorem[number within=section]{bdefinition}{Definition}
+{
+    enhanced,
+    frame hidden,
+    titlerule=0mm,
+    toptitle=1mm,
+    bottomtitle=1mm,
+    fonttitle=\bfseries\large,
+    coltitle=black,
+    colbacktitle=green!20!white,
+    colback=green!10!white,
+    after skip=2em
+}{defn}
+
+\newtcbtheorem[number within=section]{btheorem}{Theorem}
+{
+    enhanced,
+    frame hidden,
+    titlerule=0mm,
+    toptitle=1mm,
+    bottomtitle=1mm,
+    fonttitle=\bfseries\large,
+    coltitle=black,
+    colbacktitle=cyan!20!white,
+    colback=cyan!10!white,
+}{thm}
+
+\newtcbtheorem[use counter from=btheorem]{blemma}{Lemma}
+{
+    enhanced,
+    frame hidden,
+    titlerule=0mm,
+    toptitle=1mm,
+    bottomtitle=1mm,
+    fonttitle=\bfseries\large,
+    coltitle=black,
+    colbacktitle=yellow!30!white,
+    colback=yellow!20!white,
+}{lem}
+
+\newtcbtheorem[use counter from=btheorem]{bcorollary}{Corollary}
+{
+    enhanced,
+    frame hidden,
+    titlerule=0mm,
+    toptitle=1mm,
+    bottomtitle=1mm,
+    fonttitle=\bfseries\large,
+    coltitle=black,
+    colbacktitle=orange!20!white,
+    colback=orange!10!white,
+}{cor}
+
+\newtcbtheorem[use counter from=btheorem]{bproposition}{Proposition}
+{
+    enhanced,
+    frame hidden,
+    titlerule=0mm,
+    toptitle=1mm,
+    bottomtitle=1mm,
+    fonttitle=\bfseries\large,
+    coltitle=black,
+    colbacktitle=yellow!30!white,
+    colback=yellow!20!white,
+}{prop}
+
+\newtcbtheorem[use counter from=btheorem]{bremark}{Remark}
+{
+    enhanced,
+    frame hidden,
+    titlerule=0mm,
+    toptitle=1mm,
+    bottomtitle=1mm,
+    fonttitle=\bfseries\large,
+    coltitle=black,
+    colbacktitle=purple!20!white,
+    colback=purple!10!white,
+    after skip=2em
+}{rem}
+
+\newtcbtheorem[use counter from=btheorem]{bexample}{Example}
+{
+    enhanced,
+    frame hidden,
+    titlerule=0mm,
+    toptitle=1mm,
+    bottomtitle=1mm,
+    fonttitle=\bfseries\large,
+    coltitle=black,
+    colbacktitle=violet!20!white,
+    colback=violet!10!white,
+    after skip=2em
+}{exam}
+
+\newtcbtheorem[number within=section]{bexercise}{Exercise}
+{
+    enhanced,
+    frame hidden,
+    titlerule=0mm,
+    toptitle=1mm,
+    bottomtitle=1mm,
+    fonttitle=\bfseries\large,
+    coltitle=black,
+    colbacktitle=blue!30!white,
+    colback=blue!20!white,
+    after skip=2em
+}{exer}
+
+% commands for boxes
+
+\newcommand{\bthm}[2]{
+    \begin{btheorem}{#1}{}
+        #2
+    \end{btheorem}
+}
+
+\newcommand{\bprop}[2][]{
+    \begin{bproposition}{#1}{}
+        #2
+    \end{bproposition}
+}
+
+\newcommand{\blm}[2][]{
+    \begin{blemma}{#1}{}
+        #2
+    \end{blemma}
+}
+
+\newcommand{\bdefn}[2]{
+    \begin{bdefinition}{#1}{}
+        #2
+    \end{bdefinition}
+}
+
+\newcommand{\bcor}[2][]{
+    \begin{bcorollary}{#1}{}
+        #2
+    \end{bcorollary}
+}
+
+\newcommand{\bexer}[2]{
+    \begin{bexercise}{}{}
+        #1
+    \end{bexercise}
+    \textit{Solution}: #2
+    \vspace{3mm}
+}
+
+\newcommand{\brem}[1]{
+    \begin{bremark}{}{}
+        #1
+    \end{bremark}
+}
+
+\newcommand{\bexam}[2]{
+    \begin{bexample}{#1}{}
+        #2
+    \end{bexample}
+}
+
+\newcommand{\bthmr}[3]{
+    \begin{btheorem}{#1}{#2}
+        #3
+    \end{btheorem}
+}
+
+\newcommand{\bpropr}[3]{
+    \begin{bproposition}{#1}{#2}
+        #3
+    \end{bproposition}
+}
+
+\newcommand{\blmr}[3]{
+    \begin{blemma}{#1}{#2}
+        #3
+    \end{blemma}
+}
+
+\newcommand{\bdefnr}[3]{
+    \begin{bdefinition}{#1}{#2}
+        #3
+    \end{bdefinition}
+}
+
+\newcommand{\bcorr}[3]{
+    \begin{bcorollary}{#1}{#2}
+        #3
+    \end{bcorollary}
+}
