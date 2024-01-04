@@ -26,6 +26,7 @@
 \usepackage{lastpage}
 \usepackage{ulem}
 \usepackage[many]{tcolorbox}
+\usepackage{hyperref}
 
 % paragraph indentation
 \setlength{\parindent}{0pt}
@@ -209,16 +210,24 @@
     \end{btheorem}
 }
 
-\newcommand{\bpropr}[3]{
+\newcommand{\bpropr}[3][]{
     \begin{bproposition}{#1}{#2}
         #3
     \end{bproposition}
 }
 
-\newcommand{\blmr}[3]{
+\newcommand{\blmr}[3][]{
     \begin{blemma}{#1}{#2}
         #3
     \end{blemma}
+}
+
+\newcommand{\bexerr}[4][]{
+    \begin{bexercise}{#1}{#2}
+        #3
+    \end{bexercise}
+    \textit{Solution}: #4
+    \vspace{3mm}
 }
 
 \newcommand{\bdefnr}[3]{
@@ -227,8 +236,14 @@
     \end{bdefinition}
 }
 
-\newcommand{\bcorr}[3]{
+\newcommand{\bcorr}[3][]{
     \begin{bcorollary}{#1}{#2}
         #3
     \end{bcorollary}
+}
+
+\newcommand{\bremr} [2] {
+    \begin{bremark}{}{#1} 
+        #2
+    \end{bremark}
 }
