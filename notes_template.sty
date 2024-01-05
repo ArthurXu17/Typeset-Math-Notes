@@ -124,6 +124,20 @@
     after skip=2em
 }{rem}
 
+\newtcbtheorem[]{bnotation}{Notation}
+{
+    enhanced,
+    frame hidden,
+    titlerule=0mm,
+    toptitle=1mm,
+    bottomtitle=1mm,
+    fonttitle=\bfseries\large,
+    coltitle=black,
+    colbacktitle=red!20!white,
+    colback=red!10!white,
+    after skip=2em
+}{not}
+
 \newtcbtheorem[use counter from=btheorem]{bexample}{Example}
 {
     enhanced,
@@ -202,6 +216,12 @@
     \begin{bexample}{#1}{}
         #2
     \end{bexample}
+}
+
+\newcommand{\bnot}[1]{
+    \begin{bnotation*}{}{}
+        #1
+    \end{bnotation*}
 }
 
 \newcommand{\bthmr}[3]{
