@@ -6,8 +6,8 @@
 \tableofcontents
 \newpage
 \section{Introduction to Topology}
-\begin{enumerate}
-    \setlength{\parskip}{1em}
+\begin{spacedenumerate}
+    
     \item Fix $a < b \in \bR$. Show explicitly that the interval $(a, b)$ is open in $\bru$. Show explicitly that the interval $[a, b)$ is not open in $\bru$.
     
     Let $x\in (a,b)$. Take $\epsilon = \min(x-a, b-x)$. Let $y\in B_{\epsilon}(x)$. If $y = x$, then $y \in (a,b)$. If $y < x < b$, we have that $x - y  = \lvert x -y \rvert < \epsilon \implies x-y < x-a \implies y > a$. Hence $y\in (a,b)$ in this case. If $a < x < y$, we have that $y - x  = \lvert x -y \rvert < \epsilon \implies y-x > b-x \implies y < b$. Hence $y \in (a,b)$ in this case. Thus, $B_{\epsilon}(x)\subseteq (a,b)$ proving that $(a,b)$ is open in $\bru$. $\Box$
@@ -18,8 +18,8 @@
     Let $\ct$ be an arbitrary topology such that $\cb\subseteq \ct$. I claim that $\ct = \mathcal{P}(X)$, which by definition is the discrete topology. The forward direction follows by the definition of a topology since a topology is a collection of subsets. For the converse direction, let $A\subseteq X$. If $A = \emptyset$, $A\in \ct$ since we know that $\ct$ is a topology. Otherwise, we can then write $A = \bigcap_{a\in A}\{a\}$ and hence $A$ is a union of elements of $\cb$ and since $\cb\subseteq \ct$, by the definition of a topology, $A\in \ct$. Hence $\ct = \cp(X)$ as desored. $\Box$
 
     \item Fix a set $X$, and let $\ctf$ and $\ctc$ be the co-finite and co-countable topologies on $X$, respectively.
-    \begin{enumerate}
-        \setlength{\parskip}{1em}
+    \begin{spacedenumerate}
+        
         \item Show explicitly that $\ctf$ and $\ctc$ are both topologies on X
         
         For co-finite, we first note that $\emptyset\in \ctf$ by definition and $X\in \ctf$ since $X\setminus X = \emptyset$ which is finite. Let $U_{1},U_{2}\in\ctf$. If either are empty, the intersection is empty and thus remains in $\ctf$. Otherwise, say $U_{1} = X\setminus\{x_{1},\dots, x_{m}\}$ and $U_{2} = X\setminus \{y_{1},\dots, y_{n}\}$. Then $U_{1}\cap U_{2} = X\setminus (\{x_{1},\dots, x_{m}\}\cup \{y_{1},\dots, y_{n}\})$ and hence is still in $\ctf$. Now consider a collection $\{U_{\lambda}\}_{\lambda\in \Lambda}$ of open sets in $\ctf$. We can assume they are all non-empty since this will not change the value of the union. So each $U_{\lambda}$ is of the form $X\setminus V_{\lambda}$ where $V_{\lambda}$ is finite. We have that:
@@ -40,7 +40,7 @@
         \item Under what circumstances does $\ctd = \ctc$?
         
         This occurs if and only if $X$ is countable. For the converse direction, every subset is countable, and thus every subset of $X$ has its complement countable, thus $\ctc = \cp(X) = \ctd$. For the forward direction, consider the contrapositive. Suppose $X$ is uncountable and consider any $x\in X$. Note that $X\setminus\{x\}$ remains uncountable, and so $\{x\} \in \ctd$ but $\{x\}\not\in \ctc$ and hence $\ctc \neq \ctd$ as desired. $\Box$ 
-    \end{enumerate}
+    \end{spacedenumerate}
     \item Let $(X, \ctc)$ be an infinite set with the co-countable topology. Show that $\ctc$ is closed under countable intersections. Give an example to show that it need not be closed under arbitrary intersections.
     
     Let $\{U_{n}\}_{n\in \bN}$ be countably many sets in the co-countable topology. We can assume they are all non-empty since this will not change the value of the union. Thus they are of the form $U_{n} = X\setminus V_{n}$ where $V_{n}$ is countable for all $n\in \bN$. Then, we simply note that:
@@ -103,10 +103,10 @@
     First we note that $U\neq\emptyset\in T_{\text{co-}\phi}$ if and only if $U = X\setminus V$ where $V$ satisfies $\phi$ (in particular $V = X\setminus U$). Finite intersections $(X\setminus V_{1})\cap (X\setminus V_{2})$ are of the form $X\setminus (V_{1}\cup V_{2})$, so we require that finite unions of sets satisfying $\phi$ still satisfy $\phi$. Also $\bigcup X\setminus V_{\lambda} = X\setminus \bigcap V_{\lambda}$, so we require arbitrary intersections of sets satisfying $\phi$ to still satisfy $\phi$. Finally since we want $X\in T_{\text{co-}\phi} $, we require that $\emptyset$ satisfies $\phi$. Cocountable, cofintite, and particular point topology all satisfy this where the properties are ``is finite'', ``is countable'' and ``does not contain $p$''. We can also phrase the discrete topology in this way with the property ``is a set''. We can phrase the trivial topology in this way by using the property ``is the empty set''. The ray topology can be phrased as ``is an interval of the form $(-\infty, a)$ or is equal to the emptyset''.
 
     \item Let $\{\ct_{\alpha}:\alpha\in I\}$ be a collection of topologies on a set $X$, where $I$ is some indexing set. Prove that there is a unique finest topology that is refined by all the $T_{\alpha}$. That is, prove that there is a topology $\ct$ on $X$ such That
-    \begin{enumerate}
+    \begin{spacedenumerate}
         \item $\ct_{\alpha}$ refines $T$ for every $\alpha \in I$.
         \item If $T'$ is another topology that is refined by $T_{\alpha}$ for every $\alpha\in I$, then $T$ is finer than $T'$
-    \end{enumerate}
+    \end{spacedenumerate}
     We simply take $\ct$ = $\bigcap_{\alpha\in I} \ct_{\alpha}$. We see that this is a subset of each $\ct_{\alpha}$ which means that condition a) is satisfied. Also if $T'$ is a subset of each $\ct_{\alpha}$ it is thus a subset of their intersection which satisfies condition b). It remains to be shown that this is actually still a topology.
 
     We see that $\emptyset, X$ are elements of each $\ct_{\alpha}$ and is thus an element of $\ct$. If $U_{1},U_{2}\in \ct$, then $U_{1},U_{2}\in \ct_{\alpha}$ for all $\alpha\in I$, so $U_{1}\cap U_{2}\in \ct_{\alpha}$ for all $\alpha\in I$ and hence $U_{1}\cap U_{2}\in \ct$. For unions, suppose $\{U_{\lambda}\}_{\lambda\in \Lambda}$ is a collection of sets in $\ct$. They are thus contained in each $\ct_{\alpha}$. Since each $\ct_{\alpha}$ is a topology, $\bigcup_{\lambda\in\Lambda}\in \ct_{\alpha}$ for all $\alpha$ and hence the union is contained in $\ct$ as desired. $\Box$
@@ -117,8 +117,8 @@
     For an example where $\ct_{f}$ is not a topology, let $X = \{0,1,2,3\}$ and $Y = \{0,1,2\}$. Define $f:X\to Y$ where $f(0) = f(1) = 0$, $f(2) = 1$ and $f(3) = 2$ (note that $f$ is surjective here). Define the following topology on $X$: $\ct = \{\emptyset, \{0,2\}, \{1,3\}, X\}$. The resulting set for $\ct_{f}$ is $\{\emptyset, \{0,1\}, \{0,2\}, Y\}$. Note however that this is not a topology since $\{0,1\}\cap \{0,2\} = \{0\}$ but $\{0\}\not\in \ct_{f}$.
 
     \item Working in $\bru$:
-    \begin{enumerate}
-        \setlength{\parskip}{1em}
+    \begin{spacedenumerate}
+        
         \item Show that every nonempty open set contains a rational number
         
         Let $U$ be a nonempty open set. Let $x\in U$. Since $U$ is open, there exists an $\epsilon$ greater than 0 such that the interval $(x-\epsilon, x+\epsilon)\subseteq U$. By the density of the rationals, there exists a rational number $q$ contained in the interval which is a subset of $U$ as desired. $\Box$
@@ -126,6 +126,6 @@
         \item Show that there is no uncountable collection of pairwise disjoint open subsets of $\bR$
         
         Suppose for contradiction an uncountable collection of pairwise disjoint open subsets of $\bR$ exists. By part a), each of these open subsets would contain a rational number and since the subsets are all disjoint, each of these rational numbers would be distinct and we would end up with an uncountable collection of rational numbers. This is a contradiction since there are countably many rational numbers. $\Box$
-    \end{enumerate}
-\end{enumerate}
+    \end{spacedenumerate}
+\end{spacedenumerate}
 \end{document}
