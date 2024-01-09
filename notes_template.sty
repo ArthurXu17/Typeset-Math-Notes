@@ -170,6 +170,62 @@
     after skip=2em
 }{exer}
 
+\newtcbtheorem[number within=section]{beasyproblem}{Problem}
+{
+    enhanced,
+    frame hidden,
+    titlerule=0mm,
+    toptitle=1mm,
+    bottomtitle=1mm,
+    fonttitle=\bfseries\large,
+    coltitle=black,
+    colbacktitle=green!20!white,
+    colback=green!10!white,
+    after skip=2em
+}{easyproblem}
+
+\newtcbtheorem[use counter from=beasyproblem]{bmedproblem}{Problem}
+{
+    enhanced,
+    frame hidden,
+    titlerule=0mm,
+    toptitle=1mm,
+    bottomtitle=1mm,
+    fonttitle=\bfseries\large,
+    coltitle=black,
+    colbacktitle=yellow!20!white,
+    colback=yellow!10!white,
+    after skip=2em
+}{medproblem}
+
+\newtcbtheorem[use counter from=beasyproblem]{bhardproblem}{Problem}
+{
+    enhanced,
+    frame hidden,
+    titlerule=0mm,
+    toptitle=1mm,
+    bottomtitle=1mm,
+    fonttitle=\bfseries\large,
+    coltitle=black,
+    colbacktitle=orange!20!white,
+    colback=orange!10!white,
+    after skip=2em
+}{hardproblem}
+
+\newtcbtheorem[use counter from=beasyproblem]{bvhardproblem}{Problem}
+{
+    enhanced,
+    frame hidden,
+    titlerule=0mm,
+    toptitle=1mm,
+    bottomtitle=1mm,
+    fonttitle=\bfseries\large,
+    coltitle=black,
+    colbacktitle=red!20!white,
+    colback=red!10!white,
+    after skip=2em
+}{vhardproblem}
+
 % commands for boxes
 
 \newcommand{\bthm}[2]{
@@ -270,4 +326,36 @@
     \begin{bremark}{}{#1} 
         #2
     \end{bremark}
+}
+
+\newcommand{\beasy}[3][] {
+    \begin{beasyproblem}{}{#1}
+        #2
+    \end{beasyproblem}
+    \textit{Solution}: #3
+    \vspace{3mm}
+}
+
+\newcommand{\bmed}[3][] {
+    \begin{bmedproblem}{}{#1}
+        #2
+    \end{bmedproblem}
+    \textit{Solution}: #3
+    \vspace{3mm}
+}
+
+\newcommand{\bhard}[3][]{
+    \begin{bhardproblem}{}{#1}
+        #2
+    \end{bhardproblem}
+    \textit{Solution}: #3
+    \vspace{3mm}
+}
+
+\newcommand{\bvhard}[3] {
+    \begin{bvhardproblem}{}{#1}
+        #2
+    \end{bvhardproblem}
+    \textit{Solution}: #3
+    \vspace{3mm}
 }
