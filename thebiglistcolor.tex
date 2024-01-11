@@ -176,7 +176,7 @@
     To show that this generates the usual topology on $\bR$, it suffices to show that open intervals can be expressed as unions of intervals in $\cb_{\bQ}$. Then by Problem \ref{easyproblem:rintervalbasis}, we have that every open set is a union of open intervals which are each a union of intervals in $\cb_{\bQ}$. By the density of the rationals, for all $n\in \bN$, there exists a rational number $q_{n}$ such that $a < q_{n} < \min(b, a + \frac{1}{n})$. Similarly, we also have that there exists $r_{n}$ such that $\max(a, b - \frac{1}{n}) < r_{n} < b$. We then note that $(a,b) = \bigcup_{n\in\bN} (q_{n}, r_{n})$. The reverse inclusion follows because each $(q_{n}, r_{n})\subseteq (a,b)$. For the forward inclusion, if $a < x < b$. We know that there exists an $n\in \bN$ such that $\frac{1}{n} < \min(x-a, b-x)$. In particular, this means that $x > a + \frac{1}{n} > q_{n}$ and $x < b- \frac{1}{n} < r_{n}$ and we have that $x\in (q_{n}, r_{n})$. Hence every open interval can be expressed as a union of intervals in $\cb_{\bQ}$ which as discussed above implies that $\cb_{\bQ}$ generates the usual topology of $\bR$. $\Box$
 }
 
-\beasy{
+\beasy[sorgenfrey]{
     Some exercises about the Sorgenfrey line. Recall the collection $\cb = \{[a,b)\subseteq \bR: a < b\}$ is a basis which generates $\cs$, the Lower Limit Topology. The space $(\bR, \cs)$ is called the Sorgenfrey line.
     \begin{enumerate}
         \item Show that every nonempty open set in $\cs$ contains a rational number.
@@ -314,4 +314,239 @@
     \end{align*}
     Let $h = \widetilde{h}^{-1}$. Let's equip the domain of $h$ with the Furstenberg topology. By Problem \ref{easyproblem:inversequotienttop}, since $h$ is bijective in this case, if we take $\ct_{h} = \{h(U): U\in \ctfurst\}$, we get that $\ct_{h}$ is a topology on $\bZ$. We note that $A$ is the image of the even integers under $h$ and note that the set of even integers is open in $\ctfurst$ since they can be represented as $Z(2,0)$. Hence the first condition is satisfied. The second condition is satisfied because Problem \ref{medproblem:furstdefintion} tells us that non empty open sets in $\ctfurst$ are all infinite, and if we take the image of these infinite set under a bijection, they will still be infinite. So open sets in this topology are never singletons. Finally to show Hausdorff, let $a,b\in \bZ$. By Problem \ref{medproblem:furstdefintion}, we know that there exists disjoint open sets $U,V$ in $\ctfurst$ such that $h^{-1}(a)\in U$ and $h^{-1}(b)\in V$. Now consider $h(U)$ and $h(V)$ in $\bZ$ equipped with $\ct_{h}$. We have that $a\in h(U)$ and $b\in h(V)$. We also have that they are open by the definition of $\ct_{h}$. Finally we note that they are disjoint because if $y \in h(U)\cap h(V)$, then $y = h(u)$ for some $u\in U$ and $y = h(v)$ for some $v\in V$. Thus by injectivity of $h$, we get that $u = v$, which in particular gives us that $u=v \in U\cap V$ which contradicts the fact that $U$ and $V$ are disjoint. Thus $h(U)\cap h(V) = \emptyset$ completing the proof that $\ct_{h}$ is Hausdorff. $\Box$ 
 }
-\end{document}
+\section{Closed sets, closures, and dense sets}
+
+\beasy {
+    Let $(X, \ct )$ be a topological space and $\cb$ a basis for $\ct$. Let $A \subseteq X$. Show that $x \in \overline{A}$ if and only if for every basic open set $U$ containing $x$, $U \cap A \neq \emptyset$
+} {
+    The forward direction follows by the definition because every basic open set is an open set. For the converse direction, let $x\in X$ and $V$ be an arbitrary (not necesarily basic) open set containing $x$. We know from equivalent definitions of a basis that there exists a basic open set $U$ containing $x$ that is contained in $V$. By assumption, $U\cap A\neq \emptyset$ and since $U\subseteq V$, we have that $V\cap A\neq \emptyset$
+}
+
+\beasy {
+    Let $(X,\ct)$ be a topological space, $A,B\subseteq X$. Is it necessarily true that $\overline{A\cup B} = \overline{A}\cup \overline{B}$? Is it necessarily true that $\overline{A\cap B} = \overline{A}\cap \overline{B}$
+} {
+    It is true that $\overline{A\cup B} = \overline{A}\cup \overline{B}$. For the forward inclusion, let $x\in \overline{A\cap B}$ and suppose $x\not\in \overline{A}$. Then, there exists $U$ containing $x$ such that $U\cap A = \emptyset$. Since $x\in \overline{A\cup B}$, we have that $(U\cap A)\cup (U\cap B) = U\cap (A\cup B) \neq \emptyset$. But since $U\cap A = \emptyset$, this gives us that $U\cap B \neq \emptyset$. Since $U$ was arbitrary, this gives us that $x\in \overline{B}$ as desired. For the reverse inclusion, we simply use the contrapositive. Suppose $x\not\in \overline{A\cup B}$, there exists an open set $U$ containg $x$ such that $(U\cap A)\cup (U\cap B) =  U\cap (A\cup B) = \emptyset$. This gives us that $U\cap A = U\cap B = \emptyset$ and hence $x\not \in \overline{A}$ and $x\not\in \overline{B}$ as desired. Thus closure distributes over unions.
+
+    It is not true however that closures distribute over intersections. Consider $\bru$ with $A = (0,1)$ and $B = (1,2)$. We have that $A\cap B = \emptyset$, so $\overline{A\cap B} = \emptyset$. However, $\overline{A} = [0,1]$ and $\overline{B} = [1,2]$, so $\overline{A}\cap \overline{B} = \{1\}\neq \emptyset = \overline{A\cap B}$. $\Box$
+}
+
+\beasy {
+    Let $A = \{\frac{1}{n}:\ n\in \bN\}$. In $\bru$, show that $\overline{A} = A\cup\{0\}$.
+} {
+    For the reverse inclusion, we know that $A\subseteq \overline{A}$. We also know that for any open set $U$ around 0, we can take an $\epsilon > 0$ such that $(-\epsilon, \epsilon)\subseteq U$. Note that for any $\epsilon$, there exists $N\in \bN$ large enough so that $\frac{1}{N} < \epsilon$. Thus the intersection $U\cap A$ is always non empty.
+
+    For the forward inclusion we approach via the contrapositive. Suppose $x\not\in A\cup \{0\}$. If $x < 0$, take $\epsilon = \lvert x\rvert/2$ so that $B_{\epsilon}(x)\cap A  = \emptyset$ because all values in $B_{\epsilon}(x)$ will take on strictly negative values. Now suppose $x > 0$ but $x\not\in A$. Let $n\in \bN$ be minimal so that $\frac{1}{n} < x$ (we know such an $n$ must exist by Archimedian property). So we have that $\frac{1}{n} < x < \frac{1}{n-1}$ and we know these are strict inequalities because $x\not \in A$. So $x\in \left(\frac{1}{n}, \frac{1}{n-1}\right)$, and by \ref{easyproblem:openinterval}, we know that this is an open set and there exists an $\epsilon > 0$ so that $B_{\epsilon}(x)\subseteq \left(\frac{1}{n}, \frac{1}{n-1}\right)$. Note that this implies $B_{\epsilon}(x)\cap A = \emptyset$ since for all $k \leq n-1$ we have that $\frac{1}{k} \geq \frac{1}{n-1}$, and for $k\geq n$, we have that $\frac{1}{k}\leq \frac{1}{n}$. So none of the values of $A$ are contained in this interval. In both cases, we have constructed a $B_{\epsilon}(x)$ so that $B_{\epsilon}(x)\cap A = \emptyset$. Since $B_{\epsilon}(x)$ is an open set in $\bru$ but has an empty intersection with $A$, we have that $x\not\in \overline{A}\cup\{0\}$ as desired. $\Box$
+}
+
+\beasy [rclosures]{
+    Show the following facts in $\bru$. Let $a < b <c\in \bR$,
+    \begin{enumerate}
+        \item $\overline{\{a\}} = \{a\}$
+        \item $\overline{[a,b)} = [a,b]$
+        \item $\overline{(a,b)\cup(b,c)} = [a,c]$
+        \item $\overline{[a,b]} = [a,b]$
+        \item If $(x_{n})_{n = 1}^{\infty}$ is a sequence converging to $x\in \bR$, then $\overline{\{x_{n}:\ n\in \bN\}} = \{x_{n}:\ n\in \bN\}\cup \{x\} $
+    \end{enumerate}
+} {
+    \begin{spacedenumerate}
+        \item Converse inclusion follows because $A\subseteq \overline{A}$ for all sets $A$. For the forward inclusion, we use the contrapositive. If $x\not\in \{a\}$, i.e $x\neq a$, we can take $\epsilon = \lvert x-a\rvert$, and thus $a\not\in B_{\epsilon}(x) \implies \{a\}\cap B_{\epsilon}(x) = \emptyset$. Since $B_{\epsilon}(x)$ is an open set containing $x$, $x\not\in \overline{\{a\}}$ as desired. $\Box$
+        \item For the converse inclusion if $x\in [a, b)$, we are done. So consider $x = b$. In this case, for any open set $U$ containing $B$, there exists $\epsilon > 0$ such that $B_{\epsilon}(b)\subseteq U$. We have that $b - \min\left(\frac{\epsilon}{2}, \frac{b-a}{2}\right)\in B_{\epsilon}(b)\cap [a,b)$ and thus the intersection $U\cap [a,b)$ is non empty for arbitrary open sets $U$ containing $b$. This completes the reverse inclusion.
+        
+        For the forward inclusion use the contrapositive. If $x < a$, then take $\epsilon = a - x$ and $B_{\epsilon}(x)\cap [a,b) = \emptyset$. If $x > b$, take $\epsilon = x-b$ and $B_{\epsilon}(x)\cap[a,b) = \emptyset$. In either case, $B_{\epsilon}(x)$ is an open set containing $x$ that doesn't intersect with $[a,b)$, so $x\not\in \overline{[a,b)}$ as desired. $\Box$
+        \item For the converse inclusion if $x\in (a, b)\cup (b,c)$, we are done. So we are left to consider $x\in \{a,b,c\}$ only. For $a$, any open set $U$ containing it, there exists $\epsilon > 0$ such that $B_{\epsilon}(a)\subseteq U$. Then $a + \min\left(\frac{\epsilon}{2},\frac{b-a}{2}\right)\in (a,b)\cap B_{\epsilon}(a)$ and thus the intersection $U\cap (a,b)\cup (b,c)$ is non empty for arbitrary open sets $U$ containing $a$. For $b$, any open set $U$ containing it, there exists $\epsilon > 0$ such that $B_{\epsilon}(b)\subseteq U$. Then $a + \min\left(\frac{\epsilon}{2},\frac{c-b}{2}\right)\in (b,c)\cap B_{\epsilon}(b)$ and thus the intersection $U\cap (a,b)\cup (b,c)$ is non empty for arbitrary open sets $U$ containing $b$. For $c$, any open set $U$ containing it, there exists $\epsilon > 0$ such that $B_{\epsilon}(c)\subseteq U$. Then $c - \min\left(\frac{\epsilon}{2},\frac{c-b}{2}\right)\in (b,c)\cap B_{\epsilon}(c)$ and thus the intersection $U\cap (a,b)\cup (b,c)$ is non empty for arbitrary open sets $U$ containing $c$. In all cases, we have that $x\in \overline{(a,b)\cup (b,c)}$  
+        
+        For the forward inclusion use the contrapositive. If $x < a$, then take $\epsilon = a - x$ and $B_{\epsilon}(x)\cap ((a,b)\cup (b-c)) = \emptyset$. If $x > c$, take $\epsilon = x-c$ and $B_{\epsilon}(x)\cap((a,b)\cup (b-c)) = \emptyset$. In either case, $B_{\epsilon}(x)$ is an open set containing $x$ that doesn't intersect with $(a,b)\cup(b,c)$, so $x\not\in \overline{(a,b)\cup(b,c)}$ as desired. $\Box$
+        \item Reverse inclusion follows because $A\subseteq \overline{A}$ for all sets $A$. For the forward inclusion use the contrapositive. If $x < a$, then take $\epsilon = a - x$ and $B_{\epsilon}(x)\cap [a,b] = \emptyset$. If $x > b$, take $\epsilon = x-b$ and $B_{\epsilon}(x)\cap[a,b] = \emptyset$. In either case, $B_{\epsilon}(x)$ is an open set containing $x$ that doesn't intersect with $[a,b]$, so $x\not\in \overline{[a,b]}$ as desired. $\Box$
+        \item For the reverse inclusion, we only need to show that $x$ is in the closure, the other elements are contained because of the fact that $A\subseteq \overline{A}$ in general. Let $U$ be an arbitrary open set containing $x$. There exists an $\epsilon > 0$ such that $B_{\epsilon}(x)\subseteq U$. By the definition of convergence, there exists $n\in \bN$ such that $x_{n}\in B_{\epsilon}(x)\subseteq U$. Hence the intersection $U\cap \{x_{n}:\ n\in \bN\}$ is always not empty and hence $x\in \overline{\{x_{n}:\ n\in \bN\}}$ completing the reverse inclusion.
+        
+        For the forward inclusion use the contrapositive. Suppose $y$ is not an element of the sequence and is not equal to $x$. Since limits are unique in $\bru$, the sequence doesn't converge to $y$. In particular, taking $\epsilon = \lvert y-x\rvert/2$, there exists an $N\in \bN$ so that $n\geq N$ implies that $x_{n}\in B_{\epsilon}(x)$. In particular, by the triangle in equality, this means that $n\geq N$ implies that $x_{n}\not\in B_{\epsilon}(y)$ and that $x\not\in B_{\epsilon}(y)$. For each $1\leq k \leq N$, define $\epsilon_{k} = \lvert y - x_{k}\rvert/2 > 0$ (since $y\neq x_{k}$ for all $k\in\bN$). So this construction gives us that $x_{k}\not\in B_{\epsilon_{k}}(y)$. Finally let's take $\epsilon_{0} = \min(\epsilon, \epsilon_{1},\dots, \epsilon_{k})$. We then have that $B_{\epsilon_{0}}(y)$ is an open set containing $y$ that doesn't contain any elements of the sequence or $x$. Hence $y\not\in \overline{\{x_{n}:\ n\in \bN\}}$ as desired. $\Box$
+    \end{spacedenumerate}
+}
+\beasy [closureequiv]{
+    Let $(X,\ct)$ be a topological space and let $A\subseteq X$. Show that
+    \begin{align*}
+        \overline{A} &= \bigcap\ \{F\subseteq X:\ A\subseteq F\text{ and } F \text{ is closed}\}
+    \end{align*}
+} {
+    For both inclusions, we prove via the contrapositive.
+
+    $(\subseteq)$
+
+    Suppose $x$ is not an element of the set on the right hand side. Thus there exists a closed set $F$ with $A\subseteq F$ such that $x\not\in F$, i.e $x\in X\setminus F$. $X\setminus F$ is an open set since $F$ is closed and since $A\subseteq F$ we have that $A\cap (X\setminus F) = \emptyset$. Since we have found an open set containing $x$ that doesn't intersect with $A$, $x\not\in \overline{A}$. $\Box$
+
+    $(\supseteq)$
+
+    Suppose $x\not\in \overline{A}$. There exists an open set $U$ containing $x$ such that $U\cap A = \emptyset$. This implies that $A\subseteq X\setminus U$. Since $U$ is open, $X\setminus U$ is closed, so this set is contained in the intersection on the right side of the equation. However, since $x\not\in X\setminus U$ (since $x\in U$), we have that $x$ cannot be an element of an intersection containing $X\setminus U$, and hence $x$ is not an element of the right side. $\Box$ 
+}
+\beasy  [denseequiv]{
+    Show that if $(X, \ct )$ is a topological space and $D \subseteq X$, show that $D$ is dense if and only if for every nonempty open set $U \subseteq X$, $D \cap U \neq \emptyset$.
+} {
+    For the forward implication, suppose $\overline{D} = X$. Let $U$ be an arbitrary non empty open set. Then there exists $x\in U$. By assumption, we have that $x\in \overline{D}$. So by the definition of closure, $U\cap D\neq\emptyset$ as desired.
+
+    For the reverse implication. Suppose all nonempty open sets intersect non trivially with $D$. We then see that $\overline{D} = X$ since for arbitrary $x\in X$ and open sets $U_{x}$ containing $x$, we get by our assumption that $U_{x}\cap D\neq \emptyset$ so  $x\in \overline{D}$ as desired. $\Box$
+}
+
+\beasy {
+    In an arbitrary topological space, is the union of two dense sets necessarily dense? What about the intersection of two dense sets? For both questions, prove it or give a counterexample
+} {
+    The union is necessarily dense. Suppose $D_{1}$ and $D_{2}$ are dense. We note that $D_{1}\subseteq D_{1}\cup D_{2}$ and since $D_{1}$ is dense, $D_{1}\cup D_{2}$ is dense. In general if $A$ is dense with $A\subseteq B$, then $B$ is dense.
+
+    Intersections are not necessarily dense. In $\bru$, we have that the set of rationals, and irrationals are both dense. However, their intersection is the empty set which is not dense. $\Box$
+}
+
+\beasy [intequiv]{
+    Show that
+    \begin{align*}
+        \interior(A) &= \bigcup\ \{U\subseteq X:\ U\subseteq A\text{ and } U \text{ is open}\}
+    \end{align*}
+} {
+    For the forward inclusion, suppose $x\in \interior (A)$. Then there exists an open set $U_{x}$ containing $x$ with $U_{x}\subseteq A$ by definition. Thus, $U_{x}$ is an element of the union on the right hand side. Since $x\in U_{x}$, then $x$ is an element of the right side.
+
+    For the reverse inclusion, if $x$ is an element of the union, there exists an open set $U$ such that $x\in U$ and $U\subseteq A$. This is precisely the condition for $x\in \interior A$
+}
+
+\beasy [intopen]{
+    Show for any topological space $(X, \ct )$ and any $A \subseteq X$, that $\interior(A)$ is open
+} {
+    This follows from problem \ref{easyproblem:intequiv} since the interior is a union of open sets and is thus open. $\Box$
+}
+\beasy [openiffequalinterior]{
+    Show that a subset $A$ of a topological space $X$ is open if and only if $A = \interior(A)$.
+} {
+    The reverse implication follows since we've already showed in problem \ref{easyproblem:intopen} that the interior is open. For the forward implication, suppose $A$ is open. Using the equivalent definition fo the interior in problem \ref{easyproblem:intequiv}, we see that $\interior(A)\subseteq A$ since it is a union of subsets of $A$. Also, we see that if $A$ is open, then $A$ is an element of the union and so $A\subseteq \interior (A)$. Hence $A = \interior(A)$ completing the proof. $\Box$
+}
+
+\beasy [intclosureexamples]{
+    Compute the interior and closures of the following sets in the given spaces:
+    \begin{enumerate}
+        \item $(0,1]$ in $\bru$
+        \item $(0,1]$ in the Sorgenfrey line
+        \item $(0,1]$ in $(\bR, \ctt)$
+        \item $(0,1]$ in $(\bR, \ctd)$
+        \item $(0,1]$ in $(\bR, \ctr)$
+        \item $(0,1]$ in $(\bR, \ctf)$
+        \item The set $E$ of even numbers in $(\bZ, \ctf)$
+        \item $\bQ$ in $\bru$
+        \item $\bQ$ in the Sorgenfrey line
+        \item $\bQ\times \bQ$ in $\bru^{2}$
+        \item $\{(x,y,z)\in \bR^{3}:\ x= 0\}$ in $\bru^{3}$
+    \end{enumerate}
+} {
+\begin{spacedenumerate}
+    \item The closure is $[0,1]$ via a similar proof to problem \ref{easyproblem:rclosures}. The interior is $(0,1)$. We note that $(0,1)$ is open by problem \ref{easyproblem:openinterval} and that it is a subset of $[0,1)$. Thus the interior must contain $(0,1)$. However, $1\not\in \interior (0,1]$ (so the interior cannot be $(0,1]$) since every open set containing $1$ will contain an element larger than 1 which is not in $(0,1]$. Thus the interior must be $(0,1)$. $\Box$
+    \item We showed that $(0,1]$ is open in the Sorgenfrey line in Problem \ref{easyproblem:sorgenfrey}. Thus by problem \ref{easyproblem:openiffequalinterior}, we have that $(0,1]$ is it's own interior. We also have that $\bR\setminus (0,1] = (-\infty, -1)\cup[-1,0]\cup (1,\infty)$. By Problem \ref{easyproblem:sorgenfrey}, we know that the topology of the Sorgenfrey line refines the usual topology of $\bR$. Since $(-\infty, -1)$ and $(1,\infty)$ are open in the usual topology on $\bR$, they open in the Sorgenfrey line. $[-1,0]$ is open because we can write it as $[-1,-\frac{1}{2})\cup (-1, 0]$ which are both open by \ref{easyproblem:sorgenfrey}.  Hence, $\bR\setminus (0,1]$ is open, implying that $(0,1]$ is closed and equal to its own closure. $\Box$ 
+    \item The only open/closed sets in $\ctt$ are $\emptyset$ and $\bR$. By using \ref{easyproblem:intequiv}, the only open set contained by $(0,1]$ is $\emptyset$ so the interior is $\emptyset$. The only closed set containing $(0,1]$ is $\bR$, so the closure is $\bR$ by problem \ref{easyproblem:closureequiv}. $\Box$
+    \item In the discrete topology every set is both open and closed. So the interior and closure of $(0,1]$ is itself. $\Box$
+    \item In $\ctr$, open sets are of the form $(a, \infty)$ (or the empty set and $\bR$), and so closed sets are of the form $(-\infty, b)$. Note that there does not exist a nonempty open set that is contained in $(0,1]$ and hence the interior is equal to $\emptyset$. Note that $(0,1]\subseteq (-\infty, 1]$ and $(-\infty, 1]$ is closed, so the closure must be a closed subset of $(-\infty,1]$. However, every proper closed subset of $(-\infty,1]$ is of the form $(-\infty,b]$ for $b <  1$ so $1\not\in(-\infty,b]$. This implies that the closure must be equal to $(-\infty, 1]$ since $(0,1]$ itself must be a subset of its closure. $\Box$
+    \item The closed sets in $\ctf$ are the finite sets and $\bR$ itself. Since $(0,1]$ is infinite, there are no finite sets that contain it, so the only closed set containing it is $\bR$. Thus, by problem \ref{easyproblem:closureequiv}, the closure must be $\bR$. Since the complement of $(0,1]$ is infinite, every subset of $(0,1]$ will contain infinitely many values and so every non empty subset will not be open in $\ctf$. The only open subset of $(0,1]$ is $\emptyset$. Thus by problem \ref{easyproblem:intequiv}, the interior will be equal to $\emptyset$. $\Box$
+    \item We can generalize the above argument to say that if $X$ is a set equipped with the co-finite topology and $A\subseteq X$ is such that $A$ is infinite and $X\setminus A$ is infinite, then the closure of $A$ is $X$ and the interior of $A$ is $\emptyset$. If $A$ is infinite, there are no finite (i.e closed) sets that contain it except for $X$. So by problem \ref{easyproblem:closureequiv}, the closure of $A$ must be $X$. If $X\setminus A$ is infinite, every subset of $A$ will contain infinitely many elements in its complement (since it must contain $X\setminus A$). Thus the only open set contained in $A$ is the empty set, which by problem \ref{easyproblem:intequiv} tells us that the interior is $\emptyset$. So in this case, the set of even numbers is infinite and so is the complement (odd integers), and thus the interior is $\emptyset$ and closure is $X$. $\Box$
+    \item We've shown in problem \ref{medproblem:qdense} that every open set in $\bru$ intersects non trivially with $\bQ$. Furthermore, problem \ref{easyproblem:denseequiv} tells us that this implies that $\bQ$ is dense, and hence $\overline{\bQ} = \bR$. Next, we show that there are no nonempty open subsets of $\bQ$. Suppose such an open subset $U$ existed. Let $q\in U$. Let $V$ be an arbitrary open set  containing $q$. Since $U$ is open there must be open interval $(q-\epsilon, q + \epsilon)\subseteq U$. However this open interval intersects non trivially with the irrationals by problem \ref{medproblem:qdense}. This contradicts the fact that $U$ is contained in the rationals. Hence the only non empty open subset contained in $\bQ$ is $\emptyset$ which by problem \ref{easyproblem:intequiv} we have that the interior is $\emptyset$. $\Box$
+    \item $\bQ$ is still dense in the Sorgenfrey Line because every open set $U$ contains a basis element of the form $[a,b)$ which will always contain a rational number. Hence $\overline{\bQ} = \bR$. We can always follow the same proof as for $\bru$ to show that interior is empty because any open set must contain an interval $[a,b)$ (which is a basis element). Since $(a,b)\subseteq [a,b)$, we have that this interval must contain an irrational number. The proof continues in the same way and we get that the interior is $\emptyset$. $\Box$
+    \item $\bQ\times \bQ$ is still dense in $\bru^{2}$ since given a non empty open set $U$, say it contains a point $(x,y)$. There exists an open ball such that $B_{\epsilon}(x,y)\subseteq U$ ($\epsilon > 0$). Consider the interval $(x-\frac{\epsilon}{\sqrt{2}}, x+\frac{\epsilon}{\sqrt{2}})\in \bR$, by density of rationals (problem \ref{medproblem:qdense}), there is a rational number $q_{1}$ in this interval. Similarly, there exists a rational number $q_{2}$ in the interval $(y-\frac{\epsilon}{\sqrt{2}}, y + \frac{\epsilon}{\sqrt{2}})$  Then, $d((q_{1},q_{2}), (x,y)) = \sqrt{\lvert q_{1}- x\rvert^{2} + \lvert q_{2} - y\rvert^{2}} < \sqrt{\left(\frac{\epsilon}{\sqrt{2}}\right)^{2} + \left(\frac{\epsilon}{\sqrt{2}}\right)^{2}} = \epsilon$. So $(q_{1}, q_{2}) \in U\cap \bQ\times \bQ$ and hence $\overline{\bQ\times \bQ} = \bR^{2}$.
+    
+    A similar justification will allow us to show that the interior is empty. Suppose a non empty open subset $U$ of $\bQ\times \bQ$ existed. Say $(x,y)\in U$. There exists an open ball such that $B_{\epsilon}(x,y)\subseteq U$ ($\epsilon > 0$). Consider the interval $(x-\epsilon, x + \epsilon)$, there exists an irrational number $z$ in this interval. Then $d((z,y),(x,y)) = \lvert z-x\rvert < \epsilon$, so $(z,y)\in B_{\epsilon}(x,y)\subseteq U$. However, $(z,y)\not\in \bQ\times\bQ$. So there cannot be a non empty open subset of $\bQ\times \bQ$ implying that the interior is the empty set.  $\Box$
+\end{spacedenumerate}
+}
+\beasy [bd1]{
+    Let $A$ be a subset of a topological space $X$. Show that $\bd(A)= \overline{A} \cap \overline{X\setminus A} = \overline{A} \setminus \interior(A)$.
+} {
+   The first equality $\bd(A)= \overline{A} \cap \overline{X\setminus A}$ follows exactly from the definition. $x\in \bd(A)$ if and only if every open set intersects non trivially with $A$ and $X\setminus A$ which is equivalent to $x$ being an element of $\overline{A}$ and $\overline{X\setminus A}$.
+
+   To complete the proof we show $\bd(A) = \overline{A}\setminus \interior (A)$. 
+   \begin{align*}
+    x\in \bd(A) &\iff \text{for all open sets $U_{x}$ containing $x$, }U_{x}\cap A\neq \emptyset\text{ and }U_{x}\cap (X\setminus A)\neq \emptyset\\
+    &\iff \text{for all open sets $U_{x}$ containing $x$, }U_{x}\cap A\neq \emptyset\text{ and }U_{x}\not\subseteq A\\
+    &\iff x\in \overline{A} \text{ and }x\not\in \interior(A)\\
+    &\iff x\in \overline{A}\setminus\interior(A). \ \Box
+   \end{align*}
+}
+\beasy {
+    Let $A$ be a subset of a topological space $X$. Show that $\overline{A} = A\cup\bd(A)$ and $\interior(A) = A\setminus \bd(A)$.
+} {
+   \begin{spacedenumerate}
+    \item $\overline{A} = A\cup\bd(A)$
+    
+    We know that $A\subseteq \overline{A}$ and that $\bd(A) = \overline{A}\cap \overline{X\setminus A}$ by problem \ref{easyproblem:bd1}, so we also have that $\bd(A)\subseteq \overline{A}$. Thus the reverse inclusion has been shown. For the forward inclusion, again from problem \ref{easyproblem:bd1}, we have that $\bd(A) = \overline{A}\setminus \interior(A)\implies \overline{A} \subseteq \bd(A)\cup \interior(A)\subseteq \bd(A)\cup A$ as desired ($\interior(A)$ is contained in $A$ since it is a union of subsets of $A$). $\Box$ 
+    \item $\interior(A) = A\setminus \bd(A)$
+    
+    We know that $\interior(A)\subseteq A$ as mentioned above. We also have from problem \ref{easyproblem:bd1} that $\bd (A) = \overline{A} \setminus \interior(A)$ so $x\in \interior(A)\implies x\not\in \bd(A)$. This completes the forward inclusion. For the reverse inclusion, if $x\in A$ and $x\not\in \bd(A)$, there exists a neighbourhood of $U_{x}$ of $x$ such that $U_{x}\cap A = \emptyset$ or $U_{x}\cap(X\setminus A) = \emptyset$. Since $x\in A$, we know that $U_{x}\cap A\neq \emptyset$, so we must have that $U_{x}\cap(X\setminus A) = \emptyset$. This is equivalent to $U_{x}\subseteq A$ and hence $x\in \interior(A)$.
+   \end{spacedenumerate}
+}
+\bmed {
+    Let $A$ be a subset of a topological space $X$. Show that $X = \interior(A) \sqcup \bd(A) \sqcup \interior(X \setminus A)$
+} {
+    First for showing equality of the union, suppose $x\in X$ with $x\not\in \interior(A)$ and $x\not\in \interior(X\setminus A)$. Then for all open sets $U_{x}$ containing $x$, $U_{x}\not\subseteq A$ which is equivalent to $U_{x}\cap(X\setminus A)\neq \emptyset$ and $U_{x}\not\subseteq (X\setminus A)$ which is equivalent to $U_{x}\cap A\neq \emptyset$. These 2 combined precisely are the definition of $x\in \bd(A)$
+
+    For disjointness, $\interior(A)\subseteq A$ and $\interior(X\setminus A)\subseteq X\setminus A$ so $\interior(A)$ and $\interior(X\setminus A)$ are disjoint since $A$ and $X\setminus A$ are disjoint. $\bd(A)$ and $\interior(A)$ are disjoint since by problem \ref{easyproblem:bd1}, $\bd(A) =  \overline{A} \setminus \interior(A)$ so if $x\in \interior(A)$, $x\not\in \bd(A)$ so there cannot be an element in their intersection. Finally, we note that $\bd(A) = \bd(X\setminus A)$ because the definition is symmetric when we replace $A$ with $X\setminus A$. We then get that $\interior(X\setminus A)$ is disjoint with $\bd(X\setminus A) = \bd(A)$. We have shown all 3 sets are pairwise disjoint and thus the union is indeed a disjoint union. $\Box$
+}
+\bmed {
+    A subset $A$ of a topological space $X$ is called regular open if $\interior(\overline{A}) = A$. Regular open sets play an important role in set theoretic topology.
+    \begin{enumerate}
+        \item Show that in $\bru$,  any open interval $(a, b)$ is regular open
+        \item  Let $A$ be a subset of a topological space X. Is it true that $\interior(\overline{A}) = \overline{\interior(A)}$? If not, is there containment one way or the other?
+        \item Show that the intersection of two regular open sets is again regular open (in any topological space)
+        \item Is the union of two regular open sets again regular open? Prove it or give a counterexample.
+        \item Given a subset $A$ of a topological space $X$, let $A^{\perp} = X \setminus \overline{A}$. Show that a set A is regular open if and only if $(A^{\perp})^{\perp} = A$.
+    \end{enumerate}
+} {
+\begin{spacedenumerate}
+    \item We know that $\overline{(a,b)} = [a,b]$ by \ref{easyproblem:rclosures}. The interior of $[a,b]$ is $(a,b)$. It suffices to show that $a$ and $b$ both cannot be in the interior, and since we know that the interior must contain all open sets, it follows that the interior is $(a,b)$. Note that every open set $U$ containing $a$, contains an open interval $B_{\epsilon}(a)\subseteq U$. We see that this is not contained in $(a,b)$ since $a-\frac{\epsilon}{2}$ is not in $(a,b)$. Similarly for $b$, any open set $V$ containing $b$ contains an open interval $B_{\epsilon}(b)\subseteq V$ which is not contained in $(a,b)$ since $b+ \frac{\epsilon}{2}$ is not in $(a,b)$. $\Box$
+    \item We note that this equality doesn't necesarily hold because $\interior(\overline{A})$ is a open set while $\overline{\interior(A)}$ is a closed set and in a lot of topological spaces, there are very few clopen sets. A concrete counter example will be $(a,b)$ in $\bru$. In part a), we showed that $\interior(\overline{A}) = (a,b)$. We can also see that $\overline{\interior(A)} = [a,b]$ since $A = \interior(A)$ as $(a,b)$ is open. This example also shows us that the reverse inclusion is false.
+    
+    The forward implication is not true either. Recall from problem \ref{easyproblem:intclosureexamples} if we take $\bR$ equipped with the co-finite topology, and take $A = (0,1]$ (or any infinite subset whose complement is infinite), $\interior(A) = \emptyset$ and $\overline{A} = \bR$. Thus, $\overline{\interior(A)} = \emptyset$ and $\interior(\overline{A}) = \bR$. So we don't necessarily have that, $\interior(\overline{A})\subseteq \overline{\interior(A)} $. $\Box$
+    \item Suppose $A$ and $B$ are regular open sets. We have that $A\cap B = \interior(\overline{A})\cap \interior(\overline{B})$ by definition of regular open sets. We seek to show that $A\cap B = \interior(\overline{A\cap B})$. For the forward inclusion we note that $A\cap B\subseteq \overline{A\cap B}$. Thus, taking the interior of both sides and we get that $\interior(A\cap B)\subseteq \interior(\overline{A\cap B})$ (problem \ref{easyproblem:intequiv} gives us the property that interior maintains the inclusion). Since $A$ and $B$ are both open, we have that $A\cap B$ is open and thus $\interior(A\cap B) = A\cap B$ (problem \ref{easyproblem:openiffequalinterior}). Hence $A\cap B = \interior(A\cap B)\subseteq \interior(\overline{A\cap B})$. 
+    
+    For the converse inclusion we first remark that in general, the interior distributes over intersection, i.e if $\interior(C\cap D) = \interior(C)\cap \interior(D)$. The forward direction follows from the fact that $C\cap D$ is a subset of both $C$ and $D$ so $\interior(C\cap D)\subseteq \interior(C)$ and $\interior(C\cap D)\subseteq \interior(D)$. For the reverse inclusion we note that if $x\in \interior(C)$ and $x\in \interior(D)$, there exists open sets $U_{1}$ and $U_{2}$ containing $x$ such that $U_{1}\subseteq C$ and $U_{2}\subseteq D$. Then if we take $U_{1}\cap U_{2}$, it is still open and we have that $U_{1}\cap U_{2}\subseteq C\cap D$ and so $x\in \interior(C\cap D)$. Also note that $\overline{A\cap B}\subseteq \overline{A}\cap \overline{B}$ because $A\cap B\subseteq A$ and $A\cap B\subseteq B$, and so $\overline{A\cap B}$ is a subset of both $\overline{A}$ and $\overline{B}$ (problem \ref{easyproblem:closureequiv}). Again, we can take the interior of both sides which tells us that $\interior(\overline{A\cap B})\subseteq \interior(\overline{A}\cap \overline{B}) = \interior(\overline{A})\cap \interior(\overline{B}) = A \cap B$. The first equality follows from the fact that interior splits over intersections, and the second because $A$ and $B$ are regular open sets. This completes the proof of the converse direction and the set equality. $\Box$
+    \item The union of regular open sets is not necessarily open. In $\bru$, take the intervals $(0,1)$ and $(1,2)$ which are regular open by a). The union is $(0,1)\cup (1,2)$. This however is not regular open as its closure is $[0,2]$ (by problem \ref{easyproblem:rclosures}) whose interior is $(0,2)\neq (0,1)\cup (1,2)$.
+    \item It suffices to show that $(A^{\perp})^{\perp} = \interior(\overline{A})$ for all subsets $A$. Unravelling the definition, $(A^{\perp})^{\perp} = X\setminus\overline{(X\setminus\overline{A})}$. Note that $\interior(\overline{A}) = X\setminus\overline{(X\setminus\overline{A})}\iff X\setminus \interior(\overline{A}) = \overline{(X\setminus\overline{A})}$. Now note the following chain of equivalences to see this equality:
+    \begin{align*}
+        x\not\in \overline{A} &\iff \text{For all neighbourhoods $U_{x}$ of $x$, $U_{x}\not\subseteq \overline{A}$}\\
+        &\iff \text{For all neighbourhoods $U_{x}$ of $x$, $U_{x}\cap(X\setminus \overline{A})$}\\
+        &\iff x\in \overline{X\setminus \overline{A}}
+    \end{align*}
+    As discussed, this set equality implies that $A$ is regular open if and only if $(A^{\perp})^{\perp} = A$. $\Box$
+\end{spacedenumerate}
+}
+\bmed {
+    Let $A$ be a subset of $\bR^{n}$ with its usual topology. Show that $x \in \overline{A}$ if and only if there exists a sequence of elements of $A$ that converges to $x$.
+} {
+    For the forward direction, let $x\in \overline{A}$. For $n\in \bN$, since $x\in \overline{A}$, $B_{\frac{1}{n}}(x) \cap A \neq \emptyset$. So for each $n\in \bN$, choose an $x_{n}\in B_{\frac{1}{n}}(x)\cap A$ forming a sequence of elements in $A$ (invoking the axiom of choice). Note that $(x_{n})_{n = 1}^{\infty}$ converges to $x$ because for all $\epsilon > 0$, choose $N$ such that $\frac{1}{N}  < \epsilon$, and for $n\geq N$, $x_{n}\in B_{\frac{1}{n}}(x) \subseteq B_{\frac{1}{N}}(x) \subseteq B_{\epsilon}(x)$. 
+
+    For the converse direction, suppose $(x_{n})_{n = 1}^{\infty}$ is a sequence in $A$ that converges to $x\in X$. Let $U$ be an arbitrary neighbourhood of $x$. There exists an $\epsilon> 0$ such that $B_{\epsilon}(x)\subseteq U$. Since the sequence convergres to $x$, there exists a $x_{n_{0}}\in B_{\epsilon}(x)\subseteq U$. Since the sequence $x_{n}$ is contained in $A$, the intersection $U\cap A$ is non-empty (it contains $x_{n_{0}}$) and hence $x\in \overline{A}$. $\Box$  
+} 
+\bmed {
+    We have already learned that $\bQ$ is dense in $\bR$ with its usual topology. Is $\bQ \setminus \{0\}$ dense? How about if you remove finitely many points from $\bQ$? Is there an infinite set of points
+    you can remove from $\bQ$ that leaves the resulting set dense?
+} {
+    I show that if we remove finitely many points from $\bQ$, the resulting set is still dense. Suppose $A = \{a_{1},\dots, a_{n}\}\subseteq \bQ$. Consider $\bQ\setminus A$. Let $U$ be an arbitrary non empty open set in $\bru$. Let $x\in U$, and thus there exists an interval $I = (x-\epsilon, x+\epsilon)\subseteq U$ (where $\epsilon > 0$). If $A\cap I =\emptyset$, then we get that $I\cap (\bQ\setminus A)\neq \emptyset$ since we know the interval must contain a rational number and that rational number cannot be in $A$. Now suppose $A\cap I \neq \emptyset$. Define $m = \max A\cap I$ (we can take this maximum because $A$ is finite). Consider the interval $(m, x + \epsilon)\subseteq I$. This interval must contain a rational number $q$, and note that $q\not \in A$ because that would contradict the maximality of $m$. Thus we have that $I\cap (\bQ\setminus A)\neq \emptyset$ since it contains this rational number $q$. In both cases, we have that $I\cap (\bQ\setminus A)\neq \emptyset$ and since $I\subseteq U$, this means that $U\cap (\bQ\setminus A)\neq \emptyset$. Since $U$ was arbitrary, $\bQ\setminus A$ is dense. This also tells us that  $\bQ \setminus \{0\}$ is dense.
+
+    We can indeed remove infinitely many sets and still have the resulting set be dense. Consider $\bQ\setminus \bN$. Let $U$ be an arbitrary non empty open set in $\bru$. Let $x\in U$, and thus there exists an interval $I = (x-\epsilon, x+\epsilon)\subseteq U$ (where $\epsilon > 0$). If $\bN\cap I =\emptyset$, then we get that $I\cap (\bQ\setminus \bN)\neq \emptyset$ since we know the interval must contain a rational number and that rational number cannot be a natural number. Now suppose $\bN\cap I \neq \emptyset$. Define $m = \min \bN\cap I$ (we can take this minimum because $\bN$ is well ordered under the usual ordering, and so this subset of $\bN$ must contain a minimal element). Consider the interval $(x-\epsilon, m)\subseteq I$.This interval must contain a rational number $q$, and note that $q\not \in \bN$ because that would contradict the minimality of $m$. Thus we have that $I\cap (\bQ\setminus \bN)\neq \emptyset$ since it contains this rational number $q$. In both cases, we have that $I\cap (\bQ\setminus \bN)\neq \emptyset$ and since $I\subseteq U$, this means that $U\cap (\bQ\setminus \bN)\neq \emptyset$. Since $U$ was arbitrary, $\bQ\setminus \bN$ is dense. $\Box$
+}
+\bmed {
+    Let $(X, \ct )$ be a topological space, and let $D_{1}$ and $D_{2}$ be dense open subsets of $X$. Prove that $D_{1} \cap D_{2}$ is dense and open. Give an example in $\bru$ to show that this does not extend even to countably infinite intersections. That is, give an example of a collection $\{ D_{n} : n \in\bN \}$ of dense open subsets of $\bru$ such that $\bigcap_{n = 1}^{\infty}D_{n}$  is not open (as you will soon see, such an intersection must be dense).
+} {
+    Let $D_{1},\ D_{2}$ be dense and open. Their intersection is open by the definition of a topology. To show that they are dense, let $U$ be an arbitrary non empty subset of $X$. Since $D_{1}$ is dense, $U\cap D_{1}$ is non empty. Since $U$ and $D_{1}$ are both open, $U\cap D_{1}$ is open. Since $D_{2}$ is dense, $U\cap D_{1} \cap D_{2}$ is not empty and hence $D_{1}\cap D_{2}$ is dense.
+
+    Let $D_{n} = \bR \setminus \left\{\frac{1}{n}\right\}$. Problem \ref{easyproblem:rclosures}, gives us that singletons are equal to their closures and are thus closed, so $D_{n}$ is open for all $n\in \bN$. It is dense because every non empty open set in $\bR$ must contain at least 2 distinct elements (well they contain infinitely many but this is enough) since they aren't singletons, and we see that this implies that it must intersect with $\bR$ with only 1 element removed. Note however that $S = \bigcup_{n = 1}^{\infty} D_{n}$ is not open because $0\in S$, but for every open set $U$ containing $0$, there is an interval $B_{\epsilon}(0)\subseteq U$, but we know that there exists $\frac{1}{n} < \epsilon$ and so every open set will contain an element not in $S$ and thus $S$ is not open. $\Box$
+}
+
+\bmed {
+    Recall the Furstenberg topology $\ctfurst$ on $\bZ$ (problem \ref{medproblem:furstdefintion}), introduced in the exercises from the previous section. To remind you, this is the topology on $\bZ$ generated by the basis consisting of all infinite arithmetic progressions in $\bZ$. Earlier, you proved that every nonempty open subset in $\ctfurst$ is infinite. You also proved that for every basic open set $U$ in $\ctfurst$, $\bZ \setminus U$ is open. We now know this is the same as saying every basic open subset is closed. You are going to use this topology to give a slick, elegant proof that there are infinitely many prime numbers.
+    \begin{enumerate}
+        \item Using the notation from when this topology was first introduced, show that:
+        \begin{align*}
+            \bZ\setminus \{-1, 1\} = \bigcup_{p\text{ is prime}}Z(p,0)
+        \end{align*}
+        \item Assume for the sake of contradiction that there are only finitely many primes. Deduce from this assumption that $\bZ \setminus \{-1, 1\}$ is closed.
+        \item Find a contradiction resulting from the previous part, and conclude that there must
+        be infinitely many primes.        
+    \end{enumerate}
+
+} {
+    \begin{spacedenumerate}
+        \item For the reverse inclusion, note that $Z(p,0) = \{np:\ n\in \bZ\}$. Note that no scalar multiple of a prime is equal to $1$ or $-1$ which completes the reverse inclusion. For the forward inclusion, if $n\in \bZ\setminus\{-1,1\}$ we consider 2 cases, $n = 0$ or otherwise. If $n = 0$, note that $0 = 7(0)$, so $0\in Z(7,0)$ and since $7$ is prime $n$ is an element of the right hand side. Now suppose $n$ is non zero, by prime factorization, there exists a prime $p$ such that $p\mid n$, i.e $n = pk$ for some $k\in \bZ$. Thus $n\in Z(p,0)$ and thus is an element of the right hand side. In both cases we see that the forward inclusion stands. $\Box$
+        \item As mentioned in the problem statement, we've shown that every basic open set is closed. Thus, if there are finitely many primes, we have expressed $\bZ\setminus\{-1,1\}$ as the union of finitely many closed sets, and by the definition of a topology, this means that it must be closed. $\Box$
+        \item As mentioned in the problem statement, we've shown that all non empty open sets are infinite. If $\bZ\setminus\{-1,1\}$ is closed, then $\{-1, 1\}$ must be open. This is a contradiction as this set is not infinite, hence there must be infinitely many primes. $\Box$
+    \end{spacedenumerate}
+}
+\end{document} 
