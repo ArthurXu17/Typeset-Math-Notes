@@ -508,7 +508,7 @@
     As discussed, this set equality implies that $A$ is regular open if and only if $(A^{\perp})^{\perp} = A$. $\Box$
 \end{spacedenumerate}
 }
-\bmed {
+\bmed [sequenceinclosure]{
     Let $A$ be a subset of $\bR^{n}$ with its usual topology. Show that $x \in \overline{A}$ if and only if there exists a sequence of elements of $A$ that converges to $x$.
 } {
     For the forward direction, let $x\in \overline{A}$. For $n\in \bN$, since $x\in \overline{A}$, $B_{\frac{1}{n}}(x) \cap A \neq \emptyset$. So for each $n\in \bN$, choose an $x_{n}\in B_{\frac{1}{n}}(x)\cap A$ forming a sequence of elements in $A$ (invoking the axiom of choice). Note that $(x_{n})_{n = 1}^{\infty}$ converges to $x$ because for all $\epsilon > 0$, choose $N$ such that $\frac{1}{N}  < \epsilon$, and for $n\geq N$, $x_{n}\in B_{\frac{1}{n}}(x) \subseteq B_{\frac{1}{N}}(x) \subseteq B_{\epsilon}(x)$. 
@@ -523,7 +523,7 @@
 
     We can indeed remove infinitely many sets and still have the resulting set be dense. Consider $\bQ\setminus \bN$. Let $U$ be an arbitrary non empty open set in $\bru$. Let $x\in U$, and thus there exists an interval $I = (x-\epsilon, x+\epsilon)\subseteq U$ (where $\epsilon > 0$). If $\bN\cap I =\emptyset$, then we get that $I\cap (\bQ\setminus \bN)\neq \emptyset$ since we know the interval must contain a rational number and that rational number cannot be a natural number. Now suppose $\bN\cap I \neq \emptyset$. Define $m = \min \bN\cap I$ (we can take this minimum because $\bN$ is well ordered under the usual ordering, and so this subset of $\bN$ must contain a minimal element). Consider the interval $(x-\epsilon, m)\subseteq I$.This interval must contain a rational number $q$, and note that $q\not \in \bN$ because that would contradict the minimality of $m$. Thus we have that $I\cap (\bQ\setminus \bN)\neq \emptyset$ since it contains this rational number $q$. In both cases, we have that $I\cap (\bQ\setminus \bN)\neq \emptyset$ and since $I\subseteq U$, this means that $U\cap (\bQ\setminus \bN)\neq \emptyset$. Since $U$ was arbitrary, $\bQ\setminus \bN$ is dense. $\Box$
 }
-\bmed {
+\bmed [denseopenintersection]{
     Let $(X, \ct )$ be a topological space, and let $D_{1}$ and $D_{2}$ be dense open subsets of $X$. Prove that $D_{1} \cap D_{2}$ is dense and open. Give an example in $\bru$ to show that this does not extend even to countably infinite intersections. That is, give an example of a collection $\{ D_{n} : n \in\bN \}$ of dense open subsets of $\bru$ such that $\bigcap_{n = 1}^{\infty}D_{n}$  is not open (as you will soon see, such an intersection must be dense).
 } {
     Let $D_{1},\ D_{2}$ be dense and open. Their intersection is open by the definition of a topology. To show that they are dense, let $U$ be an arbitrary non empty subset of $X$. Since $D_{1}$ is dense, $U\cap D_{1}$ is non empty. Since $U$ and $D_{1}$ are both open, $U\cap D_{1}$ is open. Since $D_{2}$ is dense, $U\cap D_{1} \cap D_{2}$ is not empty and hence $D_{1}\cap D_{2}$ is dense.
@@ -549,5 +549,33 @@
         \item As mentioned in the problem statement, we've shown that every basic open set is closed. Thus, if there are finitely many primes, we have expressed $\bZ\setminus\{-1,1\}$ as the union of finitely many closed sets, and by the definition of a topology, this means that it must be closed. $\Box$
         \item As mentioned in the problem statement, we've shown that all non empty open sets are infinite. If $\bZ\setminus\{-1,1\}$ is closed, then $\{-1, 1\}$ must be open. This is a contradiction as this set is not infinite, hence there must be infinitely many primes. $\Box$
     \end{spacedenumerate}
+}
+\bhard {
+    Prove that if $\{ D_{n} :\ n \in \bN \}$ is a (countable) collection of dense open subsets of $\bru$, then $\bigcap_{n = 1}^{\infty} D_{n}$ is dense. Give an example in $\bru$ to show that this result does not extend to arbitrary (i.e uncountable) intersections.
+} {
+    Let $U\subseteq \bR$ be open. We know that $U\cap D_{1}$ is open and non empty. Let $x_{1}\in U\cap D_{1}$. Since this is open, there exists an $\epsilon_{1} > 0$ such that $B_{\epsilon_{1}}(x_{1})\subseteq U \cap D_{1}$. If we take $\delta_{1} = \min(\epsilon_{1}, 1)$, we have the following chain of equivalences
+    \begin{align*}
+        B_{\delta_{1}/2}(x_{1})\subseteq \overline{B_{\delta_{1}/2}}(x_{1})\subseteq B_{\delta_{1}}(x_{1})\subseteq B_{\epsilon_{1}}(x_{1})\subseteq U\cap D_{1}
+    \end{align*}
+    We now proceed inductively and show that for all $n\geq 2\in \bN$, we can choose $x_{n}$ and $\delta_{n}\leq \frac{1}{n}$ that satisfies the following properties:
+    \begin{enumerate}
+        \item $\overline{B_{\delta_{n}/2}}(x_{n})\subseteq \overline{B_{\delta_{n-1}/2}}(x_{n-1})$
+        \item $\overline{B_{\delta_{n}/2}}(x_{n})\subseteq U\cap D_{1}\cap \dots \cap D_{n}$
+    \end{enumerate}
+    For the base case of $n = 2$, we know that $B_{\delta_{1}/2}(x_{1})\cap D_{2}$ is non empty and open (since $B_{\delta_{1}/2}(x_{1})$ is open, and $D_{2}$ is dense and open). Let $x_{2}$ be an element of this intersection. There exists $\epsilon_{2} > 0$ such that $B_{\epsilon_{2}}(x_{2})\subseteq B_{\delta_{1}/2}(x_{1})\cap D_{2}$. Taking $\delta_{2} = \min\left(\epsilon, \frac{1}{2}\right)$ we see that the properties above are satisfied:
+    \begin{enumerate}
+        \item $\overline{B_{\delta_{2}/2}}(x_{2})\subseteq B_{\delta_{2}}(x_{2})\subseteq B_{\epsilon_{2}}(x_{2})\subseteq B_{\delta_{1}/2}(x_{1})\cap D_{2}\subseteq B_{\delta_{1}/2}(x_{1})\subseteq \overline{B_{\delta_{1}/2}}(x_{1})$
+        \item $\overline{B_{\delta_{2}/2}}(x_{2})\subseteq B_{\delta_{2}}(x_{2})\subseteq B_{\epsilon_{2}}(x_{2})\subseteq B_{\delta_{1}/2}(x_{1})\cap D_{2}\subseteq (U\cap D_{1})\cap D_{2}$. (Since $B_{\delta_{1}/2}(x_{1})\subseteq U\cap D_{1}$)
+    \end{enumerate}
+    The inductive step is quite similar. Let $n\geq 3$, and assume such a choice of $x_{n-1}$ and $\delta_{n-1}$ exists. We know that $B_{\delta_{n-1}}(x_{n-1})\cap D_{n}$ is non empty and open since $D_{n}$ is dense and both sets are open. Let $x_{n}$ be contained in this intersection. Since it is open, there exists $\epsilon_{n} > 0 $ such that $B_{\epsilon_{n}}(x_{n})\subseteq B_{\delta_{n-1}}(x_{n-1})\cap D_{n}$. Taking $\delta_{n} = \min\left(\epsilon_{n},\frac{1}{n}\right)$, we see that the desired properties are satisfied:
+    \begin{enumerate}
+        \item $\overline{B_{\delta_{n}/2}}(x_{n})\subseteq B_{\delta_{n}}(x_{n})\subseteq B_{\epsilon_{n}}(x_{n})\subseteq B_{\delta_{n-1}/2}(x_{n-1})\cap D_{n}\subseteq B_{\delta_{n-1}/2}(x_{1})\subseteq \overline{B_{\delta_{n-1}/2}}(x_{n-1})$
+        \item $\overline{B_{\delta_{n}/2}}(x_{n})\subseteq B_{\delta_{n}}(x_{n})\subseteq B_{\epsilon_{n}}(x_{n})\subseteq B_{\delta_{n-1}/2}(x_{n-1})\cap D_{n}\subseteq (U\cap D_{1}\cap\dots\cap D_{n-1})\cap D_{n}$. (Since $B_{\delta_{n-1}/2}(x_{n-1})\subseteq \overline{B_{\delta_{n-1}/2}}(x_{n-1})\subseteq U\cap D_{1}\cap\dots\cap D_{n-1}$ by our induction hypothesis). 
+    \end{enumerate}
+    This completes the construction our a sequence $(x_{n})_{n = 1}^{\infty}$. We note that this sequence is Cauchy. Let $\epsilon > 0$, take $N\in \bN$ such that $\frac{1}{2N} < \epsilon$. Suppose $m > n \geq N$. Note that by our construction above, $\overline{B_{\delta_{n}/2}}(x_{n})\subseteq \overline{B_{\delta_{m}/2}}(x_{m})$. Thus $x_{n} \in \overline{B_{\delta_{m}/2}}(x_{m})$. Thus $d(x_{n}, x_{m}) \leq \frac{\delta_{m}}{2} < \delta_{m} < \frac{1}{m} < \frac{1}{N} < \epsilon$. Since the sequence is Cauchy, by the completeness of $\bR$ (under the usual metric topology) it converges to a number $x\in \bR$. 
+
+    We now show that $x\in U\cap \bigcap_{i = 1}^{\infty}D_{i}$. To show that $x\in U$, we note that for all $n\in \bN$, $x_{n}\in \overline{B_{\delta_{n}}/2}(x_{n})\subseteq \overline{B_{\delta_{1}/2}}(x_{1})$. In particular, the sequence is contained entirely in the closed set $\overline{B_{\delta_{1}/2}}(x_{1})$. Thus by problem \ref{medproblem:sequenceinclosure}, $x\in \overline{B_{\delta_{1}/2}}(x_{1})\subseteq U$. Now let's show that $x\in D_{n}$ for all $n\in \bN$. This simply follows from the fact that for all $m\geq n$, $x_{m}\in \overline{B_{\delta_{m}}/2}(x_{m})\subseteq \overline{B_{\delta_{n}/2}}(x_{n})$. So if we consider the tail of the sequence, i.e $(x_{m})_{m = n}^{\infty}$, this will still converge to the same limit $x$ and is contained entirely in the closed set $\overline{B_{\delta_{n}/2}}(x_{n})$, thus $x\in \overline{B_{\delta_{n}/2}}(x_{n})\subseteq D_{n}$. Hence $x$ is an element of $U\cap \bigcap_{i = 1}^{\infty}D_{i}$ and since this set is not empty for arbitrary open sets $U$, $\bigcap_{i = 1}^{\infty}D_{i}$ is dense. $\Box$.
+
+    To show that this theorem doesn't extend to arbitrary intersections. We simply define for $x\in \bR$, $D_{x} = \bR\setminus\{x\}$ (which is dense and open by the same justification as problem \ref{medproblem:denseopenintersection}). Then, $\bigcap_{x\in \bR} D_{x} = \emptyset$ and thus cannot be dense.
 }
 \end{document} 
