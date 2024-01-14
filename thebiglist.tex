@@ -6,23 +6,32 @@
 \tableofcontents
 \newpage
 \section{Introduction to Topology}
-\begin{spacedenumerate}
-    
-    \item Fix $a < b \in \bR$. Show explicitly that the interval $(a, b)$ is open in $\bru$. Show explicitly that the interval $[a, b)$ is not open in $\bru$.
-    
+\renewcommand{\labelenumi}{\alph{enumi})}
+\beasy[openinterval]{
+    Fix $a < b \in \bR$. Show explicitly that the interval $(a, b)$ is open in $\bru$. Show explicitly that the interval $[a, b)$ is not open in $\bru$.
+} {
     Let $x\in (a,b)$. Take $\epsilon = \min(x-a, b-x)$. Let $y\in B_{\epsilon}(x)$. If $y = x$, then $y \in (a,b)$. If $y < x < b$, we have that $x - y  = \lvert x -y \rvert < \epsilon \implies x-y < x-a \implies y > a$. Hence $y\in (a,b)$ in this case. If $a < x < y$, we have that $y - x  = \lvert x -y \rvert < \epsilon \implies y-x > b-x \implies y < b$. Hence $y \in (a,b)$ in this case. Thus, $B_{\epsilon}(x)\subseteq (a,b)$ proving that $(a,b)$ is open in $\bru$. $\Box$
 
     To show that $[a,b)$ is not open, consider an arbitrary open ball centred at $a\in [a,b)$. Note that for all $\epsilon > 0$, $a - \frac{\epsilon}{2}\in B_{\epsilon}(a)$ but $a - \frac{\epsilon}{2} \not\in [a,b)$. Hence every open ball centered at $a$ is not contained in $[a,b)$ which means that $[a,b)$ is not open in $\bru$. $\Box$
-    \item Let $X$ be a set and let $\cb = \{ \{x\} : x \in X \}$. Show that the only topology on $X$ that contains $\cb$ as a subset is the discrete topology.
-    
-    Let $\ct$ be an arbitrary topology such that $\cb\subseteq \ct$. I claim that $\ct = \mathcal{P}(X)$, which by definition is the discrete topology. The forward direction follows by the definition of a topology since a topology is a collection of subsets. For the converse direction, let $A\subseteq X$. If $A = \emptyset$, $A\in \ct$ since we know that $\ct$ is a topology. Otherwise, we can then write $A = \bigcap_{a\in A}\{a\}$ and hence $A$ is a union of elements of $\cb$ and since $\cb\subseteq \ct$, by the definition of a topology, $A\in \ct$. Hence $\ct = \cp(X)$ as desored. $\Box$
+}
 
-    \item Fix a set $X$, and let $\ctf$ and $\ctc$ be the co-finite and co-countable topologies on $X$, respectively.
+\beasy {
+    Let $X$ be a set and let $\cb = \{ \{x\} : x \in X \}$. Show that the only topology on $X$ that contains $\cb$ as a subset is the discrete topology.
+} {
+    Let $\ct$ be an arbitrary topology such that $\cb\subseteq \ct$. I claim that $\ct = \mathcal{P}(X)$, which by definition is the discrete topology. The forward direction follows by the definition of a topology since a topology is a collection of subsets. For the converse direction, let $A\subseteq X$. If $A = \emptyset$, $A\in \ct$ since we know that $\ct$ is a topology. Otherwise, we can then write $A = \bigcap_{a\in A}\{a\}$ and hence $A$ is a union of elements of $\cb$ and since $\cb\subseteq \ct$, by the definition of a topology, $A\in \ct$. Hence $\ct = \cp(X)$ as desored. $\Box$
+}
+
+\beasy {
+    Fix a set $X$, and let $\ctf$ and $\ctc$ be the co-finite and co-countable topologies on $X$, respectively.
+    \begin{enumerate}
+        \item Show explicitly that $\ctf$ and $\ctc$ are both topologies on X.
+        \item Show that $\ctf \subseteq \ctc$.
+        \item Under what circumstances does $\ctf = \ctc$?
+        \item Under what circumstances does $\ctd = \ctc$?
+    \end{enumerate}
+} {
     \begin{spacedenumerate}
-        
-        \item Show explicitly that $\ctf$ and $\ctc$ are both topologies on X
-        
-        For co-finite, we first note that $\emptyset\in \ctf$ by definition and $X\in \ctf$ since $X\setminus X = \emptyset$ which is finite. Let $U_{1},U_{2}\in\ctf$. If either are empty, the intersection is empty and thus remains in $\ctf$. Otherwise, say $U_{1} = X\setminus\{x_{1},\dots, x_{m}\}$ and $U_{2} = X\setminus \{y_{1},\dots, y_{n}\}$. Then $U_{1}\cap U_{2} = X\setminus (\{x_{1},\dots, x_{m}\}\cup \{y_{1},\dots, y_{n}\})$ and hence is still in $\ctf$. Now consider a collection $\{U_{\lambda}\}_{\lambda\in \Lambda}$ of open sets in $\ctf$. We can assume they are all non-empty since this will not change the value of the union. So each $U_{\lambda}$ is of the form $X\setminus V_{\lambda}$ where $V_{\lambda}$ is finite. We have that:
+        \item For co-finite, we first note that $\emptyset\in \ctf$ by definition and $X\in \ctf$ since $X\setminus X = \emptyset$ which is finite. Let $U_{1},U_{2}\in\ctf$. If either are empty, the intersection is empty and thus remains in $\ctf$. Otherwise, say $U_{1} = X\setminus\{x_{1},\dots, x_{m}\}$ and $U_{2} = X\setminus \{y_{1},\dots, y_{n}\}$. Then $U_{1}\cap U_{2} = X\setminus (\{x_{1},\dots, x_{m}\}\cup \{y_{1},\dots, y_{n}\})$ and hence is still in $\ctf$. Now consider a collection $\{U_{\lambda}\}_{\lambda\in \Lambda}$ of open sets in $\ctf$. We can assume they are all non-empty since this will not change the value of the union. So each $U_{\lambda}$ is of the form $X\setminus V_{\lambda}$ where $V_{\lambda}$ is finite. We have that:
         \begin{align*}
             \bigcup_{\lambda\in\Lambda}U_{\lambda} &= \bigcup_{\lambda\in\Lambda}X\setminus V_{\lambda}\\
             &= X\setminus\left(\bigcap_{\lambda\in \Lambda} V_{\lambda}\right)
@@ -30,19 +39,16 @@
         Note that the arbitrary intersection of finite sets remains finite (this is seen because the arbitrary intersection is a subset of any one of those finite sets) and hence, $\bigcup_{\lambda\in\Lambda}U_{\lambda}$ remains open. Hence the cofinite topology is indeed a topology. $\Box$
 
         For the cocountable topology, the proof is the same. Since the union of 2 countable sets is still countable, finite intersection of open sets in the cocountable topology is open. Since arbitrary intersections of coutnable sets is countable, arbitrary unions remain open. Hence the cocountable topology is a topology. $\Box$
-        \item Show that $\ctf \subseteq \ctc$.
-        
-        This just follows from the fact that all finite sets are countable. So if $X\setminus U$ is finite (i.e $U\in \ctf$), then $X\setminus U$ is countable and thus $U\in \ctc$. $\Box$
-        \item Under what circumstances does $\ctf = \ctc$?
-        
-        This occurs if and only if $X$ is finite. For the converse direction, we see that $\ctf = \ctc = \cp(X)$ because every subset of $X$ is finite and countable. For the forward direction, consider the contrapositive. Let $X$ be infinite and thus there exists a countable infinite (denumerable) subset $C$ in $X$. Note that $X\setminus C$ is thus an element of the cocountable topology but not the cofinite topology. $\Box$
+        \item This just follows from the fact that all finite sets are countable. So if $X\setminus U$ is finite (i.e $U\in \ctf$), then $X\setminus U$ is countable and thus $U\in \ctc$. $\Box$
+        \item This occurs if and only if $X$ is finite. For the converse direction, we see that $\ctf = \ctc = \cp(X)$ because every subset of $X$ is finite and countable. For the forward direction, consider the contrapositive. Let $X$ be infinite and thus there exists a countable infinite (denumerable) subset $C$ in $X$. Note that $X\setminus C$ is thus an element of the cocountable topology but not the cofinite topology. $\Box$
 
-        \item Under what circumstances does $\ctd = \ctc$?
-        
-        This occurs if and only if $X$ is countable. For the converse direction, every subset is countable, and thus every subset of $X$ has its complement countable, thus $\ctc = \cp(X) = \ctd$. For the forward direction, consider the contrapositive. Suppose $X$ is uncountable and consider any $x\in X$. Note that $X\setminus\{x\}$ remains uncountable, and so $\{x\} \in \ctd$ but $\{x\}\not\in \ctc$ and hence $\ctc \neq \ctd$ as desired. $\Box$ 
+        \item This occurs if and only if $X$ is countable. For the converse direction, every subset is countable, and thus every subset of $X$ has its complement countable, thus $\ctc = \cp(X) = \ctd$. For the forward direction, consider the contrapositive. Suppose $X$ is uncountable and consider any $x\in X$. Note that $X\setminus\{x\}$ remains uncountable, and so $\{x\} \in \ctd$ but $\{x\}\not\in \ctc$ and hence $\ctc \neq \ctd$ as desired. $\Box$ 
     \end{spacedenumerate}
-    \item Let $(X, \ctc)$ be an infinite set with the co-countable topology. Show that $\ctc$ is closed under countable intersections. Give an example to show that it need not be closed under arbitrary intersections.
-    
+}
+
+\beasy {
+    Let $(X, \ctc)$ be an infinite set with the co-countable topology. Show that $\ctc$ is closed under countable intersections. Give an example to show that it need not be closed under arbitrary intersections.
+} {
     Let $\{U_{n}\}_{n\in \bN}$ be countably many sets in the co-countable topology. We can assume they are all non-empty since this will not change the value of the union. Thus they are of the form $U_{n} = X\setminus V_{n}$ where $V_{n}$ is countable for all $n\in \bN$. Then, we simply note that:
     \begin{align*}
         \bigcap_{n\in \bN}U_{n} &= \bigcap_{n\in\bN} X\setminus V_{n}\\
@@ -51,20 +57,24 @@
     Note that the countable union of countable sets remain countable so the countable intersection above is still in the cocountable topology. $\Box$
 
     To show that arbitrary intersections need not remain in the cocountable topology, consider $\bR$ equipped with the cocountable topology. For $x \in \bR$ with $x\geq 0$, define $U_{x} = \bR \setminus \{x\}$ which is an element of the cocountable topology. Then consider the arbitrary intersection of these sets. We see that $\bigcap_{x\geq 0} U_{x} = \bR_{< 0}$. Note that $\bR_{< 0}$ is not an element of the cocountable topology since it's complement is the non negative real numbers which is not countable.
-
-    \item Let $X$ be a nonempty set, and fix an element $p \in X$. Recall that
+}
+\beasy{
+    Let $X$ be a nonempty set, and fix an element $p \in X$. Recall that
     \begin{align*}
         \ct_{p} &= \{U\subseteq X:\ p\in U\}\cap\{\emptyset\}
     \end{align*}
     is called the point topology at $p$ on X. Show that $\ct_{p}$ is a topology on $X$.
-
+} {
     We have $p\in X$ so $X\in \ct_{p}$ and that $\emptyset \in \ct_{p}$. For abitrary unions, if $p\in U_{\lambda}$ for all $\lambda \in \Lambda$, then $p\in \bigcup U_{\lambda}$. Similarly, if $p\in U_{1}$ and $p\in U_{2}$, then $p\in U_{1}\cap U_{2}$. Hence this is a topology. $\Box$
-    \item Define the ray topology on $\bR$ as:
+}
+
+\beasy {
+    Define the ray topology on $\bR$ as:
     \begin{align*}
         \ctr &= \{(a,\infty): a\in \bR\}\cup \{\emptyset, \bR\}
     \end{align*}
     Show that $\ctr$ is a topology on $\bR$. Be sure to think carefully about unions.
-
+} {
     By definition, $\emptyset, \bR \in \ctr$. For intersections, if the empty set is contained in the intersection, the intersection is the empty set. If $\bR$ is contained in the intersection of 2 open sets, the other set (which is open) will be the result and thus the intersection is open. Otherwise, consider $(a,\infty) \cap (b,\infty)$. Simply note that this is equal to $(\max(a,b), \infty)$ because $x > a$ and $x > b$ if and only if $x > \max(a,b)$. For unions, if $\bR$ is contained in the union the result is $\bR$ which is open. We can assume there are no empty sets in the union as that will not change the result. Now consider an arbitrary collection of intervals $(a_{\lambda}, \infty)$, and let $S = \{a_{\lambda}: \lambda\in \Lambda\}$. We consider 2 cases, $S$ is bounded below and $S$ is not bounded below. 
     
     In the first case, by the completeness of $\bR$, we know that $\inf S$ exists, and I claim that $\bigcup (a_{\lambda}, \infty) =  (\inf S, \infty)$. For the forward inclusion, if $x \in (a_{\lambda_{0}}, \infty)$ for some $a_{\lambda_{0}}\in S$, we have that $x >  a_{\lambda_{0}} \geq \inf S$ and hence $x\in (\inf S, \infty)$. For the converse inclusion, if $x > \inf S$, by the definition of the greatest lower bound, there exists an $\inf S < a_{\lambda_{0}} < x$ (otherwise $x$ would be a greater lower bound). Hence $x \in \bigcup (a_{\lambda}, \infty)$. 
@@ -72,187 +82,229 @@
     Now suppose that $S$ is not bounded below. I claim then that $\bigcup (a_{\lambda}, \infty) = \bR$. The forward direction follows since each interval is a subset of $\bR$. For the converse direction, given $x\in \bR$, since $S$ is not bounded below, there exists $a_{\lambda_{0}} \in S$ with $a_{\lambda_{0}} < x$ and thus $x\in \bigcup (a_{\lambda}, \infty)$ as desired.
 
     Hence $\ctr$ is a topology. $\Box$
-    \item Let $(X, \ct )$ be a topological space, and let $A \subseteq X$ be a set with the property that for every $x \in  A$, there is an open set $U_{x} \in \ct$ such that $x \in U_{x} \subseteq A$. Show that $A$ is open.
-    
-    This simply follows by noting that $A = \bigcup_{x\in A} U_{x}$. Converse direction follows since each $U_{x}$ is a subset of $A$ forward direction follows because for all $x\in X$, $x\in U_{x} \subseteq \bigcup_{x\in A} U_{x}$. Since each $U_{x}$ is open, $A$ is open. $\Box$
-    \item Let $(X, \ct )$ be a topological space, and let $f : X \to Y$ be an injective (but not necessarily surjective) function. Is $\ct_{f} := \{ f(U) : U \in T \}$ necessarily a topology on $Y$ ? Is it
-    necessarily a topology on the range of $f$?
+}
 
+\beasy {
+    Let $(X, \ct )$ be a topological space, and let $A \subseteq X$ be a set with the property that for every $x \in  A$, there is an open set $U_{x} \in \ct$ such that $x \in U_{x} \subseteq A$. Show that $A$ is open.
+} {
+    This simply follows by noting that $A = \bigcup_{x\in A} U_{x}$. Converse direction follows since each $U_{x}$ is a subset of $A$ forward direction follows because for all $x\in X$, $x\in U_{x} \subseteq \bigcup_{x\in A} U_{x}$. Since each $U_{x}$ is open, $A$ is open as it is the union of open sets. $\Box$
+}
+
+\beasy [inversequotienttop]{
+    Let $(X, \ct )$ be a topological space, and let $f : X \to Y$ be an injective (but not necessarily surjective) function. Is $\ct_{f} := \{ f(U) : U \in T \}$ necessarily a topology on $Y$ ? Is it
+    necessarily a topology on the range of $f$?
+} {
     This is not necessarily a topology on $Y$. Let $Y = \bR\times\{0,1\}$ and let $X$ be $\bru$. Define the function $f: X\to Y$ by $x\mapsto (x,0)$. We see that $f(U) = U\times \{0\}$ for all non empty sets $U\in \bR$ and $f(\emptyset) = \emptyset$. In particular, $Y\not\in \ct_{f}$ and so this is not a topology on $Y$. $\Box$
 
     It is a topology on the range of $f$. We have that $f(\emptyset) = \emptyset$ and $f(X) = \range f$ (and $\emptyset$ and $X$ are open in $X$). Note that since $f$ is injective, we have that $f(U_{1}\cap U_{2}) = f(U_{1})\cap f(U_{2})$. The forward inclusion is true for all functions since if $y = f(x)$ with $x\in U_{1}\cap U_{2}$, then $y\in f(U_{1})$ and $y\in f(U_{2})$. For the reverse inclusion, say $y = f(x_{1})$ and $y = f(x_{2})$ with $x_{i}\in U_{i}$. Since $f$ is injective, we have that $x_{1} = x_{2}$ and hence they are both elements of $U_{1}$ and $U_{2}$. Hence $y\in f(U_{1}\cap U_{2})$. Since  $f(U_{1}\cap U_{2}) = f(U_{1})\cap f(U_{2})$, we note that $\ct_{f}$ is closed under finite intersections as $U_{1}\cap U_{2}$ will be open in $X$ whenever $U_{1}$ and $U_{2}$ are both open in $X$.
 
-    Now let's consider arbitrary unions. We first prove that for arbitrary collection of sets $\{U_{\lambda}\}_{\lambda\in\Lambda}$, $f\left(\bigcup_{\lambda\in\Lambda}U_{\lambda}\right) = \bigcup_{\lambda\in \Lambda}f(U_{\lambda})$. The forward direction follows because if $y = f(x)$ where $x\in \bigcup_{\lambda\in \Lambda}U_{\lambda}$, then $x\in U_{\lambda_{0}}$ and so $y =f(x)\in f(U_{\lambda_{0}})\subseteq \bigcup_{\lambda\in \Lambda}f(U_{\lambda})$. For the converse direction, if $y \in f(U_{\lambda_{0}})$, then $y = f(x)$ where $x\in U_{\lambda_{0}}\subseteq \bigcup_{\lambda\in \Lambda}U_{\lambda}$ and hence $y= f(x)\in f\left(\bigcup_{\lambda\in\Lambda}U_{\lambda}\right)$. Hence $\ct_{f}$ is closed under arbitrary union since $\bigcup_{\lambda\in\Lambda}U_{\lambda}$ will be open in $X$ whenever each $U_{\lambda}$ is open in $X$.
+    Now consider arbitrary unions. We first prove that for arbitrary collection of sets $\{U_{\lambda}\}_{\lambda\in\Lambda}$, $f\left(\bigcup_{\lambda\in\Lambda}U_{\lambda}\right) = \bigcup_{\lambda\in \Lambda}f(U_{\lambda})$. The forward direction follows because if $y = f(x)$ where $x\in \bigcup_{\lambda\in \Lambda}U_{\lambda}$, then $x\in U_{\lambda_{0}}$ and so $y =f(x)\in f(U_{\lambda_{0}})\subseteq \bigcup_{\lambda\in \Lambda}f(U_{\lambda})$. For the converse direction, if $y \in f(U_{\lambda_{0}})$, then $y = f(x)$ where $x\in U_{\lambda_{0}}\subseteq \bigcup_{\lambda\in \Lambda}U_{\lambda}$ and hence $y= f(x)\in f\left(\bigcup_{\lambda\in\Lambda}U_{\lambda}\right)$. Hence $\ct_{f}$ is closed under arbitrary union since $\bigcup_{\lambda\in\Lambda}U_{\lambda}$ will be open in $X$ whenever each $U_{\lambda}$ is open in $X$.
     
     Hence $\ctf$ is indeed a topology on the range of $f$. $\Box$
+}
 
-    \item Let $X$ be a set and $\ct_{1}$ and $\ct_{2}$ be two topologies on $X$. Is $\ct_{1}\cup \ct_{2}$ a topology on $X$? Is $\ct_{1}\cap \ct_{2}$ a topology on $X$? If yes, prove it. If not, give a counterexample.
-    
+\beasy {
+    Let $X$ be a set and $\ct_{1}$ and $\ct_{2}$ be two topologies on $X$. Is $\ct_{1}\cup \ct_{2}$ a topology on $X$? Is $\ct_{1}\cap \ct_{2}$ a topology on $X$? If yes, prove it. If not, give a counterexample.
+} {
     Unions of topologies are not necessarily topologies. Consider $X = \{1, 2, 3\}$ and $\ct_{1} = \{\emptyset, \{1\}, X\}$ and $\ct_{2} = \{\emptyset, \{2\}, X\}$. Note that $\ct_{1} \cup \ct_{2} = \{\emptyset, \{1\}, \{2\}, X\}$. This is not a topology since $\{1,2\} = \{1\}\cup \{2\} \not\in\ct_{1} \cup \ct_{2}  $ but both of $\{1\}$ and $\{2\}$ are in $\ct_{1} \cup \ct_{2}$. 
 
     Intersections of topologies are topologies. Let $X$ be a set and $\ct_{1}$ and $\ct_{2}$ be arbitrary topologies. By definition, $\emptyset, X\in \ct_{1}\cap \ct_{2}$. Let $U,V\in \ct_{1}\cap \ct_{2}$. By the definition of a topology, $U\cap V \in \ct_{1}$ and $U\cap V \in \ct_{2}$. Hence, $U\cap V\in \ct_{1}\cap \ct_{2}$. If $\{U_{\lambda}\}_{\lambda\in \Lambda}$ are all open sets in $\ct_{1}\cap\ct_{2}$, then by the definition of a topology $\bigcup U_{\lambda}\in \ct_{1}$ and $\bigcup U_{\lambda}\in \ct_{2}$. Hence, $\bigcup U_{\lambda}\in \ct_{1}\cap\ct_{2}$ and we have that $\ct_{1}\cap \ct_{2}$ is still a topology. $\Box$
-    \item Let $X$ be an infinite set. Show that there are infinitely many distinct topologies on $X$
-    
+}
+
+\beasy {
+    Let $X$ be an infinite set. Show that there are infinitely many distinct topologies on $X$
+} {
     Note that for any $x\in X$, $\ct_{x} = \{\emptyset, \{x\}, X\}$ forms a topology on $X$. We see that $\emptyset, X\in \ct_{x}$ and that arbitrary unions and intersections stay in $\ct_{x}$. Thus to get infinitely many distinct topologies, we just consider $\{\ct_{x}: x\in X\}$. $\Box$
-    \item Fix a set $X$, and let $\phi$ be a property that subsets $A$ of $X$ can have. For example, $\phi$ could be “$A$ is countable”, or “$A$ is finite”. $\phi$ could be “$A$ contains $p$” or “$A$ doesn't contain $p$” for a fixed point $p \in X$. If $X = \bR$, $\phi$ could be “$A$ is an interval” or “$A$ contains uncountably many irrational numbers less than $\pi$”. Define
+}
+
+\bmed {
+    Fix a set $X$, and let $\phi$ be a property that subsets $A$ of $X$ can have. For example, $\phi$ could be “$A$ is countable”, or “$A$ is finite”. $\phi$ could be “$A$ contains $p$” or “$A$ doesn't contain $p$” for a fixed point $p \in X$. If $X = \bR$, $\phi$ could be “$A$ is an interval” or “$A$ contains uncountably many irrational numbers less than $\pi$”. Define
     \begin{align*}
         T_{\text{co-}\phi} = \{U \subseteq X : U = \emptyset, \text{ or } X \setminus U\text{ has }\phi\}
     \end{align*}
     Under what assumptions on $\phi$ is $T_{\text{co-}\phi} $ a topology on $X$? Which topologies we have seen so far can be described in this way, using which $\phi$?
-
+} {
     First we note that $U\neq\emptyset\in T_{\text{co-}\phi}$ if and only if $U = X\setminus V$ where $V$ satisfies $\phi$ (in particular $V = X\setminus U$). Finite intersections $(X\setminus V_{1})\cap (X\setminus V_{2})$ are of the form $X\setminus (V_{1}\cup V_{2})$, so we require that finite unions of sets satisfying $\phi$ still satisfy $\phi$. Also $\bigcup X\setminus V_{\lambda} = X\setminus \bigcap V_{\lambda}$, so we require arbitrary intersections of sets satisfying $\phi$ to still satisfy $\phi$. Finally since we want $X\in T_{\text{co-}\phi} $, we require that $\emptyset$ satisfies $\phi$. Cocountable, cofintite, and particular point topology all satisfy this where the properties are ``is finite'', ``is countable'' and ``does not contain $p$''. We can also phrase the discrete topology in this way with the property ``is a set''. We can phrase the trivial topology in this way by using the property ``is the empty set''. The ray topology can be phrased as ``is an interval of the form $(-\infty, a)$ or is equal to the emptyset''.
+}
 
-    \item Let $\{\ct_{\alpha}:\alpha\in I\}$ be a collection of topologies on a set $X$, where $I$ is some indexing set. Prove that there is a unique finest topology that is refined by all the $T_{\alpha}$. That is, prove that there is a topology $\ct$ on $X$ such That
+\bmed {
+    Let $\{\ct_{\alpha}:\alpha\in I\}$ be a collection of topologies on a set $X$, where $I$ is some indexing set. Prove that there is a unique finest topology that is refined by all the $T_{\alpha}$. That is, prove that there is a topology $\ct$ on $X$ such That
     \begin{spacedenumerate}
         \item $\ct_{\alpha}$ refines $\ct$ for every $\alpha \in I$.
         \item If $\ct'$ is another topology that is refined by $\ct_{\alpha}$ for every $\alpha\in I$, then $\ct$ is finer than $\ct'$
     \end{spacedenumerate}
+} {
     We simply take $\ct$ = $\bigcap_{\alpha\in I} \ct_{\alpha}$. We see that this is a subset of each $\ct_{\alpha}$ which means that condition a) is satisfied. Also if $T'$ is a subset of each $\ct_{\alpha}$ it is thus a subset of their intersection which satisfies condition b). It remains to be shown that this is actually still a topology.
 
     We see that $\emptyset, X$ are elements of each $\ct_{\alpha}$ and is thus an element of $\ct$. If $U_{1},U_{2}\in \ct$, then $U_{1},U_{2}\in \ct_{\alpha}$ for all $\alpha\in I$, so $U_{1}\cap U_{2}\in \ct_{\alpha}$ for all $\alpha\in I$ and hence $U_{1}\cap U_{2}\in \ct$. For unions, suppose $\{U_{\lambda}\}_{\lambda\in \Lambda}$ is a collection of sets in $\ct$. They are thus contained in each $\ct_{\alpha}$. Since each $\ct_{\alpha}$ is a topology, $\bigcup_{\lambda\in\Lambda}\in \ct_{\alpha}$ for all $\alpha$ and hence the union is contained in $\ct$ as desired. $\Box$
-    \item This extends Exercise 1.8. Show that $f$ being injective is necessary. That is given an example of a topological space $(X,\ct)$ and a non-injective function $f:X\to Y$ such that $\ct_{f}$ is a topology on the range of $f$ and an example where it is not a topology.
-    
+}
+
+\bmed {
+    This extends Problem \ref{easyproblem:inversequotienttop}. Show that $f$ being injective is necessary. That is given an example of a topological space $(X,\ct)$ and a non-injective function $f:X\to Y$ such that $\ct_{f}$ is a topology on the range of $f$ and an example where it is not a topology.
+} {
     For an example where $\ct_{f}$ is a topology consider $f: \bru\to \bru$ where $f$ is the constant map that maps everything to 1. $\ct_{f}$ in this case is simply $\{\emptyset, \{1\}\}$ which is just the trivial topology on the range of $f$ which is $\{1\}$.
 
     For an example where $\ct_{f}$ is not a topology, let $X = \{0,1,2,3\}$ and $Y = \{0,1,2\}$. Define $f:X\to Y$ where $f(0) = f(1) = 0$, $f(2) = 1$ and $f(3) = 2$ (note that $f$ is surjective here). Define the following topology on $X$: $\ct = \{\emptyset, \{0,2\}, \{1,3\}, X\}$. The resulting set for $\ct_{f}$ is $\{\emptyset, \{0,1\}, \{0,2\}, Y\}$. Note however that this is not a topology since $\{0,1\}\cap \{0,2\} = \{0\}$ but $\{0\}\not\in \ct_{f}$.
+}
 
-    \item Working in $\bru$:
+\bmed [qdense]{
+    Working in $\bru$:
+    \begin{enumerate}
+        \item Show that every nonempty open set contains a rational number.
+        \item Show that there is no uncountable collection of pairwise disjoint open subsets of $\bR$.
+    \end{enumerate}
+} {
     \begin{spacedenumerate}
-        
-        \item Show that every nonempty open set contains a rational number
-        
-        Let $U$ be a nonempty open set. Let $x\in U$. Since $U$ is open, there exists an $\epsilon$ greater than 0 such that the interval $(x-\epsilon, x+\epsilon)\subseteq U$. By the density of the rationals, there exists a rational number $q$ contained in the interval which is a subset of $U$ as desired. $\Box$
-
-        \item Show that there is no uncountable collection of pairwise disjoint open subsets of $\bR$
-        
-        Suppose for contradiction an uncountable collection of pairwise disjoint open subsets of $\bR$ exists. By part a), each of these open subsets would contain a rational number and since the subsets are all disjoint, each of these rational numbers would be distinct and we would end up with an uncountable collection of rational numbers. This is a contradiction since there are countably many rational numbers. $\Box$
+        \item Let $U$ be a nonempty open set. Let $x\in U$. Since $U$ is open, there exists an $\epsilon$ greater than 0 such that the interval $(x-\epsilon, x+\epsilon)\subseteq U$. By the density of the rationals, there exists a rational number $q$ contained in the interval which is a subset of $U$ as desired. $\Box$
+        \item Suppose for contradiction an uncountable collection of pairwise disjoint open subsets of $\bR$ exists. By part a), each of these open subsets would contain a rational number and since the subsets are all disjoint, each of these rational numbers would be distinct and we would end up with an uncountable collection of rational numbers. This is a contradiction since there are countably many rational numbers. $\Box$
     \end{spacedenumerate}
-\end{spacedenumerate}
-\section{Bases for topologies}
-\begin{spacedenumerate}
-    \item Show explicitly that the collection $\cb = \{ (a, b) \subseteq \bR : a < b \}$ is basis, and that it generates the usual topology on $\bR$.
-    
+}
+\section{Bases for Topologies}
+\beasy [rintervalbasis]{
+    Show explicitly that the collection $\cb = \{ (a, b) \subseteq \bR : a < b \}$ is basis, and that it generates the usual topology on $\bR$. 
+} {
     We can write $\bR$ as $\bigcup_{n\in\bN}(n, n+2)$ and thus $\cb$ covers $\bR$. Suppose $(a_{1}, b_{1})$ and $(a_{2}, b_{2})$ intersect non trivially, say $x$ is contained in the intersection. We know that there exists an $\epsilon_{1} > 0$ such that $(x-\epsilon_{1}, x+\epsilon_{1}) \subseteq (a_{1}, b_{1})$ and $\epsilon_{2} > 0$ such that $(x-\epsilon_{2}, x + \epsilon_{2}) \subseteq (a_{2}, b_{2})$. If we take $\epsilon = \min(\epsilon_{1}, \epsilon_{2})$, we then have that the interval $(x-\epsilon, x+\epsilon)$ is contained in both of $(x-\epsilon_{1}, x + \epsilon_{1})$ and $(x-\epsilon_{2}, x + \epsilon_{2})$. Hence it is contained in both of $(a_{1}, b_{1})$ and $(a_{2}, b_{2})$. Thus $\cb$ is a basis.
 
     To show that this generates the usual topology on $\bR$ we note by the definition of the usual topology, we have that if $U$ open, for all $x\in U$ there exists an open interval centered at $x$ that is contained in $U$ (let's call this interval $(a_{x}, b_{x})$). Then, we simply write $U = \bigcup_{x\in U}(a_{x}, b_{x})$ and we have that every open set in $\bru$ can be written as the union of elements of $\cb$ and hence $\cb$ generates the usual topology of $\bR$. $\Box$
-    \item Show that $\cb_{\bQ} = \{(a,b)\subseteq \bR:\ a,b\in \bQ,\ a < b\}$ is a basis for the usual topology on $\bR$.
-    
-    Like in Exercise 2.1, we write $\bR$ as $\bigcup_{n\in\bN}(n, n+2)$ and thus $\cb_{\bQ}$ covers $\bR$. Now again suppose, $(a_{1}, b_{1})$ and $(a_{2}, b_{2})$ intersect non trivially (here $a_{i}, b_{i}\in \bQ$) at $x$. Exercise 2.1 gives us that there exists an interval $(a,b)$ containing $x$ that is contained in both of these intervals. In particular $b < \min(b_{1}, b_{2})$ and $a > \max(a_{1}, a_{2})$. By the density of the rationals, there exists rational numbers $q$ and $r$ such that $b < r< \min(b_{1}, b_{2})$ and $\max(a_{1}, a_{2}) < q < a$. Thus the interval $(q,r)$ still contains $x$ but is also still contained in both of $(a_{1}, b_{1})$ and $(a_{2}, b_{2})$ as desired. Hence, $\cb_{\bQ}$ is a basis.
-    
-    To show that this generates the usual topology on $\bR$, it suffices to show that open intervals can be expressed as unions of intervals in $\cb_{\bQ}$. Then by Exercise 2.1, we have that every open set is a union of open intervals which are each a union of intervals in $\cb_{\bQ}$. By the density of the rationals, for all $n\in \bN$, there exists a rational number $q_{n}$ such that $a < q_{n} < \min(b, a + \frac{1}{n})$. Similarly, we also have that there exists $r_{n}$ such that $\max(a, b - \frac{1}{n}) < r_{n} < b$. We then note that $(a,b) = \bigcup_{n\in\bN} (q_{n}, r_{n})$. The reverse inclusion follows because each $(q_{n}, r_{n})\subseteq (a,b)$. For the forward inclusion, if $a < x < b$. We know that there exists an $n\in \bN$ such that $\frac{1}{n} < \min(x-a, b-x)$. In particular, this means that $x > a + \frac{1}{n} > q_{n}$ and $x < b- \frac{1}{n} < r_{n}$ and we have that $x\in (q_{n}, r_{n})$. Hence every open interval can be expressed as a union of intervals in $\cb_{\bQ}$ which as discussed above implies that $\cb_{\bQ}$ generates the usual topology of $\bR$. $\Box$
+}
 
-    \item Some exercises about the Sorgenfrey line. Recall the collection $\cb = \{[a,b)\subseteq \bR: a < b\}$ is a basis which generates $\cs$, the Lower Limit Topology. The space $(\bR, \cs)$ is called the Sorgenfrey line.
-    \begin{spacedenumerate}
+\beasy [qintervalbasis] {
+    Show that $\cb_{\bQ} = \{(a,b)\subseteq \bR:\ a,b\in \bQ,\ a < b\}$ is a basis for the usual topology on $\bR$.
+} {
+    Like in Problem \ref{easyproblem:rintervalbasis}, we write $\bR$ as $\bigcup_{n\in\bN}(n, n+2)$ and thus $\cb_{\bQ}$ covers $\bR$. Now again suppose, $(a_{1}, b_{1})$ and $(a_{2}, b_{2})$ intersect non trivially (here $a_{i}, b_{i}\in \bQ$) at $x$. Problem \ref{easyproblem:rintervalbasis} gives us that there exists an interval $(a,b)$ containing $x$ that is contained in both of these intervals. In particular $b < \min(b_{1}, b_{2})$ and $a > \max(a_{1}, a_{2})$. By the density of the rationals, there exists rational numbers $q$ and $r$ such that $b < r< \min(b_{1}, b_{2})$ and $\max(a_{1}, a_{2}) < q < a$. Thus the interval $(q,r)$ still contains $x$ but is also still contained in both of $(a_{1}, b_{1})$ and $(a_{2}, b_{2})$ as desired. Hence, $\cb_{\bQ}$ is a basis.
+    
+    To show that this generates the usual topology on $\bR$, it suffices to show that open intervals can be expressed as unions of intervals in $\cb_{\bQ}$. Then by Problem \ref{easyproblem:rintervalbasis}, we have that every open set is a union of open intervals which are each a union of intervals in $\cb_{\bQ}$. By the density of the rationals, for all $n\in \bN$, there exists a rational number $q_{n}$ such that $a < q_{n} < \min(b, a + \frac{1}{n})$. Similarly, we also have that there exists $r_{n}$ such that $\max(a, b - \frac{1}{n}) < r_{n} < b$. We then note that $(a,b) = \bigcup_{n\in\bN} (q_{n}, r_{n})$. The reverse inclusion follows because each $(q_{n}, r_{n})\subseteq (a,b)$. For the forward inclusion, if $a < x < b$. We know that there exists an $n\in \bN$ such that $\frac{1}{n} < \min(x-a, b-x)$. In particular, this means that $x > a + \frac{1}{n} > q_{n}$ and $x < b- \frac{1}{n} < r_{n}$ and we have that $x\in (q_{n}, r_{n})$. Hence every open interval can be expressed as a union of intervals in $\cb_{\bQ}$ which as discussed above implies that $\cb_{\bQ}$ generates the usual topology of $\bR$. $\Box$
+}
+
+\beasy[sorgenfrey]{
+    Some exercises about the Sorgenfrey line. Recall the collection $\cb = \{[a,b)\subseteq \bR: a < b\}$ is a basis which generates $\cs$, the Lower Limit Topology. The space $(\bR, \cs)$ is called the Sorgenfrey line.
+    \begin{enumerate}
         \item Show that every nonempty open set in $\cs$ contains a rational number.
-        
-        A non empty open set $U$ in $\cs$ must contain an element of the basis, say $[a,b)$. Note that $(a,b) \subseteq [a,b)\subseteq U$ and by Exercise 1.14, there exists a rational number in $(a,b)$ and thus a rational number in $U$. $\Box$
         \item Show that the interval $(0, 1)$ is open in the Sorgenfrey line.
-        
-        This follows from the fact that we can write $(0,1) = \bigcup_{n\in \bN}[\frac{1}{n}, 1)$. The reverse inclusion is true since each half open interval is contain in $(0,1)$. The forward direction is true since for all $x\in (0,1)$ there is a natural number $n$ large enough so that $\frac{1}{n} < x$. $\Box$
-
         \item More generally, show that for any $a < b \in \bR$, $(a, b)$ is open in the Sorgenfrey line.
-
-        We use the same construction, we write $(a,b) = \bigcup_{n\in \bN}[a+ \frac{1}{n}, b)$ where if $a + \frac{1}{n} \geq b$, we say that $[a+ \frac{1}{n}, b) = \emptyset$. The argument is the exact same as above.
-
         \item Is the interval $(0, 1]$ open $\cs$?
-        
-        Yes, we write $(0,1] = (0,1) \cup [\frac{1}{3}, 1]$. Then we write $[\frac{1}{3}, 1] = \bigcup_{n\geq 2}[\frac{1}{3}, 1-\frac{1}{n})$. This shows that $[\frac{1}{3}, 1]$ and  we've already shown that $(0,1)$ is open, thus the union of the two intervals is still open. $\Box$
-
         \item Show that $\cs$ strictly refines the usual topology on $\bR$
-        
-        Since we showed every open interval is open in $\cs$ and we know from Exercise 2.1 that the open intervals form a basis for $\bru$, we thus have that every open set in $\bru$ can be represented as a union of elements in $\cs$. Hence we have that $\cs$ refines $\bru$, To show that it strictly refines it, we simply remark that $[0,1)\in \cs$ since it is a basis element, and Exercise 1.1 tells us that this is not open in $\bru$. $\Box$
-
         \item Show that the real numbers can be written as the union of two disjoint, nonempty open sets in $\cs$
-        
-        We will write $\bR = (-\infty, 0) \cup [0, \infty)$. $(-\infty, 0)$ is open in $\cs$ since $(-\infty, 0) = \bigcup_{n\in \bN}[-n, 0)$. $[0, \infty)$ is open in $\cs$ since $[0, \infty) = \bigcup_{n\in\bN} [0,n)$. These 2 sets are clearly disjoint and non empty thus satisfying the conditions of the problems. $\Box$
-
         \item Let $\cb_{\bQ} = \{[a,b):\ a,b\in \bQ,\ a < b\}$. Show that $\cb_{\bQ}$ is \textit{not} a basis for the Lower Limit Topology
-        
-        I will show that $[\sqrt{2}, 5)$ cannot be written as the union of elements in $\cb_{\bQ}$. Suppose for contradiction that $[\sqrt{2}, 5)  = \bigcup_{\lambda\in\Lambda}[q_{\lambda}, r_{\lambda})$ for some collection of rational number intervals $[q_{\lambda}, r_{\lambda})$. We must have that each interval $[q_{\lambda}, r_{\lambda}) \subseteq [\sqrt{2}, 5)$. Thus $q_{\lambda} \geq \sqrt{2}$ for all $\lambda\in \Lambda$. Since these 2 sets are equal, we also have that $\sqrt{2} \in [q_{\lambda_{0}}, r_{\lambda_{0}})$ for some $\lambda_{0}\in \Lambda$ (since $\sqrt{2}\in [\sqrt{2}, 5)$). Thus we have that $q_{\lambda_{0}}\leq \sqrt{2} \leq q_{\lambda_{0}}$ which implies that $q_{\lambda_{0}} = \sqrt{2}$, a contradiction. $\Box$ 
+    \end{enumerate}
+} {
+    \begin{spacedenumerate}
+        \item A non empty open set $U$ in $\cs$ must contain an element of the basis, say $[a,b)$. Note that $(a,b) \subseteq [a,b)\subseteq U$ and by Problem \ref{medproblem:qdense}, there exists a rational number in $(a,b)$ and thus a rational number in $U$. $\Box$
+        \item This follows from the fact that we can write $(0,1) = \bigcup_{n\in \bN}[\frac{1}{n}, 1)$. The reverse inclusion is true since each half open interval is contained in $(0,1)$. The forward direction is true since for all $x\in (0,1)$ there is a natural number $n$ large enough so that $\frac{1}{n} < x$. $\Box$
+        \item We use the same construction, we write $(a,b) = \bigcup_{n\in \bN}[a+ \frac{1}{n}, b)$ where if $a + \frac{1}{n} \geq b$, we say that $[a+ \frac{1}{n}, b) = \emptyset$. The argument is the exact same as above.
+        \item Not it is not open. Suppose for contradiction that the set is open. Then, we would be able to write $(0,1]$ as a collection of unions of intervals of the form $[a,b)$. Say $(0,1] = \bigcup_{\lambda\in \Lambda}[a_{\lambda}, b_{\lambda})$. This would imply that $1\in [a_{\lambda_{0}}, b_{\lambda_{0}})$ for some $\lambda_{0}\in \Lambda$. In particular, we have that $1 < b_{\lambda_{0}}$. But if we take $r = \frac{1 + b_{\lambda_{0}}}{2}$, we have that $a_{\lambda_{0}} \leq 1 < r < b_{\lambda_{0}}$. This would imply that $r\in [a_{\lambda_{0}}, b_{\lambda_{0}})$ and hence is an element of the set on the right, however we see that $r > 1$ and thus $r\not\in (0,1]$. Thus we have a contradiction and $(0,1]$ cannot be open. $\Box$
+        \item Since we showed every open interval is open in $\cs$ and we know from Problem \ref{easyproblem:rintervalbasis} that the open intervals form a basis for $\bru$, we thus have that every open set in $\bru$ can be represented as a union of elements in $\cs$. Hence we have that $\cs$ refines $\bru$, To show that it strictly refines it, we simply remark that $[0,1)\in \cs$ since it is a basis element, and Problem \ref{easyproblem:openinterval} tells us that this is not open in $\bru$. $\Box$
+        \item We will write $\bR = (-\infty, 0) \cup [0, \infty)$. $(-\infty, 0)$ is open in $\cs$ since $(-\infty, 0) = \bigcup_{n\in \bN}[-n, 0)$. $[0, \infty)$ is open in $\cs$ since $[0, \infty) = \bigcup_{n\in\bN} [0,n)$. These 2 sets are clearly disjoint and non empty thus satisfying the conditions of the problems. $\Box$
+        \item I will show that $[\sqrt{2}, 5)$ cannot be written as the union of elements in $\cb_{\bQ}$. Suppose for contradiction that $[\sqrt{2}, 5)  = \bigcup_{\lambda\in\Lambda}[q_{\lambda}, r_{\lambda})$ for some collection of rational number intervals $[q_{\lambda}, r_{\lambda})$. We must have that each interval $[q_{\lambda}, r_{\lambda}) \subseteq [\sqrt{2}, 5)$. Thus $q_{\lambda} \geq \sqrt{2}$ for all $\lambda\in \Lambda$. Since these 2 sets are equal, we also have that $\sqrt{2} \in [q_{\lambda_{0}}, r_{\lambda_{0}})$ for some $\lambda_{0}\in \Lambda$ (since $\sqrt{2}\in [\sqrt{2}, 5)$). Thus we have that $q_{\lambda_{0}}\leq \sqrt{2} \leq q_{\lambda_{0}}$ which implies that $q_{\lambda_{0}} = \sqrt{2}$, a contradiction. $\Box$ 
     \end{spacedenumerate}
-    \item Recall that the collection $\cb = \{ \{x\} : x \in X \}$ is a basis for the discrete topology on a set $X$. If $X$ is a finite set with $n$ elements, then clearly $\cb$ also has $n$ elements. Is there a basis
-    with fewer than $n$ elements that generates the discrete topology on $X$?
+}
 
+\beasy {
+    Recall that the collection $\cb = \{ \{x\} : x \in X \}$ is a basis for the discrete topology on a set $X$. If $X$ is a finite set with $n$ elements, then clearly $\cb$ also has $n$ elements. Is there a basis
+    with fewer than $n$ elements that generates the discrete topology on $X$? 
+} {
     This is not possible. Suppose such a basis $\cb'$ existed. Since $\cb'$ has less than $n$ elements, there exists $x\in X$ such that $\{x\}\not\in \cb'$. Suppose now that $\{x\}$ can be written as the union of elements of $cb'$. Say $\{x\}  = \bigcup \cc$ where $\cc\subseteq \cb'$. Then every element of $\cc$ must be a subset of $\{x\}$ which is not possible since $\{x\}\not \in\cb$ and we would have that each element of $\cc$ is the empty set. This a contradiction since the union of empty sets is empty. $\Box$. 
-    
-    \item Let $X = [0,1]^{[0,1]}$, the set of all functions $f: [0,1]\to [0,1]$. Given a subset $A\subseteq [0,1]$, let 
+}
+
+\beasy {
+    Let $X = [0,1]^{[0,1]}$, the set of all functions $f: [0,1]\to [0,1]$. Given a subset $A\subseteq [0,1]$, let 
     \begin{align*}
         U_{A} &= \{f\in X:\ f(x) = 0\text{ for all }x\in A\}
     \end{align*}
     Show that $\cb = \{U_{A}:\ A\subseteq[0,1]\}$ is a basis for a topology on $X$.
+} {
+    First let's show that $\cb$ covers $X$. We simply note that $U_{\emptyset} = X$ since the statement in the set definition is vacuously true (and hence the union of all the $U_{A}$ will be equal to $X$). Suppose $U_{A}\cap U_{B}\neq \emptyset$. Then there exists $f\in X$ such that $f(x) = 0$ for all $x\in A$ and $f(x) = 0$ for all $x\in B$. In particular, this tells us that $f\in U_{A\cup B}$. Finally note that $U_{A\cup B}\subseteq U_{A}\cap U_{B}$ since if $g(x) = 0$ for all $x\in A\cup B$, then $g(x) = 0$ for all $x\in A$ and $g(x) = 0$ for all $x\in B$. Hence $\cb$ is a basis as we have checked both conditions in the definition. $\Box$
+}
 
-    Fisrt let's show that $\cb$ covers $X$. We simply note that $U_{\emptyset} = X$ since the statement in the set definition is vacuously true (and hence the union of all the $U_{A}$ will be equal to $X$). Suppose $U_{A}\cap U_{B}\neq \emptyset$. Then there exists $f\in X$ such that $f(x) = 0$ for all $x\in A$ and $f(x) = 0$ for all $x\in B$. In particular, this tells us that $f\in U_{A\cup B}$. Finally note that $U_{A\cup B}\subseteq U_{A}\cap U_{B}$ since if $g(x) = 0$ for all $x\in A\cup B$, then $g(x) = 0$ for all $x\in A$ and $g(x) = 0$ for all $x\in B$. Hence $\cb$ is a basis as we have checked both conditions in the definition.
-    \item Let $\cb$ be a basis on a set $X$ and let $\ct_{\cb}$ be the topology that it generates. Show that:
+\bmed [basisintersection]{
+    Let $\cb$ be a basis on a set $X$ and let $\ct_{\cb}$ be the topology that it generates. Show that:
     \begin{align*}
         \ct_{\cb} &= \bigcap \{\ct\subseteq \cp(X):\ \ct\text{ is a topology on }X \text{ and }\cb\subseteq \ct\}
     \end{align*}
     That is, show that $\ct_{\cb}$ is the intersection of all topologies that contain $\cb$.
-
+} {
     The reverse inclusion follows from the fact that $\ct_{\cb}$ is itself a topology that contains $\cb$ so if $U$ is an element of the intersection, $U\in \ct_{\cb}$. For the forward inclusion, suppose $U\in \ct_{\cb}$. Let $\ct$ be an arbitrary topology of $X$ containing $\cb$. Since $U$ is the union of elements in $\cb$ and each set in $\cb$ is in $\ct$, by the definition of a topology we have that $U\in \ct$ as desired. $\Box$
-    \item Let $\{\ct_{\alpha}:\alpha\in I\}$ be a collection of topologies on a set $X$, where $I$ is some indexing set. Prove that there is a unique coarsest topology that refines all the $T_{\alpha}$. That is, prove that there is a topology $\ct$ on $X$ such that
+}
+
+\bmed {
+    Let $\{\ct_{\alpha}:\alpha\in I\}$ be a collection of topologies on a set $X$, where $I$ is some indexing set. Prove that there is a unique coarsest topology that refines all the $T_{\alpha}$. That is, prove that there is a topology $\ct$ on $X$ such that
     \begin{spacedenumerate}
         \item $\ct$ refines $\ct_{\alpha}$ for every $\alpha \in I$.
         \item If $\ct'$ is another topology that refines $\ct_{\alpha}$ for every $\alpha\in I$, then $\ct$ is coarser than $\ct'$
     \end{spacedenumerate}
-    Define $\cs = \bigcup_{\alpha\in I}\ct_{\alpha}$. Similar to Exercise 2.6, define a set $\ct$ (which we will show is a topology) that is equal to the intersection of all topologies that contain $\cs$. That is:
+} {
+    Define $\cs = \bigcup_{\alpha\in I}\ct_{\alpha}$. Similar to Problem \ref{medproblem:basisintersection}, define a set $\ct$ (which we will show is a topology) that is equal to the intersection of all topologies that contain $\cs$. That is:
     \begin{align*}
         \ct &= \bigcap \{\tau\subseteq \cp(X):\ \tau\text{ is a topology on }X \text{ and }\ct=s\subseteq \tau\}
     \end{align*}
     To show that this a topology, we remark that arbitrary intersections of topologies is still a topology (we also need to show that the intersection is not empty, but this is satisfied by the discrete topology on $X$). First note that $\emptyset, X\in \ct$ since they are elements of each $\tau$ by the definition of a topology. If $\{U_{\lambda}\}_{\lambda\in\Lambda}$ are all elements of $\ct$, they are elements of each $\tau$, and thus their union will still be an element of each $\tau$, and is thus in $\ct$ as well. Similarly, if $U,V\in \ct$, $U,V\in \tau$ for all $\tau$ containing $\cs$ and by the definition of a topology $U\cap V \in \tau$ for all $\tau$ and thus $U\cap V\in \ct$.
 
     We have just shown that $\ct$ is a topology. Let's check the refinement conditions. We note that $\ct$ contains each $\ct_{\alpha}$ since each $\ct_{\alpha}\subseteq \cs \subseteq \ct$ (since $\ct$ is an intersection of sets which all contain $\cs$). If $\ct'$ is a topology that refines each $\ct_{\alpha}$, then we have that $\cs\subseteq \ct'$, but by the definition of $\ct$, $\ct'$ will  be contained in the intersection and hence $\ct\subseteq \ct'$ i.e $\ct$ is coarser than $\ct'$ as desired. $\Box$
-    \item Let $m,b\in \bZ$ with $m\neq 0$. A set of the form $Z(m,b) = \{mx+b\: x\in \bZ\}$ is called an arithmetic progression. Show that the collection $\cb$ of all arithmetic progressions is a basis on $\bZ$. The topology $\ctfurst$ that $\cb$ generates is called the Furstenberg Topology.
-    
-    We first note that $Z(1, 0) = \bZ$ and thus the set of all arithmetic progressions cover $\bZ$. Now suppose $n \in Z(m_{1}, b_{1})\cap Z(m_{2}, b_{2})$. We have that $n = m_{1}x_{1} + b_{1} = m_{2}x_{2} + b_{2}$. Consider $Z(m_{1}m_{2}, n)$. Note that $n\in Z(m_{1}m_{2}, n)$ since $n = 0m_{1}m_{2} + n$. Next note that $Z(m_{1}m_{2}, n)\subseteq Z(m_{1}, b_{1})\cap Z(m_{2}, b_{2})$. This is because if $y = m_{1}m_{2}x + n \in Z(m_{1}m_{2}, n)$, we have that $y = m_{1}m_{2}x + m_{1}x_{1} + b_{1} = m_{1}(m_{2}x + x_{1}) + b_{1}\in Z(m_{1}, b_{1})$ and $y = m_{1}m_{2}x + m_{2}x_{2} + b_{2} = m_{2}(m_{1}x + x_{2}) + b_{2}\in Z(m_{2}, b_{2})$. Hence $\cb$ is a basis on $\bZ$.$\Box$
-    \begin{spacedenumerate}
+}
+\bmed [furstdefintion]{
+    Let $m,b\in \bZ$ with $m\neq 0$. A set of the form $Z(m,b) = \{mx+b\: x\in \bZ\}$ is called an arithmetic progression. 
+    \begin{enumerate}
+        \item Show that the collection $\cb$ of all arithmetic progressions is a basis on $\bZ$. The topology $\ctfurst$ that $\cb$ generates is called the Furstenberg Topology.
         \item Show that every nonempty open set in $\ctfurst$ is infinite.
-        
-        Note that every non empty open set must contain a basis element. Since every basis element has infinitely many elements, then each non empty open set must be infinite. $\Box$
         \item Let $U\in \cb$ be a basic open set. Show that $\bZ\setminus U$ is open.
-        
-        Let's write $U = Z(m,b)$ where $m \neq 0$. If $m = 1$, note that $Z(m,b) = \bZ$ and hence, $\bZ\setminus U  =\emptyset$ which is open. Otherwise we prove the following relationship:
-        \begin{align*}
-            \bZ\setminus Z(m,b) &= \bigcup_{n = b+1}^{b+m-1}Z(m,n)
-        \end{align*}
-        This is equivalent to showing:
-        \begin{align*}
-            \bZ &=\bigcup_{n = b}^{b+m-1}Z(m,n)
-        \end{align*}
-        The converse inclusion is trivial since each $Z(m,n)\subseteq \bZ$. For the forward direction, let $y\in \bZ$. We know that $y\in Z(m,y)$. By division algorithm, we have that $y-b = mq+r$ for some $q\in \bZ$ and $0\leq r \leq m-1$. So we have that $y \in Z(m, b + r + mq)$. We now quickly remark that  $y \in Z(m, b + r + mq) = Z(m,b+r)$. For the forward inclusion we have that $y = mx + b+r+mq \implies y = m(x+q) + b+r\in Z(m+br)$. For the reverse inclusion $y = mx + b + r \implies y = mx - mq + b + r + mq = m(x-q) + b + r + mq \in Z(m, b + r + mq)$. Hence we have that $y\in Z(m,b+r)$. Since we know that $0\leq r \leq m-1$, this means that $Z(m,b+r)$ is an element in the union above completing the proof of the above set equality. This set equality precisely tells us that $\bZ\setminus Z(m,b)$ is a union of arithmetic progressions and thus is open. $\Box$
         \item Show that $\ctfurst$ is Hausdorff (i.e for any distinct integers $m,n$ there are disjoint open sets $U$ and $V$ with $m\in U$ and $n\in V$).
-        
-        Let $m\neq n\in \bZ$. WLOG $m < n$. Take $U = Z(n-m+1, m)$ and $V = Z(n-m+1, n)$. It is clear that $m\in U$ and $n\in V$ (take $x = 0$ in the definition). To show that sets are disjoint, suppose that $(n-m+1)x_{1} + m = (n-m+1)x_{2} + n$ for some $x_{1}, x_{2}\in \bZ$ so that the intersection is non empty. This implies that $(n-m+1)(x_{1}-x_{2}) = n-m$. Since $0 < n-m < n-m+1$, this implies $x_{1}-x_{2} = 0$ as any other value for $x_{1}-x_{2}$ would cause $\lvert (n-m+1)(x_{1}-x_{2})\rvert > n-m+1 > n-m$. Thus we have that $x_{1} = x_{2}$ which contradicts the fact that they are distinct. Hence $U$ and $V$ must be disjoint completing the proof that $\ctfurst$ is Hausdorff. $\Box$
-    \end{spacedenumerate}
-    \item Show that the collection $\cs = \{(-\infty, b):\ b\in \bR\} \cup \{(a,\infty):\ a\in \bR\}$ is a subbasis that generates the usual topology on $\bR$.
-    
+    \end{enumerate}
+} {
+\begin{spacedenumerate}
+    \item We first note that $Z(1, 0) = \bZ$ and thus the set of all arithmetic progressions cover $\bZ$. Now suppose $n \in Z(m_{1}, b_{1})\cap Z(m_{2}, b_{2})$. We have that $n = m_{1}x_{1} + b_{1} = m_{2}x_{2} + b_{2}$. Consider $Z(m_{1}m_{2}, n)$. Note that $n\in Z(m_{1}m_{2}, n)$ since $n = 0m_{1}m_{2} + n$. Next note that $Z(m_{1}m_{2}, n)\subseteq Z(m_{1}, b_{1})\cap Z(m_{2}, b_{2})$. This is because if $y = m_{1}m_{2}x + n \in Z(m_{1}m_{2}, n)$, we have that $y = m_{1}m_{2}x + m_{1}x_{1} + b_{1} = m_{1}(m_{2}x + x_{1}) + b_{1}\in Z(m_{1}, b_{1})$ and $y = m_{1}m_{2}x + m_{2}x_{2} + b_{2} = m_{2}(m_{1}x + x_{2}) + b_{2}\in Z(m_{2}, b_{2})$. Hence $\cb$ is a basis on $\bZ$.$\Box$
+    \item Note that every non empty open set must contain a basis element. Since every basis element has infinitely many elements, then each non empty open set must be infinite. $\Box$
+    \item Let's write $U = Z(m,b)$ where $m \neq 0$. If $m = 1$, note that $Z(m,b) = \bZ$ and hence, $\bZ\setminus U  =\emptyset$ which is open. Otherwise we prove the following relationship:
+    \begin{align*}
+        \bZ\setminus Z(m,b) &= \bigcup_{n = b+1}^{b+m-1}Z(m,n)
+    \end{align*}
+    This is equivalent to showing:
+    \begin{align*}
+        \bZ &=\bigcup_{n = b}^{b+m-1}Z(m,n)
+    \end{align*}
+    The converse inclusion is trivial since each $Z(m,n)\subseteq \bZ$. For the forward direction, let $y\in \bZ$. We know that $y\in Z(m,y)$. By division algorithm, we have that $y-b = mq+r$ for some $q\in \bZ$ and $0\leq r \leq m-1$. So we have that $y \in Z(m, b + r + mq)$. We now quickly remark that  $y \in Z(m, b + r + mq) = Z(m,b+r)$. For the forward inclusion we have that $y = mx + b+r+mq \implies y = m(x+q) + b+r\in Z(m+br)$. For the reverse inclusion $y = mx + b + r \implies y = mx - mq + b + r + mq = m(x-q) + b + r + mq \in Z(m, b + r + mq)$. Hence we have that $y\in Z(m,b+r)$. Since we know that $0\leq r \leq m-1$, this means that $Z(m,b+r)$ is an element in the union above completing the proof of the above set equality. This set equality precisely tells us that $\bZ\setminus Z(m,b)$ is a union of arithmetic progressions and thus is open. $\Box$
+    \item Let $m\neq n\in \bZ$. WLOG $m < n$. Take $U = Z(n-m+1, m)$ and $V = Z(n-m+1, n)$. It is clear that $m\in U$ and $n\in V$ (take $x = 0$ in the definition). To show that sets are disjoint, suppose that $(n-m+1)x_{1} + m = (n-m+1)x_{2} + n$ for some $x_{1}, x_{2}\in \bZ$ so that the intersection is non empty. This implies that $(n-m+1)(x_{1}-x_{2}) = n-m$. Since $0 < n-m < n-m+1$, this implies $x_{1}-x_{2} = 0$ as any other value for $x_{1}-x_{2}$ would cause $\lvert (n-m+1)(x_{1}-x_{2})\rvert > n-m+1 > n-m$. Thus we have that $x_{1} = x_{2}$ which contradicts the fact that they are distinct. Hence $U$ and $V$ must be disjoint completing the proof that $\ctfurst$ is Hausdorff. $\Box$
+\end{spacedenumerate}
+}
+\bmed {
+    Show that the collection $\cs = \{(-\infty, b):\ b\in \bR\} \cup \{(a,\infty):\ a\in \bR\}$ is a subbasis that generates the usual topology on $\bR$.
+} {
     We first show that if $\cb_{1}$ is a base for a topology $\ct$ and if $\cb_{2}\subseteq \ct$ is such that $\cb_{1}\subseteq \cb_{2}$, then $\cb_{2}$ is a base for $\ct$ as well. This follows quite simply because if $G\in\tau$, there is $\mathcal{C}\subseteq \cb_{1}$ such that  $G = \cup\{B : B\in \mathcal{C}\}$. But we also have that $\mathcal{C}$ is a subset of $\cb_{2}$, since $\cb_{1}\subseteq \cb_{2}$. Thus $\cb_{2}$ is also a base for $\ct$.
 
-    Let $\cb'$ be the set of all finite intersections of $\mathcal{S}$. Let $\cb$ be the base for the topology from a). We note that $\cb\subseteq \cb'$. This is because an interval of the form $(a,b)$ is equal to the intersection of the intervals $(-\infty, b)$ and $(a,\infty)$ (from Exercise 2.1 we know the set of all intervals form a base for the usual topology of $\bR$). From above, we get that $\cb'$ is a base for topology from a), and hence $\mathcal{S}$ is a subbase.
+    Let $\cb'$ be the set of all finite intersections of $\mathcal{S}$. Let $\cb$ be the base for the topology from a). We note that $\cb\subseteq \cb'$. This is because an interval of the form $(a,b)$ is equal to the intersection of the intervals $(-\infty, b)$ and $(a,\infty)$ (from Problem \ref{easyproblem:rintervalbasis} we know the set of all intervals form a base for the usual topology of $\bR$). From above, we get that $\cb'$ is a base for topology from a), and hence $\mathcal{S}$ is a subbase.
+}
 
-    \item \begin{spacedenumerate}
-        \item Let $\cs$ be a collection of subsets of a set $X$ that covers $X$. Show that $\cs$ is a subbasis on $X$.
-        
-        Let $\cb$ be the set of all finite intersections of $\cs$. Note that $\cs\subseteq\cb$ since we can take intersections with just one term. Thus $\cb$ covers $X$ since $\cs$ covers $X$. Let $B_{1},B_{2}\in \cb$. Since $B_{1}$ and $B_{2}$ are both a finite intersection of elements in $\cs$, then $B_{1}\cap B_{2}$ is also a finite intersection of elements in $\cs$, and hence $B_{1}\cap B_{2} \in \cb$. In particular, for any $x\in B_{1}\cap B_{2}$, we simply take $B_{1}\cap B_{2}$ to be the neighbourhood of $x$ that is contained in $B_{1}\cap B_{2}$. Hence $\cb$ is a basis as desired. $\Box$
-        \item Give an example of a subbasis on $\bR$ that does not generate the usual topology on $\bR$
-        
-        We simply take $\cs = \cp(\bR)$. We note that the set of finite intections we end up with the basis $\cb = \cp(\bR)$. Then taking unions, we still end up with $\ct = \cp(\bR)$ which is the discrete topology (which is not the usual topology).
-    \end{spacedenumerate}
-    \item For a prime number $p$, let $S_{p} = \{n\in \bN:\ n\text{ is a multiple of }p\}$
+\bmed [subbasecover]{
+    \begin{enumerate}
+       \item Let $\cs$ be a collection of subsets of a set $X$ that covers $X$. Show that $\cs$ is a subbasis on $X$.
+       \item Give an example of a subbasis on $\bR$ that does not generate the usual topology on $\bR$ 
+    \end{enumerate}
+} {
     \begin{spacedenumerate}
-        \item Show that $\cs = \{S_{p}:\ p\text{ is prime}\}\cup\{\{1\}\}$ is a subbasis on $\bN$
-        
-        By Exercise 2.10, it suffices to show that $\cs$ covers $\bN$. Let $n\in \bN$. If $n = 1$, then $n\in \{1\}$ which is an element of $\cs$. Otherwise, there exists a prime $p$ that divides $n$, and hence $n\in S_{p}$ which is an element of $S_{p}$. Since $\cs$ covers $\bN$ it is a subbasis for $\bN$.
-        \item Describe the open sets in the topology generated by $\cs$
-        
-        First I'll extend the notation $S_{n}$ to be the multiples of $n$ even when $n$ is not prime. We note that $S_{n}\cup S_{m}$ are the multiples of the least common multiple of $n$ and $m$. And so by taking finite intersections, we generate the basis $\cb = \{S_{n}:\ n\geq 2\in\bN\}\cup \{\{1\}\}$. The resulting topology has open sets whose elements are the union of these basis elements. So open sets in the topology are simply the union of multiples of numbers.
+        \item Let $\cb$ be the set of all finite intersections of $\cs$. Note that $\cs\subseteq\cb$ since we can take intersections with just one term. Thus $\cb$ covers $X$ since $\cs$ covers $X$. Let $B_{1},B_{2}\in \cb$. Since $B_{1}$ and $B_{2}$ are both a finite intersection of elements in $\cs$, then $B_{1}\cap B_{2}$ is also a finite intersection of elements in $\cs$, and hence $B_{1}\cap B_{2} \in \cb$. In particular, for any $x\in B_{1}\cap B_{2}$, we simply take $B_{1}\cap B_{2}$ to be the neighbourhood of $x$ that is contained in $B_{1}\cap B_{2}$. Hence $\cb$ is a basis as desired. $\Box$
+        \item We simply take $\cs = \cp(\bR)$. We note that the set of finite intections we end up with the basis $\cb = \cp(\bR)$. Then taking unions, we still end up with $\ct = \cp(\bR)$ which is the discrete topology (which is not the usual topology).
     \end{spacedenumerate}
-    \item Fix an infinite subset $A$ of $\bZ$ whose complement $\bZ\setminus A$ is also infinite. Construct a topology on $\bZ$ which satisifies the following properties:
+}
+
+\bmed {
+    For a prime number $p$, let $S_{p} = \{n\in \bN:\ n\text{ is a multiple of }p\}$
+    \begin{enumerate}
+        \item Show that $\cs = \{S_{p}:\ p\text{ is prime}\}\cup\{\{1\}\}$ is a subbasis on $\bN$
+        \item Describe the open sets in the topology generated by $\cs$
+    \end{enumerate}
+} {
+    \begin{spacedenumerate}
+        \item By Problem \ref{medproblem:subbasecover}, it suffices to show that $\cs$ covers $\bN$. Let $n\in \bN$. If $n = 1$, then $n\in \{1\}$ which is an element of $\cs$. Otherwise, there exists a prime $p$ that divides $n$, and hence $n\in S_{p}$ which is an element of $S_{p}$. Since $\cs$ covers $\bN$ it is a subbasis for $\bN$. $\Box$
+        \item First I'll extend the notation $S_{n}$ to be the multiples of $n$ even when $n$ is not prime. We note that $S_{n}\cup S_{m}$ are the multiples of the least common multiple of $n$ and $m$. And so by taking finite intersections, we generate the basis $\cb = \{S_{n}:\ n\geq 2\in\bN\}\cup \{\{1\}\}$. The resulting topology has open sets whose elements are the union of these basis elements. So open sets in the topology are simply the union of multiples of numbers.
+    \end{spacedenumerate}
+}
+\bhard {
+    Fix an infinite subset $A$ of $\bZ$ whose complement $\bZ\setminus A$ is also infinite. Construct a topology on $\bZ$ which satisifies the following properties:
     \begin{enumerate}
         \item $A$ is open
         \item Singletons are never open
         \item The topology is Hausdorff
     \end{enumerate}
-
+} {
     We know that since $A$ and $\bZ\setminus A$ are subsets of $\bZ$, they are countable (and thus countably infinite since they are infinite by assumption). Let $f$ be a bijection from $A$ to the set of even integers, and $g$ a bijection from $\bZ\setminus A$ to the set of odd integers. Then construction a bijection $\widetilde{h}: \bZ\to \bZ$ as follows:
     \begin{align*}
         \widetilde{h}(x) = \begin{cases}
@@ -260,8 +312,351 @@
             g(x) &\text{ if }x\not\in A
         \end{cases}
     \end{align*}
-    Let $h = \widetilde{h}^{-1}$. Let's equip the domain of $h$ with the Furstenberg topology. By exercise 1.8, since $h$ is bijective in this case, if we take $\ct_{h} = \{h(U): U\in \ctfurst\}$, we get that $\ct_{h}$ is a topology on $\bZ$. We note that $A$ is the image of the even integers under $h$ and note that the set of even integers is open in $\ctfurst$ since they can be represented as $Z(2,0)$. Hence the first condition is satisfied. The second condition is satisfied because exercise 2.8 tells us that non empty open sets in $\ctfurst$ are all infinite, and if we take the image of these infinite set under a bijection, they will still be infinite. So open sets in this topology are never singletons. Finally to show Hausdorff, let $a,b\in \bZ$. By exercise 2.8, we know that there exists disjoint open sets $U,V$ in $\ctfurst$ such that $h^{-1}(a)\in U$ and $h^{-1}(b)\in V$. Now consider $h(U)$ and $h(V)$ in $\bZ$ equipped with $\ct_{h}$. We have that $a\in h(U)$ and $b\in h(V)$. We also have that they are open by the definition of $\ct_{h}$. Finally we note that they are disjoint because if $y \in h(U)\cap h(V)$, then $y = h(u)$ for some $u\in U$ and $y = h(v)$ for some $v\in V$. Thus by injectivity of $h$, we get that $u = v$, which in particular gives us that $u=v \in U\cap V$ which contradicts the fact that $U$ and $V$ are disjoint. Thus $h(U)\cap h(V) = \emptyset$ completing the proof that $\ct_{h}$ is Hausdorff. $\Box$ 
+    Let $h = \widetilde{h}^{-1}$. Let's equip the domain of $h$ with the Furstenberg topology. By Problem \ref{easyproblem:inversequotienttop}, since $h$ is bijective in this case, if we take $\ct_{h} = \{h(U): U\in \ctfurst\}$, we get that $\ct_{h}$ is a topology on $\bZ$. We note that $A$ is the image of the even integers under $h$ and note that the set of even integers is open in $\ctfurst$ since they can be represented as $Z(2,0)$. Hence the first condition is satisfied. The second condition is satisfied because Problem \ref{medproblem:furstdefintion} tells us that non empty open sets in $\ctfurst$ are all infinite, and if we take the image of these infinite set under a bijection, they will still be infinite. So open sets in this topology are never singletons. Finally to show Hausdorff, let $a,b\in \bZ$. By Problem \ref{medproblem:furstdefintion}, we know that there exists disjoint open sets $U,V$ in $\ctfurst$ such that $h^{-1}(a)\in U$ and $h^{-1}(b)\in V$. Now consider $h(U)$ and $h(V)$ in $\bZ$ equipped with $\ct_{h}$. We have that $a\in h(U)$ and $b\in h(V)$. We also have that they are open by the definition of $\ct_{h}$. Finally we note that they are disjoint because if $y \in h(U)\cap h(V)$, then $y = h(u)$ for some $u\in U$ and $y = h(v)$ for some $v\in V$. Thus by injectivity of $h$, we get that $u = v$, which in particular gives us that $u=v \in U\cap V$ which contradicts the fact that $U$ and $V$ are disjoint. Thus $h(U)\cap h(V) = \emptyset$ completing the proof that $\ct_{h}$ is Hausdorff. $\Box$ 
+}
+\section{Closed sets, closures, and dense sets}
 
+\beasy {
+    Let $(X, \ct )$ be a topological space and $\cb$ a basis for $\ct$. Let $A \subseteq X$. Show that $x \in \overline{A}$ if and only if for every basic open set $U$ containing $x$, $U \cap A \neq \emptyset$
+} {
+    The forward direction follows by the definition because every basic open set is an open set. For the converse direction, let $x\in X$ and $V$ be an arbitrary (not necesarily basic) open set containing $x$. We know from equivalent definitions of a basis that there exists a basic open set $U$ containing $x$ that is contained in $V$. By assumption, $U\cap A\neq \emptyset$ and since $U\subseteq V$, we have that $V\cap A\neq \emptyset$
+}
 
+\beasy {
+    Let $(X,\ct)$ be a topological space, $A,B\subseteq X$. Is it necessarily true that $\overline{A\cup B} = \overline{A}\cup \overline{B}$? Is it necessarily true that $\overline{A\cap B} = \overline{A}\cap \overline{B}$
+} {
+    It is true that $\overline{A\cup B} = \overline{A}\cup \overline{B}$. For the forward inclusion, let $x\in \overline{A\cap B}$ and suppose $x\not\in \overline{A}$. Then, there exists $U$ containing $x$ such that $U\cap A = \emptyset$. Since $x\in \overline{A\cup B}$, we have that $(U\cap A)\cup (U\cap B) = U\cap (A\cup B) \neq \emptyset$. But since $U\cap A = \emptyset$, this gives us that $U\cap B \neq \emptyset$. Since $U$ was arbitrary, this gives us that $x\in \overline{B}$ as desired. For the reverse inclusion, we simply use the contrapositive. Suppose $x\not\in \overline{A\cup B}$, there exists an open set $U$ containg $x$ such that $(U\cap A)\cup (U\cap B) =  U\cap (A\cup B) = \emptyset$. This gives us that $U\cap A = U\cap B = \emptyset$ and hence $x\not \in \overline{A}$ and $x\not\in \overline{B}$ as desired. Thus closure distributes over unions.
+
+    It is not true however that closures distribute over intersections. Consider $\bru$ with $A = (0,1)$ and $B = (1,2)$. We have that $A\cap B = \emptyset$, so $\overline{A\cap B} = \emptyset$. However, $\overline{A} = [0,1]$ and $\overline{B} = [1,2]$, so $\overline{A}\cap \overline{B} = \{1\}\neq \emptyset = \overline{A\cap B}$. $\Box$
+}
+
+\beasy {
+    Let $A = \{\frac{1}{n}:\ n\in \bN\}$. In $\bru$, show that $\overline{A} = A\cup\{0\}$.
+} {
+    For the reverse inclusion, we know that $A\subseteq \overline{A}$. We also know that for any open set $U$ around 0, we can take an $\epsilon > 0$ such that $(-\epsilon, \epsilon)\subseteq U$. Note that for any $\epsilon$, there exists $N\in \bN$ large enough so that $\frac{1}{N} < \epsilon$. Thus the intersection $U\cap A$ is always non empty.
+
+    For the forward inclusion we approach via the contrapositive. Suppose $x\not\in A\cup \{0\}$. If $x < 0$, take $\epsilon = \lvert x\rvert/2$ so that $B_{\epsilon}(x)\cap A  = \emptyset$ because all values in $B_{\epsilon}(x)$ will take on strictly negative values. Now suppose $x > 0$ but $x\not\in A$. Let $n\in \bN$ be minimal so that $\frac{1}{n} < x$ (we know such an $n$ must exist by Archimedian property). So we have that $\frac{1}{n} < x < \frac{1}{n-1}$ and we know these are strict inequalities because $x\not \in A$. So $x\in \left(\frac{1}{n}, \frac{1}{n-1}\right)$, and by \ref{easyproblem:openinterval}, we know that this is an open set and there exists an $\epsilon > 0$ so that $B_{\epsilon}(x)\subseteq \left(\frac{1}{n}, \frac{1}{n-1}\right)$. Note that this implies $B_{\epsilon}(x)\cap A = \emptyset$ since for all $k \leq n-1$ we have that $\frac{1}{k} \geq \frac{1}{n-1}$, and for $k\geq n$, we have that $\frac{1}{k}\leq \frac{1}{n}$. So none of the values of $A$ are contained in this interval. In both cases, we have constructed a $B_{\epsilon}(x)$ so that $B_{\epsilon}(x)\cap A = \emptyset$. Since $B_{\epsilon}(x)$ is an open set in $\bru$ but has an empty intersection with $A$, we have that $x\not\in \overline{A}\cup\{0\}$ as desired. $\Box$
+}
+
+\beasy [rclosures]{
+    Show the following facts in $\bru$. Let $a < b <c\in \bR$,
+    \begin{enumerate}
+        \item $\overline{\{a\}} = \{a\}$
+        \item $\overline{[a,b)} = [a,b]$
+        \item $\overline{(a,b)\cup(b,c)} = [a,c]$
+        \item $\overline{[a,b]} = [a,b]$
+        \item If $(x_{n})_{n = 1}^{\infty}$ is a sequence converging to $x\in \bR$, then $\overline{\{x_{n}:\ n\in \bN\}} = \{x_{n}:\ n\in \bN\}\cup \{x\} $
+    \end{enumerate}
+} {
+    \begin{spacedenumerate}
+        \item Converse inclusion follows because $A\subseteq \overline{A}$ for all sets $A$. For the forward inclusion, we use the contrapositive. If $x\not\in \{a\}$, i.e $x\neq a$, we can take $\epsilon = \lvert x-a\rvert$, and thus $a\not\in B_{\epsilon}(x) \implies \{a\}\cap B_{\epsilon}(x) = \emptyset$. Since $B_{\epsilon}(x)$ is an open set containing $x$, $x\not\in \overline{\{a\}}$ as desired. $\Box$
+        \item For the converse inclusion if $x\in [a, b)$, we are done. So consider $x = b$. In this case, for any open set $U$ containing $B$, there exists $\epsilon > 0$ such that $B_{\epsilon}(b)\subseteq U$. We have that $b - \min\left(\frac{\epsilon}{2}, \frac{b-a}{2}\right)\in B_{\epsilon}(b)\cap [a,b)$ and thus the intersection $U\cap [a,b)$ is non empty for arbitrary open sets $U$ containing $b$. This completes the reverse inclusion.
+        
+        For the forward inclusion use the contrapositive. If $x < a$, then take $\epsilon = a - x$ and $B_{\epsilon}(x)\cap [a,b) = \emptyset$. If $x > b$, take $\epsilon = x-b$ and $B_{\epsilon}(x)\cap[a,b) = \emptyset$. In either case, $B_{\epsilon}(x)$ is an open set containing $x$ that doesn't intersect with $[a,b)$, so $x\not\in \overline{[a,b)}$ as desired. $\Box$
+        \item For the converse inclusion if $x\in (a, b)\cup (b,c)$, we are done. So we are left to consider $x\in \{a,b,c\}$ only. For $a$, any open set $U$ containing it, there exists $\epsilon > 0$ such that $B_{\epsilon}(a)\subseteq U$. Then $a + \min\left(\frac{\epsilon}{2},\frac{b-a}{2}\right)\in (a,b)\cap B_{\epsilon}(a)$ and thus the intersection $U\cap (a,b)\cup (b,c)$ is non empty for arbitrary open sets $U$ containing $a$. For $b$, any open set $U$ containing it, there exists $\epsilon > 0$ such that $B_{\epsilon}(b)\subseteq U$. Then $a + \min\left(\frac{\epsilon}{2},\frac{c-b}{2}\right)\in (b,c)\cap B_{\epsilon}(b)$ and thus the intersection $U\cap (a,b)\cup (b,c)$ is non empty for arbitrary open sets $U$ containing $b$. For $c$, any open set $U$ containing it, there exists $\epsilon > 0$ such that $B_{\epsilon}(c)\subseteq U$. Then $c - \min\left(\frac{\epsilon}{2},\frac{c-b}{2}\right)\in (b,c)\cap B_{\epsilon}(c)$ and thus the intersection $U\cap (a,b)\cup (b,c)$ is non empty for arbitrary open sets $U$ containing $c$. In all cases, we have that $x\in \overline{(a,b)\cup (b,c)}$  
+        
+        For the forward inclusion use the contrapositive. If $x < a$, then take $\epsilon = a - x$ and $B_{\epsilon}(x)\cap ((a,b)\cup (b-c)) = \emptyset$. If $x > c$, take $\epsilon = x-c$ and $B_{\epsilon}(x)\cap((a,b)\cup (b-c)) = \emptyset$. In either case, $B_{\epsilon}(x)$ is an open set containing $x$ that doesn't intersect with $(a,b)\cup(b,c)$, so $x\not\in \overline{(a,b)\cup(b,c)}$ as desired. $\Box$
+        \item Reverse inclusion follows because $A\subseteq \overline{A}$ for all sets $A$. For the forward inclusion use the contrapositive. If $x < a$, then take $\epsilon = a - x$ and $B_{\epsilon}(x)\cap [a,b] = \emptyset$. If $x > b$, take $\epsilon = x-b$ and $B_{\epsilon}(x)\cap[a,b] = \emptyset$. In either case, $B_{\epsilon}(x)$ is an open set containing $x$ that doesn't intersect with $[a,b]$, so $x\not\in \overline{[a,b]}$ as desired. $\Box$
+        \item For the reverse inclusion, we only need to show that $x$ is in the closure, the other elements are contained because of the fact that $A\subseteq \overline{A}$ in general. Let $U$ be an arbitrary open set containing $x$. There exists an $\epsilon > 0$ such that $B_{\epsilon}(x)\subseteq U$. By the definition of convergence, there exists $n\in \bN$ such that $x_{n}\in B_{\epsilon}(x)\subseteq U$. Hence the intersection $U\cap \{x_{n}:\ n\in \bN\}$ is always not empty and hence $x\in \overline{\{x_{n}:\ n\in \bN\}}$ completing the reverse inclusion.
+        
+        For the forward inclusion use the contrapositive. Suppose $y$ is not an element of the sequence and is not equal to $x$. Since limits are unique in $\bru$, the sequence doesn't converge to $y$. In particular, taking $\epsilon = \lvert y-x\rvert/2$, there exists an $N\in \bN$ so that $n\geq N$ implies that $x_{n}\in B_{\epsilon}(x)$. In particular, by the triangle in equality, this means that $n\geq N$ implies that $x_{n}\not\in B_{\epsilon}(y)$ and that $x\not\in B_{\epsilon}(y)$. For each $1\leq k \leq N$, define $\epsilon_{k} = \lvert y - x_{k}\rvert/2 > 0$ (since $y\neq x_{k}$ for all $k\in\bN$). So this construction gives us that $x_{k}\not\in B_{\epsilon_{k}}(y)$. Finally let's take $\epsilon_{0} = \min(\epsilon, \epsilon_{1},\dots, \epsilon_{k})$. We then have that $B_{\epsilon_{0}}(y)$ is an open set containing $y$ that doesn't contain any elements of the sequence or $x$. Hence $y\not\in \overline{\{x_{n}:\ n\in \bN\}}$ as desired. $\Box$
+    \end{spacedenumerate}
+}
+\beasy [closureequiv]{
+    Let $(X,\ct)$ be a topological space and let $A\subseteq X$. Show that
+    \begin{align*}
+        \overline{A} &= \bigcap\ \{F\subseteq X:\ A\subseteq F\text{ and } F \text{ is closed}\}
+    \end{align*}
+    Note that this tells us that if $A\subseteq B$, then $\overline{A}\subseteq \overline{B}$. This is because $x\in \overline{A}$ means that $x$ is an element of every closed set that contains $A$, but every closed set that contains $B$ also contains $A$, hence $x\in \overline{B}$.
+} {
+    For both inclusions, we prove via the contrapositive.
+
+    $(\subseteq)$
+
+    Suppose $x$ is not an element of the set on the right hand side. Thus there exists a closed set $F$ with $A\subseteq F$ such that $x\not\in F$, i.e $x\in X\setminus F$. $X\setminus F$ is an open set since $F$ is closed and since $A\subseteq F$ we have that $A\cap (X\setminus F) = \emptyset$. Since we have found an open set containing $x$ that doesn't intersect with $A$, $x\not\in \overline{A}$. $\Box$
+
+    $(\supseteq)$
+
+    Suppose $x\not\in \overline{A}$. There exists an open set $U$ containing $x$ such that $U\cap A = \emptyset$. This implies that $A\subseteq X\setminus U$. Since $U$ is open, $X\setminus U$ is closed, so this set is contained in the intersection on the right side of the equation. However, since $x\not\in X\setminus U$ (since $x\in U$), we have that $x$ cannot be an element of an intersection containing $X\setminus U$, and hence $x$ is not an element of the right side. $\Box$ 
+}
+\beasy  [denseequiv]{
+    Show that if $(X, \ct )$ is a topological space and $D \subseteq X$, show that $D$ is dense if and only if for every nonempty open set $U \subseteq X$, $D \cap U \neq \emptyset$.
+} {
+    For the forward implication, suppose $\overline{D} = X$. Let $U$ be an arbitrary non empty open set. Then there exists $x\in U$. By assumption, we have that $x\in \overline{D}$. So by the definition of closure, $U\cap D\neq\emptyset$ as desired.
+
+    For the reverse implication. Suppose all nonempty open sets intersect non trivially with $D$. We then see that $\overline{D} = X$ since for arbitrary $x\in X$ and open sets $U_{x}$ containing $x$, we get by our assumption that $U_{x}\cap D\neq \emptyset$ so  $x\in \overline{D}$ as desired. $\Box$
+}
+
+\beasy {
+    In an arbitrary topological space, is the union of two dense sets necessarily dense? What about the intersection of two dense sets? For both questions, prove it or give a counterexample
+} {
+    The union is necessarily dense. Suppose $D_{1}$ and $D_{2}$ are dense. We note that $D_{1}\subseteq D_{1}\cup D_{2}$ and since $D_{1}$ is dense, $D_{1}\cup D_{2}$ is dense. In general if $A$ is dense with $A\subseteq B$, then $B$ is dense.
+
+    Intersections are not necessarily dense. In $\bru$, we have that the set of rationals, and irrationals are both dense. However, their intersection is the empty set which is not dense. $\Box$
+}
+
+\beasy [intequiv]{
+    Show that
+    \begin{align*}
+        \interior(A) &= \bigcup\ \{U\subseteq X:\ U\subseteq A\text{ and } U \text{ is open}\}
+    \end{align*}
+} {
+    For the forward inclusion, suppose $x\in \interior (A)$. Then there exists an open set $U_{x}$ containing $x$ with $U_{x}\subseteq A$ by definition. Thus, $U_{x}$ is an element of the union on the right hand side. Since $x\in U_{x}$, then $x$ is an element of the right side.
+
+    For the reverse inclusion, if $x$ is an element of the union, there exists an open set $U$ such that $x\in U$ and $U\subseteq A$. This is precisely the condition for $x\in \interior A$
+}
+
+\beasy [intopen]{
+    Show for any topological space $(X, \ct )$ and any $A \subseteq X$, that $\interior(A)$ is open
+} {
+    This follows from problem \ref{easyproblem:intequiv} since the interior is a union of open sets and is thus open. $\Box$
+}
+\beasy [openiffequalinterior]{
+    Show that a subset $A$ of a topological space $X$ is open if and only if $A = \interior(A)$.
+} {
+    The reverse implication follows since we've already showed in problem \ref{easyproblem:intopen} that the interior is open. For the forward implication, suppose $A$ is open. Using the equivalent definition fo the interior in problem \ref{easyproblem:intequiv}, we see that $\interior(A)\subseteq A$ since it is a union of subsets of $A$. Also, we see that if $A$ is open, then $A$ is an element of the union and so $A\subseteq \interior (A)$. Hence $A = \interior(A)$ completing the proof. $\Box$
+}
+
+\beasy [intclosureexamples]{
+    Compute the interior and closures of the following sets in the given spaces:
+    \begin{enumerate}
+        \item $(0,1]$ in $\bru$
+        \item $(0,1]$ in the Sorgenfrey line
+        \item $(0,1]$ in $(\bR, \ctt)$
+        \item $(0,1]$ in $(\bR, \ctd)$
+        \item $(0,1]$ in $(\bR, \ctr)$
+        \item $(0,1]$ in $(\bR, \ctf)$
+        \item The set $E$ of even numbers in $(\bZ, \ctf)$
+        \item $\bQ$ in $\bru$
+        \item $\bQ$ in the Sorgenfrey line
+        \item $\bQ\times \bQ$ in $\bru^{2}$
+        \item $\{(x,y,z)\in \bR^{3}:\ x= 0\}$ in $\bru^{3}$
+    \end{enumerate}
+} {
+\begin{spacedenumerate}
+    \item The closure is $[0,1]$ via a similar proof to problem \ref{easyproblem:rclosures}. The interior is $(0,1)$. We note that $(0,1)$ is open by problem \ref{easyproblem:openinterval} and that it is a subset of $[0,1)$. Thus the interior must contain $(0,1)$. However, $1\not\in \interior (0,1]$ (so the interior cannot be $(0,1]$) since every open set containing $1$ will contain an element larger than 1 which is not in $(0,1]$. Thus the interior must be $(0,1)$. $\Box$
+    \item We showed that $(0,1]$ is open in the Sorgenfrey line in Problem \ref{easyproblem:sorgenfrey}. Thus by problem \ref{easyproblem:openiffequalinterior}, we have that $(0,1]$ is it's own interior. We also have that $\bR\setminus (0,1] = (-\infty, -1)\cup[-1,0]\cup (1,\infty)$. By Problem \ref{easyproblem:sorgenfrey}, we know that the topology of the Sorgenfrey line refines the usual topology of $\bR$. Since $(-\infty, -1)$ and $(1,\infty)$ are open in the usual topology on $\bR$, they open in the Sorgenfrey line. $[-1,0]$ is open because we can write it as $[-1,-\frac{1}{2})\cup (-1, 0]$ which are both open by \ref{easyproblem:sorgenfrey}.  Hence, $\bR\setminus (0,1]$ is open, implying that $(0,1]$ is closed and equal to its own closure. $\Box$ 
+    \item The only open/closed sets in $\ctt$ are $\emptyset$ and $\bR$. By using \ref{easyproblem:intequiv}, the only open set contained by $(0,1]$ is $\emptyset$ so the interior is $\emptyset$. The only closed set containing $(0,1]$ is $\bR$, so the closure is $\bR$ by problem \ref{easyproblem:closureequiv}. $\Box$
+    \item In the discrete topology every set is both open and closed. So the interior and closure of $(0,1]$ is itself. $\Box$
+    \item In $\ctr$, open sets are of the form $(a, \infty)$ (or the empty set and $\bR$), and so closed sets are of the form $(-\infty, b)$. Note that there does not exist a nonempty open set that is contained in $(0,1]$ and hence the interior is equal to $\emptyset$. Note that $(0,1]\subseteq (-\infty, 1]$ and $(-\infty, 1]$ is closed, so the closure must be a closed subset of $(-\infty,1]$. However, every proper closed subset of $(-\infty,1]$ is of the form $(-\infty,b]$ for $b <  1$ so $1\not\in(-\infty,b]$. This implies that the closure must be equal to $(-\infty, 1]$ since $(0,1]$ itself must be a subset of its closure. $\Box$
+    \item The closed sets in $\ctf$ are the finite sets and $\bR$ itself. Since $(0,1]$ is infinite, there are no finite sets that contain it, so the only closed set containing it is $\bR$. Thus, by problem \ref{easyproblem:closureequiv}, the closure must be $\bR$. Since the complement of $(0,1]$ is infinite, every subset of $(0,1]$ will contain infinitely many values and so every non empty subset will not be open in $\ctf$. The only open subset of $(0,1]$ is $\emptyset$. Thus by problem \ref{easyproblem:intequiv}, the interior will be equal to $\emptyset$. $\Box$
+    \item We can generalize the above argument to say that if $X$ is a set equipped with the co-finite topology and $A\subseteq X$ is such that $A$ is infinite and $X\setminus A$ is infinite, then the closure of $A$ is $X$ and the interior of $A$ is $\emptyset$. If $A$ is infinite, there are no finite (i.e closed) sets that contain it except for $X$. So by problem \ref{easyproblem:closureequiv}, the closure of $A$ must be $X$. If $X\setminus A$ is infinite, every subset of $A$ will contain infinitely many elements in its complement (since it must contain $X\setminus A$). Thus the only open set contained in $A$ is the empty set, which by problem \ref{easyproblem:intequiv} tells us that the interior is $\emptyset$. So in this case, the set of even numbers is infinite and so is the complement (odd integers), and thus the interior is $\emptyset$ and closure is $X$. $\Box$
+    \item We've shown in problem \ref{medproblem:qdense} that every open set in $\bru$ intersects non trivially with $\bQ$. Furthermore, problem \ref{easyproblem:denseequiv} tells us that this implies that $\bQ$ is dense, and hence $\overline{\bQ} = \bR$. Next, we show that there are no nonempty open subsets of $\bQ$. Suppose such an open subset $U$ existed. Let $q\in U$. Let $V$ be an arbitrary open set  containing $q$. Since $U$ is open there must be open interval $(q-\epsilon, q + \epsilon)\subseteq U$. However this open interval intersects non trivially with the irrationals by problem \ref{medproblem:qdense}. This contradicts the fact that $U$ is contained in the rationals. Hence the only non empty open subset contained in $\bQ$ is $\emptyset$ which by problem \ref{easyproblem:intequiv} we have that the interior is $\emptyset$. $\Box$
+    \item $\bQ$ is still dense in the Sorgenfrey Line because every open set $U$ contains a basis element of the form $[a,b)$ which will always contain a rational number. Hence $\overline{\bQ} = \bR$. We can always follow the same proof as for $\bru$ to show that interior is empty because any open set must contain an interval $[a,b)$ (which is a basis element). Since $(a,b)\subseteq [a,b)$, we have that this interval must contain an irrational number. The proof continues in the same way and we get that the interior is $\emptyset$. $\Box$
+    \item $\bQ\times \bQ$ is still dense in $\bru^{2}$ since given a non empty open set $U$, say it contains a point $(x,y)$. There exists an open ball such that $B_{\epsilon}(x,y)\subseteq U$ ($\epsilon > 0$). Consider the interval $(x-\frac{\epsilon}{\sqrt{2}}, x+\frac{\epsilon}{\sqrt{2}})\in \bR$, by density of rationals (problem \ref{medproblem:qdense}), there is a rational number $q_{1}$ in this interval. Similarly, there exists a rational number $q_{2}$ in the interval $(y-\frac{\epsilon}{\sqrt{2}}, y + \frac{\epsilon}{\sqrt{2}})$  Then, $d((q_{1},q_{2}), (x,y)) = \sqrt{\lvert q_{1}- x\rvert^{2} + \lvert q_{2} - y\rvert^{2}} < \sqrt{\left(\frac{\epsilon}{\sqrt{2}}\right)^{2} + \left(\frac{\epsilon}{\sqrt{2}}\right)^{2}} = \epsilon$. So $(q_{1}, q_{2}) \in U\cap \bQ\times \bQ$ and hence $\overline{\bQ\times \bQ} = \bR^{2}$.
+    
+    A similar justification will allow us to show that the interior is empty. Suppose a non empty open subset $U$ of $\bQ\times \bQ$ existed. Say $(x,y)\in U$. There exists an open ball such that $B_{\epsilon}(x,y)\subseteq U$ ($\epsilon > 0$). Consider the interval $(x-\epsilon, x + \epsilon)$, there exists an irrational number $z$ in this interval. Then $d((z,y),(x,y)) = \lvert z-x\rvert < \epsilon$, so $(z,y)\in B_{\epsilon}(x,y)\subseteq U$. However, $(z,y)\not\in \bQ\times\bQ$. So there cannot be a non empty open subset of $\bQ\times \bQ$ implying that the interior is the empty set.  $\Box$
 \end{spacedenumerate}
-\end{document}
+}
+\beasy [bd1]{
+    Let $A$ be a subset of a topological space $X$. Show that $\bd(A)= \overline{A} \cap \overline{X\setminus A} = \overline{A} \setminus \interior(A)$.
+} {
+   The first equality $\bd(A)= \overline{A} \cap \overline{X\setminus A}$ follows exactly from the definition. $x\in \bd(A)$ if and only if every open set intersects non trivially with $A$ and $X\setminus A$ which is equivalent to $x$ being an element of $\overline{A}$ and $\overline{X\setminus A}$.
+
+   To complete the proof we show $\bd(A) = \overline{A}\setminus \interior (A)$. 
+   \begin{align*}
+    x\in \bd(A) &\iff \text{for all open sets $U_{x}$ containing $x$, }U_{x}\cap A\neq \emptyset\text{ and }U_{x}\cap (X\setminus A)\neq \emptyset\\
+    &\iff \text{for all open sets $U_{x}$ containing $x$, }U_{x}\cap A\neq \emptyset\text{ and }U_{x}\not\subseteq A\\
+    &\iff x\in \overline{A} \text{ and }x\not\in \interior(A)\\
+    &\iff x\in \overline{A}\setminus\interior(A). \ \Box
+   \end{align*}
+}
+\beasy {
+    Let $A$ be a subset of a topological space $X$. Show that $\overline{A} = A\cup\bd(A)$ and $\interior(A) = A\setminus \bd(A)$.
+} {
+   \begin{spacedenumerate}
+    \item $\overline{A} = A\cup\bd(A)$
+    
+    We know that $A\subseteq \overline{A}$ and that $\bd(A) = \overline{A}\cap \overline{X\setminus A}$ by problem \ref{easyproblem:bd1}, so we also have that $\bd(A)\subseteq \overline{A}$. Thus the reverse inclusion has been shown. For the forward inclusion, again from problem \ref{easyproblem:bd1}, we have that $\bd(A) = \overline{A}\setminus \interior(A)\implies \overline{A} \subseteq \bd(A)\cup \interior(A)\subseteq \bd(A)\cup A$ as desired ($\interior(A)$ is contained in $A$ since it is a union of subsets of $A$). $\Box$ 
+    \item $\interior(A) = A\setminus \bd(A)$
+    
+    We know that $\interior(A)\subseteq A$ as mentioned above. We also have from problem \ref{easyproblem:bd1} that $\bd (A) = \overline{A} \setminus \interior(A)$ so $x\in \interior(A)\implies x\not\in \bd(A)$. This completes the forward inclusion. For the reverse inclusion, if $x\in A$ and $x\not\in \bd(A)$, there exists a neighbourhood of $U_{x}$ of $x$ such that $U_{x}\cap A = \emptyset$ or $U_{x}\cap(X\setminus A) = \emptyset$. Since $x\in A$, we know that $U_{x}\cap A\neq \emptyset$, so we must have that $U_{x}\cap(X\setminus A) = \emptyset$. This is equivalent to $U_{x}\subseteq A$ and hence $x\in \interior(A)$.
+   \end{spacedenumerate}
+}
+\bmed {
+    Let $A$ be a subset of a topological space $X$. Show that $X = \interior(A) \sqcup \bd(A) \sqcup \interior(X \setminus A)$
+} {
+    First for showing equality of the union, suppose $x\in X$ with $x\not\in \interior(A)$ and $x\not\in \interior(X\setminus A)$. Then for all open sets $U_{x}$ containing $x$, $U_{x}\not\subseteq A$ which is equivalent to $U_{x}\cap(X\setminus A)\neq \emptyset$ and $U_{x}\not\subseteq (X\setminus A)$ which is equivalent to $U_{x}\cap A\neq \emptyset$. These 2 combined precisely are the definition of $x\in \bd(A)$
+
+    For disjointness, $\interior(A)\subseteq A$ and $\interior(X\setminus A)\subseteq X\setminus A$ so $\interior(A)$ and $\interior(X\setminus A)$ are disjoint since $A$ and $X\setminus A$ are disjoint. $\bd(A)$ and $\interior(A)$ are disjoint since by problem \ref{easyproblem:bd1}, $\bd(A) =  \overline{A} \setminus \interior(A)$ so if $x\in \interior(A)$, $x\not\in \bd(A)$ so there cannot be an element in their intersection. Finally, we note that $\bd(A) = \bd(X\setminus A)$ because the definition is symmetric when we replace $A$ with $X\setminus A$. We then get that $\interior(X\setminus A)$ is disjoint with $\bd(X\setminus A) = \bd(A)$. We have shown all 3 sets are pairwise disjoint and thus the union is indeed a disjoint union. $\Box$
+}
+\bmed {
+    A subset $A$ of a topological space $X$ is called regular open if $\interior(\overline{A}) = A$. Regular open sets play an important role in set theoretic topology.
+    \begin{enumerate}
+        \item Show that in $\bru$,  any open interval $(a, b)$ is regular open
+        \item  Let $A$ be a subset of a topological space X. Is it true that $\interior(\overline{A}) = \overline{\interior(A)}$? If not, is there containment one way or the other?
+        \item Show that the intersection of two regular open sets is again regular open (in any topological space)
+        \item Is the union of two regular open sets again regular open? Prove it or give a counterexample.
+        \item Given a subset $A$ of a topological space $X$, let $A^{\perp} = X \setminus \overline{A}$. Show that a set A is regular open if and only if $(A^{\perp})^{\perp} = A$.
+    \end{enumerate}
+} {
+\begin{spacedenumerate}
+    \item We know that $\overline{(a,b)} = [a,b]$ by \ref{easyproblem:rclosures}. The interior of $[a,b]$ is $(a,b)$. It suffices to show that $a$ and $b$ both cannot be in the interior, and since we know that the interior must contain all open sets, it follows that the interior is $(a,b)$. Note that every open set $U$ containing $a$, contains an open interval $B_{\epsilon}(a)\subseteq U$. We see that this is not contained in $(a,b)$ since $a-\frac{\epsilon}{2}$ is not in $(a,b)$. Similarly for $b$, any open set $V$ containing $b$ contains an open interval $B_{\epsilon}(b)\subseteq V$ which is not contained in $(a,b)$ since $b+ \frac{\epsilon}{2}$ is not in $(a,b)$. $\Box$
+    \item We note that this equality doesn't necesarily hold because $\interior(\overline{A})$ is a open set while $\overline{\interior(A)}$ is a closed set and in a lot of topological spaces, there are very few clopen sets. A concrete counter example will be $(a,b)$ in $\bru$. In part a), we showed that $\interior(\overline{A}) = (a,b)$. We can also see that $\overline{\interior(A)} = [a,b]$ since $A = \interior(A)$ as $(a,b)$ is open. This example also shows us that the reverse inclusion is false.
+    
+    The forward implication is not true either. Recall from problem \ref{easyproblem:intclosureexamples} if we take $\bR$ equipped with the co-finite topology, and take $A = (0,1]$ (or any infinite subset whose complement is infinite), $\interior(A) = \emptyset$ and $\overline{A} = \bR$. Thus, $\overline{\interior(A)} = \emptyset$ and $\interior(\overline{A}) = \bR$. So we don't necessarily have that, $\interior(\overline{A})\subseteq \overline{\interior(A)} $. $\Box$
+    \item Suppose $A$ and $B$ are regular open sets. We have that $A\cap B = \interior(\overline{A})\cap \interior(\overline{B})$ by definition of regular open sets. We seek to show that $A\cap B = \interior(\overline{A\cap B})$. For the forward inclusion we note that $A\cap B\subseteq \overline{A\cap B}$. Thus, taking the interior of both sides and we get that $\interior(A\cap B)\subseteq \interior(\overline{A\cap B})$ (In general if $C\subseteq D$, then $\interior(C)\subseteq \interior(D)$ because if $U\subseteq C$, then $U\subseteq D$). Since $A$ and $B$ are both open, we have that $A\cap B$ is open and thus $\interior(A\cap B) = A\cap B$ (problem \ref{easyproblem:openiffequalinterior}). Hence $A\cap B = \interior(A\cap B)\subseteq \interior(\overline{A\cap B})$. 
+    
+    For the converse inclusion we first remark that in general, the interior distributes over intersection, i.e if $\interior(C\cap D) = \interior(C)\cap \interior(D)$. The forward direction follows from the fact that $C\cap D$ is a subset of both $C$ and $D$ so $\interior(C\cap D)\subseteq \interior(C)$ and $\interior(C\cap D)\subseteq \interior(D)$. For the reverse inclusion we note that if $x\in \interior(C)$ and $x\in \interior(D)$, there exists open sets $U_{1}$ and $U_{2}$ containing $x$ such that $U_{1}\subseteq C$ and $U_{2}\subseteq D$. Then if we take $U_{1}\cap U_{2}$, it is still open and we have that $U_{1}\cap U_{2}\subseteq C\cap D$ and so $x\in \interior(C\cap D)$. Also note that $\overline{A\cap B}\subseteq \overline{A}\cap \overline{B}$ because $A\cap B\subseteq A$ and $A\cap B\subseteq B$, and so $\overline{A\cap B}$ is a subset of both $\overline{A}$ and $\overline{B}$ (problem \ref{easyproblem:closureequiv}). Again, we can take the interior of both sides which tells us that $\interior(\overline{A\cap B})\subseteq \interior(\overline{A}\cap \overline{B}) = \interior(\overline{A})\cap \interior(\overline{B}) = A \cap B$. The first equality follows from the fact that interior splits over intersections, and the second because $A$ and $B$ are regular open sets. This completes the proof of the converse direction and the set equality. $\Box$
+    \item The union of regular open sets is not necessarily open. In $\bru$, take the intervals $(0,1)$ and $(1,2)$ which are regular open by a). The union is $(0,1)\cup (1,2)$. This however is not regular open as its closure is $[0,2]$ (by problem \ref{easyproblem:rclosures}) whose interior is $(0,2)\neq (0,1)\cup (1,2)$.
+    \item It suffices to show that $(A^{\perp})^{\perp} = \interior(\overline{A})$ for all subsets $A$. Unravelling the definition, $(A^{\perp})^{\perp} = X\setminus\overline{(X\setminus\overline{A})}$. Note that $\interior(\overline{A}) = X\setminus\overline{(X\setminus\overline{A})}\iff X\setminus \interior(\overline{A}) = \overline{(X\setminus\overline{A})}$. Now note the following chain of equivalences to see this equality:
+    \begin{align*}
+        x\not\in \overline{A} &\iff \text{For all neighbourhoods $U_{x}$ of $x$, $U_{x}\not\subseteq \overline{A}$}\\
+        &\iff \text{For all neighbourhoods $U_{x}$ of $x$, $U_{x}\cap(X\setminus \overline{A})$}\\
+        &\iff x\in \overline{X\setminus \overline{A}}
+    \end{align*}
+    As discussed, this set equality implies that $A$ is regular open if and only if $(A^{\perp})^{\perp} = A$. $\Box$
+\end{spacedenumerate}
+}
+\bmed [sequenceinclosure]{
+    Let $A$ be a subset of $\bR^{n}$ with its usual topology. Show that $x \in \overline{A}$ if and only if there exists a sequence of elements of $A$ that converges to $x$.
+} {
+    For the forward direction, let $x\in \overline{A}$. For $n\in \bN$, since $x\in \overline{A}$, $B_{\frac{1}{n}}(x) \cap A \neq \emptyset$. So for each $n\in \bN$, choose an $x_{n}\in B_{\frac{1}{n}}(x)\cap A$ forming a sequence of elements in $A$ (invoking the axiom of choice). Note that $(x_{n})_{n = 1}^{\infty}$ converges to $x$ because for all $\epsilon > 0$, choose $N$ such that $\frac{1}{N}  < \epsilon$, and for $n\geq N$, $x_{n}\in B_{\frac{1}{n}}(x) \subseteq B_{\frac{1}{N}}(x) \subseteq B_{\epsilon}(x)$. 
+
+    For the converse direction, suppose $(x_{n})_{n = 1}^{\infty}$ is a sequence in $A$ that converges to $x\in X$. Let $U$ be an arbitrary neighbourhood of $x$. There exists an $\epsilon> 0$ such that $B_{\epsilon}(x)\subseteq U$. Since the sequence convergres to $x$, there exists a $x_{n_{0}}\in B_{\epsilon}(x)\subseteq U$. Since the sequence $x_{n}$ is contained in $A$, the intersection $U\cap A$ is non-empty (it contains $x_{n_{0}}$) and hence $x\in \overline{A}$. $\Box$  
+} 
+\bmed {
+    We have already learned that $\bQ$ is dense in $\bR$ with its usual topology. Is $\bQ \setminus \{0\}$ dense? How about if you remove finitely many points from $\bQ$? Is there an infinite set of points
+    you can remove from $\bQ$ that leaves the resulting set dense?
+} {
+    I show that if we remove finitely many points from $\bQ$, the resulting set is still dense. Suppose $A = \{a_{1},\dots, a_{n}\}\subseteq \bQ$. Consider $\bQ\setminus A$. Let $U$ be an arbitrary non empty open set in $\bru$. Let $x\in U$, and thus there exists an interval $I = (x-\epsilon, x+\epsilon)\subseteq U$ (where $\epsilon > 0$). If $A\cap I =\emptyset$, then we get that $I\cap (\bQ\setminus A)\neq \emptyset$ since we know the interval must contain a rational number and that rational number cannot be in $A$. Now suppose $A\cap I \neq \emptyset$. Define $m = \max A\cap I$ (we can take this maximum because $A$ is finite). Consider the interval $(m, x + \epsilon)\subseteq I$. This interval must contain a rational number $q$, and note that $q\not \in A$ because that would contradict the maximality of $m$. Thus we have that $I\cap (\bQ\setminus A)\neq \emptyset$ since it contains this rational number $q$. In both cases, we have that $I\cap (\bQ\setminus A)\neq \emptyset$ and since $I\subseteq U$, this means that $U\cap (\bQ\setminus A)\neq \emptyset$. Since $U$ was arbitrary, $\bQ\setminus A$ is dense. This also tells us that  $\bQ \setminus \{0\}$ is dense.
+
+    We can indeed remove infinitely many sets and still have the resulting set be dense. Consider $\bQ\setminus \bN$. Let $U$ be an arbitrary non empty open set in $\bru$. Let $x\in U$, and thus there exists an interval $I = (x-\epsilon, x+\epsilon)\subseteq U$ (where $\epsilon > 0$). If $\bN\cap I =\emptyset$, then we get that $I\cap (\bQ\setminus \bN)\neq \emptyset$ since we know the interval must contain a rational number and that rational number cannot be a natural number. Now suppose $\bN\cap I \neq \emptyset$. Define $m = \min \bN\cap I$ (we can take this minimum because $\bN$ is well ordered under the usual ordering, and so this subset of $\bN$ must contain a minimal element). Consider the interval $(x-\epsilon, m)\subseteq I$.This interval must contain a rational number $q$, and note that $q\not \in \bN$ because that would contradict the minimality of $m$. Thus we have that $I\cap (\bQ\setminus \bN)\neq \emptyset$ since it contains this rational number $q$. In both cases, we have that $I\cap (\bQ\setminus \bN)\neq \emptyset$ and since $I\subseteq U$, this means that $U\cap (\bQ\setminus \bN)\neq \emptyset$. Since $U$ was arbitrary, $\bQ\setminus \bN$ is dense. $\Box$
+}
+\bmed [denseopenintersection]{
+    Let $(X, \ct )$ be a topological space, and let $D_{1}$ and $D_{2}$ be dense open subsets of $X$. Prove that $D_{1} \cap D_{2}$ is dense and open. Give an example in $\bru$ to show that this does not extend even to countably infinite intersections. That is, give an example of a collection $\{ D_{n} : n \in\bN \}$ of dense open subsets of $\bru$ such that $\bigcap_{n = 1}^{\infty}D_{n}$  is not open (as you will soon see, such an intersection must be dense).
+} {
+    Let $D_{1},\ D_{2}$ be dense and open. Their intersection is open by the definition of a topology. To show that they are dense, let $U$ be an arbitrary non empty subset of $X$. Since $D_{1}$ is dense, $U\cap D_{1}$ is non empty. Since $U$ and $D_{1}$ are both open, $U\cap D_{1}$ is open. Since $D_{2}$ is dense, $U\cap D_{1} \cap D_{2}$ is not empty and hence $D_{1}\cap D_{2}$ is dense.
+
+    Let $D_{n} = \bR \setminus \left\{\frac{1}{n}\right\}$. Problem \ref{easyproblem:rclosures}, gives us that singletons are equal to their closures and are thus closed, so $D_{n}$ is open for all $n\in \bN$. It is dense because every non empty open set in $\bR$ must contain at least 2 distinct elements (well they contain infinitely many but this is enough) since they aren't singletons, and we see that this implies that it must intersect with $\bR$ with only 1 element removed. Note however that $S = \bigcup_{n = 1}^{\infty} D_{n}$ is not open because $0\in S$, but for every open set $U$ containing $0$, there is an interval $B_{\epsilon}(0)\subseteq U$, but we know that there exists $\frac{1}{n} < \epsilon$ and so every open set will contain an element not in $S$ and thus $S$ is not open. $\Box$
+}
+
+\bmed {
+    Recall the Furstenberg topology $\ctfurst$ on $\bZ$ (problem \ref{medproblem:furstdefintion}), introduced in the exercises from the previous section. To remind you, this is the topology on $\bZ$ generated by the basis consisting of all infinite arithmetic progressions in $\bZ$. Earlier, you proved that every nonempty open subset in $\ctfurst$ is infinite. You also proved that for every basic open set $U$ in $\ctfurst$, $\bZ \setminus U$ is open. We now know this is the same as saying every basic open subset is closed. You are going to use this topology to give a slick, elegant proof that there are infinitely many prime numbers.
+    \begin{enumerate}
+        \item Using the notation from when this topology was first introduced, show that:
+        \begin{align*}
+            \bZ\setminus \{-1, 1\} = \bigcup_{p\text{ is prime}}Z(p,0)
+        \end{align*}
+        \item Assume for the sake of contradiction that there are only finitely many primes. Deduce from this assumption that $\bZ \setminus \{-1, 1\}$ is closed.
+        \item Find a contradiction resulting from the previous part, and conclude that there must
+        be infinitely many primes.        
+    \end{enumerate}
+
+} {
+    \begin{spacedenumerate}
+        \item For the reverse inclusion, note that $Z(p,0) = \{np:\ n\in \bZ\}$. Note that no scalar multiple of a prime is equal to $1$ or $-1$ which completes the reverse inclusion. For the forward inclusion, if $n\in \bZ\setminus\{-1,1\}$ we consider 2 cases, $n = 0$ or otherwise. If $n = 0$, note that $0 = 7(0)$, so $0\in Z(7,0)$ and since $7$ is prime $n$ is an element of the right hand side. Now suppose $n$ is non zero, by prime factorization, there exists a prime $p$ such that $p\mid n$, i.e $n = pk$ for some $k\in \bZ$. Thus $n\in Z(p,0)$ and thus is an element of the right hand side. In both cases we see that the forward inclusion stands. $\Box$
+        \item As mentioned in the problem statement, we've shown that every basic open set is closed. Thus, if there are finitely many primes, we have expressed $\bZ\setminus\{-1,1\}$ as the union of finitely many closed sets, and by the definition of a topology, this means that it must be closed. $\Box$
+        \item As mentioned in the problem statement, we've shown that all non empty open sets are infinite. If $\bZ\setminus\{-1,1\}$ is closed, then $\{-1, 1\}$ must be open. This is a contradiction as this set is not infinite, hence there must be infinitely many primes. $\Box$
+    \end{spacedenumerate}
+}
+\bhard {
+    Prove that if $\{ D_{n} :\ n \in \bN \}$ is a (countable) collection of dense open subsets of $\bru$, then $\bigcap_{n = 1}^{\infty} D_{n}$ is dense. Give an example in $\bru$ to show that this result does not extend to arbitrary (i.e uncountable) intersections.
+} {
+    Let $U\subseteq \bR$ be open. We know that $U\cap D_{1}$ is open and non empty. Let $x_{1}\in U\cap D_{1}$. Since this is open, there exists an $\epsilon_{1} > 0$ such that $B_{\epsilon_{1}}(x_{1})\subseteq U \cap D_{1}$. If we take $\delta_{1} = \min(\epsilon_{1}, 1)$, we have the following chain of equivalences
+    \begin{align*}
+        B_{\delta_{1}/2}(x_{1})\subseteq \overline{B_{\delta_{1}/2}}(x_{1})\subseteq B_{\delta_{1}}(x_{1})\subseteq B_{\epsilon_{1}}(x_{1})\subseteq U\cap D_{1}
+    \end{align*}
+    We now proceed inductively and show that for all $n\geq 2\in \bN$, we can choose $x_{n}$ and $\delta_{n}\leq \frac{1}{n}$ that satisfies the following properties:
+    \begin{enumerate}
+        \item $\overline{B_{\delta_{n}/2}}(x_{n})\subseteq \overline{B_{\delta_{n-1}/2}}(x_{n-1})$
+        \item $\overline{B_{\delta_{n}/2}}(x_{n})\subseteq U\cap D_{1}\cap \dots \cap D_{n}$
+    \end{enumerate}
+    For the base case of $n = 2$, we know that $B_{\delta_{1}/2}(x_{1})\cap D_{2}$ is non empty and open (since $B_{\delta_{1}/2}(x_{1})$ is open, and $D_{2}$ is dense and open). Let $x_{2}$ be an element of this intersection. There exists $\epsilon_{2} > 0$ such that $B_{\epsilon_{2}}(x_{2})\subseteq B_{\delta_{1}/2}(x_{1})\cap D_{2}$. Taking $\delta_{2} = \min\left(\epsilon, \frac{1}{2}\right)$ we see that the properties above are satisfied:
+    \begin{enumerate}
+        \item $\overline{B_{\delta_{2}/2}}(x_{2})\subseteq B_{\delta_{2}}(x_{2})\subseteq B_{\epsilon_{2}}(x_{2})\subseteq B_{\delta_{1}/2}(x_{1})\cap D_{2}\subseteq B_{\delta_{1}/2}(x_{1})\subseteq \overline{B_{\delta_{1}/2}}(x_{1})$
+        \item $\overline{B_{\delta_{2}/2}}(x_{2})\subseteq B_{\delta_{2}}(x_{2})\subseteq B_{\epsilon_{2}}(x_{2})\subseteq B_{\delta_{1}/2}(x_{1})\cap D_{2}\subseteq (U\cap D_{1})\cap D_{2}$. (Since $B_{\delta_{1}/2}(x_{1})\subseteq U\cap D_{1}$)
+    \end{enumerate}
+    The inductive step is quite similar. Let $n\geq 3$, and assume such a choice of $x_{n-1}$ and $\delta_{n-1}$ exists. We know that $B_{\delta_{n-1}}(x_{n-1})\cap D_{n}$ is non empty and open since $D_{n}$ is dense and both sets are open. Let $x_{n}$ be contained in this intersection. Since it is open, there exists $\epsilon_{n} > 0 $ such that $B_{\epsilon_{n}}(x_{n})\subseteq B_{\delta_{n-1}}(x_{n-1})\cap D_{n}$. Taking $\delta_{n} = \min\left(\epsilon_{n},\frac{1}{n}\right)$, we see that the desired properties are satisfied:
+    \begin{enumerate}
+        \item $\overline{B_{\delta_{n}/2}}(x_{n})\subseteq B_{\delta_{n}}(x_{n})\subseteq B_{\epsilon_{n}}(x_{n})\subseteq B_{\delta_{n-1}/2}(x_{n-1})\cap D_{n}\subseteq B_{\delta_{n-1}/2}(x_{1})\subseteq \overline{B_{\delta_{n-1}/2}}(x_{n-1})$
+        \item $\overline{B_{\delta_{n}/2}}(x_{n})\subseteq B_{\delta_{n}}(x_{n})\subseteq B_{\epsilon_{n}}(x_{n})\subseteq B_{\delta_{n-1}/2}(x_{n-1})\cap D_{n}\subseteq (U\cap D_{1}\cap\dots\cap D_{n-1})\cap D_{n}$. (Since $B_{\delta_{n-1}/2}(x_{n-1})\subseteq \overline{B_{\delta_{n-1}/2}}(x_{n-1})\subseteq U\cap D_{1}\cap\dots\cap D_{n-1}$ by our induction hypothesis). 
+    \end{enumerate}
+    This completes the construction our a sequence $(x_{n})_{n = 1}^{\infty}$. We note that this sequence is Cauchy. Let $\epsilon > 0$, take $N\in \bN$ such that $\frac{1}{2N} < \epsilon$. Suppose $m > n \geq N$. Note that by our construction above, $\overline{B_{\delta_{n}/2}}(x_{n})\subseteq \overline{B_{\delta_{m}/2}}(x_{m})$. Thus $x_{n} \in \overline{B_{\delta_{m}/2}}(x_{m})$. Thus $d(x_{n}, x_{m}) \leq \frac{\delta_{m}}{2} < \delta_{m} < \frac{1}{m} < \frac{1}{N} < \epsilon$. Since the sequence is Cauchy, by the completeness of $\bR$ (under the usual metric topology) it converges to a number $x\in \bR$. 
+
+    We now show that $x\in U\cap \bigcap_{i = 1}^{\infty}D_{i}$. To show that $x\in U$, we note that for all $n\in \bN$, $x_{n}\in \overline{B_{\delta_{n}}/2}(x_{n})\subseteq \overline{B_{\delta_{1}/2}}(x_{1})$. In particular, the sequence is contained entirely in the closed set $\overline{B_{\delta_{1}/2}}(x_{1})$. Thus by problem \ref{medproblem:sequenceinclosure}, $x\in \overline{B_{\delta_{1}/2}}(x_{1})\subseteq U$. Now let's show that $x\in D_{n}$ for all $n\in \bN$. This simply follows from the fact that for all $m\geq n$, $x_{m}\in \overline{B_{\delta_{m}}/2}(x_{m})\subseteq \overline{B_{\delta_{n}/2}}(x_{n})$. So if we consider the tail of the sequence, i.e $(x_{m})_{m = n}^{\infty}$, this will still converge to the same limit $x$ and is contained entirely in the closed set $\overline{B_{\delta_{n}/2}}(x_{n})$, thus $x\in \overline{B_{\delta_{n}/2}}(x_{n})\subseteq D_{n}$. Hence $x$ is an element of $U\cap \bigcap_{i = 1}^{\infty}D_{i}$ and since this set is not empty for arbitrary open sets $U$, $\bigcap_{i = 1}^{\infty}D_{i}$ is dense. $\Box$.
+
+    To show that this theorem doesn't extend to arbitrary intersections. We simply define for $x\in \bR$, $D_{x} = \bR\setminus\{x\}$ (which is dense and open by the same justification as problem \ref{medproblem:denseopenintersection}). Then, $\bigcap_{x\in \bR} D_{x} = \emptyset$ and thus cannot be dense.
+}
+
+\section{Countability}
+\beasy {
+    Construct an explicit bijection $f : \bN \to\bZ$ (ie. give a formula for such a bijection).
+} {
+    In this solution, we are taking $\bN$ to not include 0. Define $f$ as below:
+    \begin{align*}
+        f(n) &= \begin{cases}
+            -\frac{n}{2} &\text{if $n$ is even}\\
+            \frac{n-1}{2} &\text{if $n$ is odd}
+        \end{cases}
+    \end{align*}
+    Note that the range of $f$ is indeed contained in $\bZ$ since when $n$ is even, $-\frac{n}{2}\in \bZ$, and when $n$ is odd $\frac{n-1}{2}$ is indeed in $\bZ$ as well. For surjectivity, let $k\in \bZ$. If $k \geq 0$, then $2k+1$ is a odd natural number and  $f(2k+1) = k$. If $k < 0$, $-2k$ is an even natural number and $f(-2k) = k$. For injectivity, suppose $f(m) = f(n)$. If $f(m) = f(n) = 0$, we must have that $m = n = 1$, since $-\frac{k}{2}\neq 0$ for even natural numbers $k$ and $\frac{k-1}{2} = 0$ if and only if $k = 1$. If $f(m) = f(n)$ are both positive, then we have that $m$ and $n$ are both odd ($-\frac{n}{2}$ is always negative for even natural numbers), and we get that $\frac{m-1}{2} = \frac{n-1}{2} \implies m = n$. If $f(m) = f(n)$ are both negative, then $m$ and $n$ are both odd (since $\frac{k-1}{2}$ is non negative for odd natural numbers $k$), and we then get that $-\frac{m}{2} = -\frac{n}{2}\implies m = n$. Thus $f$ is a bijection. $\Box$
+}
+
+\beasy [countableequiv]{
+    Let $A$ be an infinite set, and let $C$ be a fixed denumerable set. Prove the following equivalence:
+    \renewcommand{\labelenumi}{(\arabic{enumi})}
+    \begin{enumerate}
+        \item There exists a bijection $f: A\to \bN$ (i.e $A$ is denumerable)
+        \item There exists an injection $i: A\to \bN$
+        \item There exists a surjection $s: \bN\to A$
+        \item There exists a bijection $f: A\to C$
+        \item There exists an injection $i: A\to C$
+        \item There exists a surjection $s: C\to A$
+    \end{enumerate}
+    \renewcommand{\labelenumi}{\alph{enumi})}
+} {
+    Let $h: C\to \bN$ be a bijection which exists because $C$ is denumerable. We first quickly remark that $(1)\iff (4)$, $(2)\iff (5)$ and $(3)\iff (6)$ because we can compose the functions $f,i,s$ with $h$ or its inverse as needed and still maintain that they are bijective/injective/surjective respectively. Thus it suffices to prove that the first 3 are equivalent. Also $(1)\implies (2)$ is immediate because the bijection $f$ is an injection.
+
+    $(2)\implies (3)$
+
+    Fix $a_{0}\in A$. Define $s:\bN\to A$ by $s(n) = i^{-1}(n)$ if $n\in i(A)$, otherwise $s(n) = a_{0}$. This is a surjection because for $a\in A$, $s(i(a)) = a$. $\Box$
+
+    $(3)\implies (1)$
+
+    Define the map $h:A\to \bN$ by $h(a) = \min\{n\in \bN:\ s(n) = a\}$. The fact that $s$ is surjective means that the set is non empty for all $a\in A$ so that $h(a)$ actually takes on a value. Note that $h$ is injective because if $h(a) = h(b)$, then $a = s(h(a)) = s(h(b)) = b$. Thus $h$ is a bijection from $A$ to $h(A)\subseteq \bN$. Since $h(A)$ is a subset of $\bN$, it must be countable, and thus $A$ is countable as well. Since $A$ is infinite, $A$ is denumerable and thus a bijection exists. $\Box$
+}
+
+\beasy {
+    Let $A$ be a countable set. Prove that $\text{Fin}(A) := \{ X \subseteq A : X \text{ is finite} \}$ is countable.
+} {
+    If $A$ is finite, say with $n$ elements, we know that $\text{Fin}(A)$ has $2^{n}$ elements (i.e is also finite). Say $A$ is denumerable, and $f: A\to\bN$ is a bijection. Define $g: \text{Fin}(A)\to \bN$ in the following way. For $i\in \bN$, let $p_{i}$ denote the $i$th smallest prime. For an arbitrary $X = \{x_{1},\dots, x_{n}\}\in \text{Fin}(A)$, reorder so that $f(x_{1}) < \dots < f(x_{n})$ (we know all values are distinct since $f$ is a bijection) and define $g(X) = p_{1}^{f(x_{1})}\dots p_{n}^{f(x_{n})}$. We simply note that $g$ is injective because if $g(X) = g(Y)$, we first note that they must $X$ and $Y$ must have the same number of elements, otherwise $g(X)$ and $g(Y)$ would have differing number of prime factors (and thus can't be equal). Then we have that $p_{1}^{f(x_{1})}\dots p_{n}^{f(x_{n})} = p_{1}^{f(y_{1})}\dots p_{n}^{f(y_{n})}$, which by prime factorization tells us that $f(x_{i}) = f(y_{i})$ for all $1\leq i \leq n$, and since $f$ is a bijection we get that $x_{i} = y_{i}$ for all $i$ and hence $X = Y$. Since we have found an injection from $\text{Fin}(A)$ into $\bN$, by problem \ref{easyproblem:countableequiv}, $\text{Fin}(A)$ is countable.
+} 
+\beasy [productcountable]{
+    Let $A$ and $B$ be countable sets. Prove that $A \times B$ is countable. Then show that the Cartesian product of finitely many countable sets is countable.
+} {
+    By problem \ref{easyproblem:countableequiv}, there exists injections $f: A\to \bN$ and $g: B\to \bN$. Define $h: A\times B\to \bN$ by $h(a,b) = 2^{f(a)}3^{g(b)}$. Note that $h$ is injective because if $2^{f(a_{1})}3^{g(b_{1})} = 2^{f(a_{2})}3^{g(b_{2})}$, we get by prime factorization that $f(a_{1}) = f(a_{2})$ and $g(a_{1}) = g(a_{2})$ and since $f$ and $g$ are both injective $(a_{1}, b_{1}) = (a_{2}, b_{2})$, hence $h$ is injective. Since we have found an injection from $A\times B$ into $\bN$, by  problem \ref{easyproblem:countableequiv}, $A\times B$ is countable. 
+
+    For finite cartesian products, we can either apply induction or define $h$ with the first $n$ primes (if it is a cartesian product of $n$ sets). $\Box$
+}
+
+
+\beasy [countableunioncountable]{
+    For $n\in \bN$, let $A_{n}$ be denumerable, mutually disjoint sets and $f_{n} : \bN \to A_{n}$ witnesses that $A_{n}$ is countable, prove that $g : \bN \times \bN \to\bigcup_{n\in \bN} A_{n}$ defined by $g(n, i) = f_{n}(i)$ is a bijection. Conclude from this that a countable union of countable sets is countable.
+} {
+    For injectivity suppose $g(n_{1}, i_{1}) = g(n_{2}, i_{2})$. Note that $g(n_{1}, i_{1}) = f_{n_{1}}(i_{1})\in A_{n_{1}}$ and $g(n_{2}, i_{2}) = f_{n_{2}}(i_{2})\in A_{n_{2}}$. By assumption $A_{n_{1}}$ and $A_{n_{2}}$ are disjoint if $n_{1}\neq n_{2}$, thus we must have that $n_{1} = n_{2}$. This then gives us that $f_{n}(i_{1}) = f_{n}(i_{2})$ (where $n = n_{1} = n_{2}$). Since $f_{n}$ is a bijection, we have that $i_{1} = i_{2}$. Thus $g$ is injective. 
+
+    For surjectivity, let $x\in \bigcup_{n\in \bN} A_{n}$. Say $x \in A_{n_{0}}$. Since $f_{n_{0}}$ is a bijection, there exists $i\in \bN$ such that $g(n_{0}, i) = f_{n_{0}}(i) = x$ and hence $g$ is surjective.
+
+    Now suppose $\{B_{n}\}_{n\in \bN}$ is a countable collection of not necessarily disjoint sets. We then simply define $C_{n} = B_{n} \setminus\left(\bigcup_{i\leq n} B_{i}\right)$. Then the $C_{n}$ are mutually disjoint and hence by above $\bigcup_{n\in \bN}C_{n}$ is countable. Note however, that $\bigcup_{n\in \bN} B_{n} = \bigcup_{n\in \bN}C_{n}$. The converse inclusion is obvious because $C_{n}\subseteq B_{n}$ for all $n$. For the forward inclusion, if $x$ is an element of the left set, let $n_{0} = \min\{n\in \bN:\ x\in B_{n}\}$. Then $x\in C_{n_{0}}$ and hence is an element of the right set. Thus $\{B_{n}\}_{n\in \bN}$ is countable. $\Box$
+}
+
+\beasy {
+    Show that $\cb_{\bQ} = \{ (a, b) \subseteq \bR : a, b \in \bQ \}$ is countable, and conclude that $\bru$ is second countable.
+} {
+    Simply note that we can construct a bijection $\bQ\times \bQ\to \cb_{\bQ}$ by mapping the ordered pair $(a,b)$ to the interval $(a,b)\subseteq \bR$. This is clearly surjective. I would also say it's clearly injective but for completion we note that if $a_{1}\neq a_{2}$ or $b_{1}\neq b_{2}$, then the intervals $(a_{1}, b_{1})$ and $(a_{2}, b_{2})$ are not equal. If $a_{1} \neq a_{2}$, WLOG assume $a_{1} < a_{2}$, and take a real number $r$ such that $a_{1} < \min(b_{1}, a_{2})$. Then $r\in (a_{1}, b_{1})$ but $r\not\in (a_{2}, b_{2})$. If $b_{1}\neq b_{2}$, WLOG assume $b_{1}  < b_{2}$, choose $r$ such that $\max(a_{2}, b_{1}) < r < b_{2}$ and we get that $r\in (a_{2}, b_{2})$ but $r\not\in (a_{1}, b_{1})$. Note that $\bQ$ is countable and by problem \ref{easyproblem:productcountable} we get that $\bQ\times \bQ$ and thus $\cb_{\bQ}$ is countable. We know by \ref{easyproblem:qintervalbasis}, that $\cb_{\bQ}$ is a basis for $\bru$ and since it is countable, we have that $\bru$ is second countable. $\Box$
+}
+
+
+\beasy {
+    A topological space $(X, \ct )$ is said to have the countable chain condition (usually we just say ``$(X, \ct )$ is ccc'') if there are no uncountable collections of mutually disjoint open subsets of $X$. In problem \ref{medproblem:qdense}, we showed that $\bru$ is ccc. Prove that any separable space is ccc.
+} {
+    Let $D$ be a countable dense subset of $X$. Suppose for contradiction there was an uncountable collection $\{U_{\lambda}\}_{\lambda\in \Lambda}$ of mutually disjoint open subsets of $X$. Since $D$ is dense, for all $\lambda\in \Lambda$ there is a $d_{\lambda}\in D\cap U_{\lambda}$. By assumption the $U_{\lambda}$ are disjoint so if $\lambda_{1}\neq \lambda_{2}$, $d_{\lambda_{1}}\neq d_{\lambda_{2}}$. Note that we get an uncountable set $\{d_{\lambda}\}_{\lambda\in \Lambda}$ which is a subset of $D$. This is a contradiction as subsets of countable sets must be countable. Hence, there are no uncountable collections of mutually disjoint open subsets of $X$. $\Box$
+}
+
+\beasy [UncountablePigeonhole]{
+    Prove the uncountable pigeonhole principle. That is, if $A$ is an uncountable set and $A_{n}$, $n \in N$ are mutually disjoint subsets of A such that $A = \bigcup_{n\in \bN}A_{n}$, show that at least one of the $A_{n}$ must be uncountable.
+} {
+    This simply follows from problem \ref{easyproblem:countableunioncountable}. If all of the $A_{n}$ were countable, we would get that $A$ is countable, hence at least one of them must be uncountable. $\Box$
+}
+\end{document} 
