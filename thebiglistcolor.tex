@@ -578,4 +578,85 @@
 
     To show that this theorem doesn't extend to arbitrary intersections. We simply define for $x\in \bR$, $D_{x} = \bR\setminus\{x\}$ (which is dense and open by the same justification as problem \ref{medproblem:denseopenintersection}). Then, $\bigcap_{x\in \bR} D_{x} = \emptyset$ and thus cannot be dense.
 }
+
+\section{Countability}
+\beasy {
+    Construct an explicit bijection $f : \bN \to\bZ$ (ie. give a formula for such a bijection).
+} {
+    In this solution, we are taking $\bN$ to not include 0. Define $f$ as below:
+    \begin{align*}
+        f(n) &= \begin{cases}
+            -\frac{n}{2} &\text{if $n$ is even}\\
+            \frac{n-1}{2} &\text{if $n$ is odd}
+        \end{cases}
+    \end{align*}
+    Note that the range of $f$ is indeed contained in $\bZ$ since when $n$ is even, $-\frac{n}{2}\in \bZ$, and when $n$ is odd $\frac{n-1}{2}$ is indeed in $\bZ$ as well. For surjectivity, let $k\in \bZ$. If $k \geq 0$, then $2k+1$ is a odd natural number and  $f(2k+1) = k$. If $k < 0$, $-2k$ is an even natural number and $f(-2k) = k$. For injectivity, suppose $f(m) = f(n)$. If $f(m) = f(n) = 0$, we must have that $m = n = 1$, since $-\frac{k}{2}\neq 0$ for even natural numbers $k$ and $\frac{k-1}{2} = 0$ if and only if $k = 1$. If $f(m) = f(n)$ are both positive, then we have that $m$ and $n$ are both odd ($-\frac{n}{2}$ is always negative for even natural numbers), and we get that $\frac{m-1}{2} = \frac{n-1}{2} \implies m = n$. If $f(m) = f(n)$ are both negative, then $m$ and $n$ are both odd (since $\frac{k-1}{2}$ is non negative for odd natural numbers $k$), and we then get that $-\frac{m}{2} = -\frac{n}{2}\implies m = n$. Thus $f$ is a bijection. $\Box$
+}
+
+\beasy [countableequiv]{
+    Let $A$ be an infinite set, and let $C$ be a fixed denumerable set. Prove the following equivalence:
+    \renewcommand{\labelenumi}{(\arabic{enumi})}
+    \begin{enumerate}
+        \item There exists a bijection $f: A\to \bN$ (i.e $A$ is denumerable)
+        \item There exists an injection $i: A\to \bN$
+        \item There exists a surjection $s: \bN\to A$
+        \item There exists a bijection $f: A\to C$
+        \item There exists an injection $i: A\to C$
+        \item There exists a surjection $s: C\to A$
+    \end{enumerate}
+    \renewcommand{\labelenumi}{\alph{enumi})}
+} {
+    Let $h: C\to \bN$ be a bijection which exists because $C$ is denumerable. We first quickly remark that $(1)\iff (4)$, $(2)\iff (5)$ and $(3)\iff (6)$ because we can compose the functions $f,i,s$ with $h$ or its inverse as needed and still maintain that they are bijective/injective/surjective respectively. Thus it suffices to prove that the first 3 are equivalent. Also $(1)\implies (2)$ is immediate because the bijection $f$ is an injection.
+
+    $(2)\implies (3)$
+
+    Fix $a_{0}\in A$. Define $s:\bN\to A$ by $s(n) = i^{-1}(n)$ if $n\in i(A)$, otherwise $s(n) = a_{0}$. This is a surjection because for $a\in A$, $s(i(a)) = a$. $\Box$
+
+    $(3)\implies (1)$
+
+    Define the map $h:A\to \bN$ by $h(a) = \min\{n\in \bN:\ s(n) = a\}$. The fact that $s$ is surjective means that the set is non empty for all $a\in A$ so that $h(a)$ actually takes on a value. Note that $h$ is injective because if $h(a) = h(b)$, then $a = s(h(a)) = s(h(b)) = b$. Thus $h$ is a bijection from $A$ to $h(A)\subseteq \bN$. Since $h(A)$ is a subset of $\bN$, it must be countable, and thus $A$ is countable as well. Since $A$ is infinite, $A$ is denumerable and thus a bijection exists. $\Box$
+}
+
+\beasy {
+    Let $A$ be a countable set. Prove that $\text{Fin}(A) := \{ X \subseteq A : X \text{ is finite} \}$ is countable.
+} {
+    If $A$ is finite, say with $n$ elements, we know that $\text{Fin}(A)$ has $2^{n}$ elements (i.e is also finite). Say $A$ is denumerable, and $f: A\to\bN$ is a bijection. Define $g: \text{Fin}(A)\to \bN$ in the following way. For $i\in \bN$, let $p_{i}$ denote the $i$th smallest prime. For an arbitrary $X = \{x_{1},\dots, x_{n}\}\in \text{Fin}(A)$, reorder so that $f(x_{1}) < \dots < f(x_{n})$ (we know all values are distinct since $f$ is a bijection) and define $g(X) = p_{1}^{f(x_{1})}\dots p_{n}^{f(x_{n})}$. We simply note that $g$ is injective because if $g(X) = g(Y)$, we first note that they must $X$ and $Y$ must have the same number of elements, otherwise $g(X)$ and $g(Y)$ would have differing number of prime factors (and thus can't be equal). Then we have that $p_{1}^{f(x_{1})}\dots p_{n}^{f(x_{n})} = p_{1}^{f(y_{1})}\dots p_{n}^{f(y_{n})}$, which by prime factorization tells us that $f(x_{i}) = f(y_{i})$ for all $1\leq i \leq n$, and since $f$ is a bijection we get that $x_{i} = y_{i}$ for all $i$ and hence $X = Y$. Since we have found an injection from $\text{Fin}(A)$ into $\bN$, by problem \ref{easyproblem:countableequiv}, $\text{Fin}(A)$ is countable.
+} 
+\beasy [productcountable]{
+    Let $A$ and $B$ be countable sets. Prove that $A \times B$ is countable. Then show that the Cartesian product of finitely many countable sets is countable.
+} {
+    By problem \ref{easyproblem:countableequiv}, there exists injections $f: A\to \bN$ and $g: B\to \bN$. Define $h: A\times B\to \bN$ by $h(a,b) = 2^{f(a)}3^{g(b)}$. Note that $h$ is injective because if $2^{f(a_{1})}3^{g(b_{1})} = 2^{f(a_{2})}3^{g(b_{2})}$, we get by prime factorization that $f(a_{1}) = f(a_{2})$ and $g(a_{1}) = g(a_{2})$ and since $f$ and $g$ are both injective $(a_{1}, b_{1}) = (a_{2}, b_{2})$, hence $h$ is injective. Since we have found an injection from $A\times B$ into $\bN$, by  problem \ref{easyproblem:countableequiv}, $A\times B$ is countable. 
+
+    For finite cartesian products, we can either apply induction or define $h$ with the first $n$ primes (if it is a cartesian product of $n$ sets). $\Box$
+}
+
+
+\beasy [countableunioncountable]{
+    For $n\in \bN$, let $A_{n}$ be denumerable, mutually disjoint sets and $f_{n} : \bN \to A_{n}$ witnesses that $A_{n}$ is countable, prove that $g : \bN \times \bN \to\bigcup_{n\in \bN} A_{n}$ defined by $g(n, i) = f_{n}(i)$ is a bijection. Conclude from this that a countable union of countable sets is countable.
+} {
+    For injectivity suppose $g(n_{1}, i_{1}) = g(n_{2}, i_{2})$. Note that $g(n_{1}, i_{1}) = f_{n_{1}}(i_{1})\in A_{n_{1}}$ and $g(n_{2}, i_{2}) = f_{n_{2}}(i_{2})\in A_{n_{2}}$. By assumption $A_{n_{1}}$ and $A_{n_{2}}$ are disjoint if $n_{1}\neq n_{2}$, thus we must have that $n_{1} = n_{2}$. This then gives us that $f_{n}(i_{1}) = f_{n}(i_{2})$ (where $n = n_{1} = n_{2}$). Since $f_{n}$ is a bijection, we have that $i_{1} = i_{2}$. Thus $g$ is injective. 
+
+    For surjectivity, let $x\in \bigcup_{n\in \bN} A_{n}$. Say $x \in A_{n_{0}}$. Since $f_{n_{0}}$ is a bijection, there exists $i\in \bN$ such that $g(n_{0}, i) = f_{n_{0}}(i) = x$ and hence $g$ is surjective.
+
+    Now suppose $\{B_{n}\}_{n\in \bN}$ is a countable collection of not necessarily disjoint sets. We then simply define $C_{n} = B_{n} \setminus\left(\bigcup_{i\leq n} B_{i}\right)$. Then the $C_{n}$ are mutually disjoint and hence by above $\bigcup_{n\in \bN}C_{n}$ is countable. Note however, that $\bigcup_{n\in \bN} B_{n} = \bigcup_{n\in \bN}C_{n}$. The converse inclusion is obvious because $C_{n}\subseteq B_{n}$ for all $n$. For the forward inclusion, if $x$ is an element of the left set, let $n_{0} = \min\{n\in \bN:\ x\in B_{n}\}$. Then $x\in C_{n_{0}}$ and hence is an element of the right set. Thus $\{B_{n}\}_{n\in \bN}$ is countable. $\Box$
+}
+
+\beasy {
+    Show that $\cb_{\bQ} = \{ (a, b) \subseteq \bR : a, b \in \bQ \}$ is countable, and conclude that $\bru$ is second countable.
+} {
+    Simply note that we can construct a bijection $\bQ\times \bQ\to \cb_{\bQ}$ by mapping the ordered pair $(a,b)$ to the interval $(a,b)\subseteq \bR$. This is clearly surjective. I would also say it's clearly injective but for completion we note that if $a_{1}\neq a_{2}$ or $b_{1}\neq b_{2}$, then the intervals $(a_{1}, b_{1})$ and $(a_{2}, b_{2})$ are not equal. If $a_{1} \neq a_{2}$, WLOG assume $a_{1} < a_{2}$, and take a real number $r$ such that $a_{1} < \min(b_{1}, a_{2})$. Then $r\in (a_{1}, b_{1})$ but $r\not\in (a_{2}, b_{2})$. If $b_{1}\neq b_{2}$, WLOG assume $b_{1}  < b_{2}$, choose $r$ such that $\max(a_{2}, b_{1}) < r < b_{2}$ and we get that $r\in (a_{2}, b_{2})$ but $r\not\in (a_{1}, b_{1})$. Note that $\bQ$ is countable and by problem \ref{easyproblem:productcountable} we get that $\bQ\times \bQ$ and thus $\cb_{\bQ}$ is countable. We know by \ref{easyproblem:qintervalbasis}, that $\cb_{\bQ}$ is a basis for $\bru$ and since it is countable, we have that $\bru$ is second countable. $\Box$
+}
+
+
+\beasy {
+    A topological space $(X, \ct )$ is said to have the countable chain condition (usually we just say ``$(X, \ct )$ is ccc'') if there are no uncountable collections of mutually disjoint open subsets of $X$. In problem \ref{medproblem:qdense}, we showed that $\bru$ is ccc. Prove that any separable space is ccc.
+} {
+    Let $D$ be a countable dense subset of $X$. Suppose for contradiction there was an uncountable collection $\{U_{\lambda}\}_{\lambda\in \Lambda}$ of mutually disjoint open subsets of $X$. Since $D$ is dense, for all $\lambda\in \Lambda$ there is a $d_{\lambda}\in D\cap U_{\lambda}$. By assumption the $U_{\lambda}$ are disjoint so if $\lambda_{1}\neq \lambda_{2}$, $d_{\lambda_{1}}\neq d_{\lambda_{2}}$. Note that we get an uncountable set $\{d_{\lambda}\}_{\lambda\in \Lambda}$ which is a subset of $D$. This is a contradiction as subsets of countable sets must be countable. Hence, there are no uncountable collections of mutually disjoint open subsets of $X$. $\Box$
+}
+
+\beasy [UncountablePigeonhole]{
+    Prove the uncountable pigeonhole principle. That is, if $A$ is an uncountable set and $A_{n}$, $n \in N$ are mutually disjoint subsets of A such that $A = \bigcup_{n\in \bN}A_{n}$, show that at least one of the $A_{n}$ must be uncountable.
+} {
+    This simply follows from problem \ref{easyproblem:countableunioncountable}. If all of the $A_{n}$ were countable, we would get that $A$ is countable, hence at least one of them must be uncountable. $\Box$
+}
 \end{document} 
