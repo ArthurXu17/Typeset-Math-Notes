@@ -672,4 +672,50 @@
 } {
     This simply follows from problem \ref{easyproblem:countableunioncountable}. If all of the $A_{n}$ were countable, we would get that $A$ is countable, hence at least one of them must be uncountable. $\Box$
 }
+
+\bmed {
+    Show that $\cb = \{ B_{\epsilon}(x) \subseteq \bR^{n}:\ x \in \bQ^{n}\text{ and } 0 < \epsilon \in \bQ \}$ is countable, and conclude that $\bru^{n}$ is second countable.
+} {
+    We quickly remark that $\cb$ is countable by constructing a surjection onto $\bQ^{n}\times \bQ_{> 0}$ (and finite cartesian products of countable sets are countable by problem \ref{easyproblem:productcountable}). Given $B_{\epsilon}(x)$ (where $x$ has rational coordinates $(x_{1},\dots, x_{n})$), map it to $(x_{1},\dots, x_{n}, \epsilon)$. This is surjective since for any element $(y_{1},\dots, y_{n}, y_{n+1})\in \bQ^{n}\times \bQ_{> 0}$, we take $x = (y_{1},\dots, y_{n})$ and $\epsilon = y_{n+1}$. Thus this collection is countable. Unfortunately, it is yet to be shown that this is a basis so whoopdedo it's problem \ref{easyproblem:qintervalbasis} round 2:
+
+    We first show that $\cb' = \{ B_{\epsilon}(x) \subseteq \bR^{n}:\ x \in \bR^{n}\text{ and } 0 < \epsilon \in \bR \}$ is a basis for $\bru^{n}$. We see that it covers $\bR^{n}$ since we can set $x = 0\in \bR^{n}$ and let $\epsilon$ vary across all real numbers. To show the second condition of a basis, consider $B_{\epsilon_{1}}(x_{1})\cap B_{\epsilon_{2}}(x_{2})$. We already know that open balls in $\bru^{n}$ are open, thus this intersection is open. Hence, for all $x\in B_{\epsilon_{1}}(x_{1})\cap B_{\epsilon_{2}}(x_{2})$, there exists $B_{\epsilon_{3}}(x)$ such that $x\in B_{\epsilon_{3}}(x)\subseteq B_{\epsilon_{1}}(x_{1})\cap B_{\epsilon_{2}}$. So this shows that $\cb'$ is a basis. To show that it generates $\bru^{n}$, let $U$ be an arbitrary open set in $\bru^{n}$. For each $x\in U$, by the definition of the usual topology, there exists an open ball $B_{x}$ such that $x\in B_{x}\subseteq \bru^{n}$. We then write $U = \bigcup_{x\in U}B_{x}$ which is a union of elements in $\cb'$.
+
+    Now we have to show that $\cb$ is a basis. It covers $\bR^{n}$ for the same reasoning as $\cb'$. For the second condition, given $x\in B_{\epsilon_{1}}(x_{1})\cap B_{\epsilon_{2}}(x_{2})$ (where $x\in \bR^{n}$), we know that there exists $B_{\epsilon_{3}}(x)$ such that $B_{\epsilon_{3}}(x)\subseteq B_{\epsilon_{1}}(x_{1})\cap B_{\epsilon_{2}}(x_{2})$, however we have no guarantee that $x$ has rational coordinates or that $\epsilon_{3}$ is rational. Let $q$ be a rational number in $(0,\epsilon_{3})$ (such a $q$ exists by problem \ref{medproblem:qdense}). Say $x = (x_{1},\dots, x_{n})$. For each $i\in\{1,\dots, n\}$, there exists $y_{i}\in \bQ$ such that $y_{i}\in (x_{i}-\frac{\sqrt{q}}{\sqrt{3}n},x_{i} + \frac{\sqrt{q}}{\sqrt{3}n})$. Then note that $\| x-y\| < \frac{q}{3}$:
+    \begin{align*}
+        \| x-y\| &= \left(\sum_{i = 1}^{n}\lvert x_{i}-y_{i}\rvert\right)^{\frac{1}{2}}\\
+        &<\left(\sum_{i = 1}^{n}\left\lvert \frac{\sqrt{q}}{\sqrt{3}n}\right\rvert\right)^{\frac{1}{2}}\\
+        &= \left(\frac{\sqrt{q}}{\sqrt{3}}\right)^{\frac{1}{2}} = \frac{q}{3}
+    \end{align*}
+    We now see that $B_{\frac{2q}{3}}(y)\subseteq B_{\epsilon_{3}}(x)\subseteq B_{\epsilon_{1}}(x_{1})\cap B_{\epsilon_{2}}(x_{2})$. This follows by the triangle inequality, if $d(z,y) < \frac{2q}{3}$, then $d(z,x) \leq d(y,z) + d(y,x) < \frac{2q}{3} + \frac{q}{3} = q < \epsilon_{3}$. Hence we have shown that $\cb'$ is a basis (but not yet shown that it generates $\bru^{n}$ :( )
+
+    To show that it generates $\bru^{n}$, it suffices to show that every element of $\cb'$ can be written as a union of elements in $\cb$. First let's quickly remark that the proof in the above paragraph justifies in general that for any open ball $B_{\epsilon}(x)\subseteq \bR^{n}$, there exists a point with rational coordinates $y\in \bQ^{n}$ and rational number $q > 0$, such that $B_{\frac{2q}{3}}(y)\subseteq B_{\epsilon}(x)$. Furthermore, note that in the above proof, $x\in B_{\frac{2q}{3}}(y)$ since $d(x,y) < \frac{q}{3}$. Then let $B_{\epsilon}(x)$ be an arbitrary open ball. Since it is open in $\bru$, for all $z\in B_{\epsilon}(x)$, there exists an open ball $B_{z}$ contained in $B_{\epsilon}(x)$. By the justification above, for each $z$, there exists a rational number $q_{z}$ and vector $y^{(z)}\in \bQ^{n}$ with $B_{q_{z}}(y^{(z)})\subseteq B_{z}$. Then, we write $B_{\epsilon}(x) = \bigcup_{z\in B_{\epsilon}(x)}B_{q_{z}}(y^{(z)})$. And since every open set in $\bru^{n}$ can be written as a union of elements of $\cb'$ and every element of $\cb'$ can be written as a union of elements in $\cb$, we have that every open set in $\bru^{n}$ can be written as a union of elements in $\cb$, and hence $\cb$ generates the usual topology of $\bR^{n}$. Since $\cb'$ is countable, $\bru^{n}$ is second countable. $\Box$
+}
+
+\bmed {
+    In problem \ref{easyproblem:sorgenfrey}, we showed that the collection $\cb_{\bQ}$ of intervals $[a, b)$ with rational endpoints is not a basis for the Sorgenfrey line. Take this a step further by proving that there is no countable basis for the Sorgenfrey line. That is, prove that the Sorgenfrey line is not second countable.
+} {
+    Suppose for contradiction that $\cb = \{B_{n}\}_{n\in \bN}$ is a countable basis for the Sorgenfrey line. Let $\mathcal{C}\subseteq \cb$ be the collection of elements of $\cb$ that are bounded below (Note that $\mathcal{C}$ is countable as it is a subset of a countable set). Define $A = \{\inf B:\ B\in \mathcal{C}\} \subseteq \bR$ (each infimum exists by the completeness of $\bR$). Note that $A$ is a countable as it is the range of the infimum function applied to each element of $\mathcal{C}$ (i.e there is a surjection of a countable set onto it and hence it is countable by problem \ref{easyproblem:countableequiv}). Since $A$ is a countable subset of $\bR$, there exists $q\in \bR\setminus A$. Consider $U = [q, q+5)$ which is open in the Sorgenfrey Line. Since we are assuming that $\cb$ is a basis, $U$ must be equal to the union of elements in $\cb$. Say $U = \bigcup_{B\in \mathcal{D}}B$ where $\mathcal{D}\subseteq \cb$. First note that $\mathcal{D}\subseteq \mathcal{C}$ (i.e all the sets are bounded below) because $U$ is bounded below. Furthermore, for all $B\in \mathcal{D}$, we must have $\inf B \geq q$. Otherwise, if $\inf B < q$ for some $B\in \mathcal{D}$, we get that there exists $x\in B$ (and thus is an element of the right) with $x < q$, but this would imply that $x\not\in U$ which contradicts the fact that the 2 sets are equal. Hence $\inf B\geq q$ for all $B\in \mathcal{D}$. However, $q$ was chosen so that $q\not\in A$, so $q\neq \inf B$ for all $B\in \mathcal{C}\subseteq \mathcal{D}$, so this becomes a strict inequality, i.e $\inf B > q$ for all $B\in \mathcal{D}$. However, if this is the case, we would have that $q\not\in B$ for all $B\in \mathcal{D}$, but $q\in U$ and so $U\neq \bigcup_{B\in \mathcal{D}}B$ for all possible subcollections $\mathcal{D}$. Hence $\cb$ cannot be a basis implying that the Sorgenfrey has no countable basis and is thus not second countable. $\Box$
+}
+
+\bmed {
+    Suppose $A \subseteq \bR$ is countable. Show that there exists a real number $x$ such that $A\cap(x+A) =\emptyset$. (Here, $x + A = \{ x + a\ :\ a \in A \}$.)
+} {
+    Define $D = \{a - b:\ a,b\in A\}\subseteq \bR$. Note that $D$ is countable because it is the image of the function $f: A\times A\to \bR$ where $f(a,b) = a-b$. Since $A$ is countable, $A\times A$ is countable by problem \ref{easyproblem:productcountable}, and since $f$ is a surjection onto $D$ from $A\times A$, $D$ is countable by \ref{easyproblem:countableequiv}. Since $D$ is a countable subset of $\bR$, there exists $q\in \bR\setminus D$. Note then that $A\cap (q+A) = \emptyset$. Suppose $y\in A$ and $y = q + a$ for some $a\in A$. Then, $q = y-a$ which implies that $q\in D$, but $q$ was chosen such that $q\not\in D$. Thus $A\cap (q+A) = \emptyset$. $\Box$
+}
+
+\bmed {
+    Show that the set $2^{\bN}$ of all functions $f : \bN \to \{0, 1\}$ is uncountable
+} {
+    We simply use a diagonalization argument. Suppose for contradiction that $\{f_{n}\}_{n\in \bN}$ is a countable collection of all functions in $2^{\bN}$. Define $g: \bN\to \{0,1\}$ as follows. We simply take $g(n) = 1$ if $f_{n}(n) = 0$ and $g(n) = 0$ if $f_{n}(n) = 1$. Then $g\neq f_{n}$ for all $n\in \bN$ since $g(n) \neq f_{n}(n)$. Hence $2^{\bN}$ cannot be represented as a countable collection and is thus uncountable. $\Box$
+}
+
+\bmed {
+    Let $f_{n} : \bN \to \bN\ (n \in \bN)$ be a fixed collection of functions. Construct a function $g : \bN \to \bN$ such that for all $n \in N$,
+    \begin{align*}
+        \lim_{k\to\infty}\frac{g(k)}{f_{n}(k)} = \infty
+    \end{align*}
+    (In words, construct a function $g$ that increases faster than all of the $f_{n}$'s.)
+} {
+    For $k\in \bN$, define $g(k) = 2^{k}\cdot\max\{f_{i}(k):\ 1\leq i \leq k\}$. Now let's show that the limit condition is satisfied. Fix an $n\in N$. Let $M\in \bN$ be arbitrary. Since $2^{k}\to \infty$ as $k\to\infty$, there exists $n_{0}$ such that $k\geq n_{0}\implies 2^{k}\geq M$. Next, by the definition of $g$, for all $k\geq n$, $g(k) \geq 2^{k}f_{n}(k)$. So if $k\geq \max(n, n_{0})$, we have that $\frac{g(k)}{f_{n}(k)}\geq \frac{2^{k}f_{n}(k)}{f_{n}(k)} = 2^{k} > M$ as desired. $\Box$
+}
 \end{document} 
