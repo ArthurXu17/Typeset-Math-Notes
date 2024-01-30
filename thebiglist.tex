@@ -718,4 +718,74 @@
 } {
     For $k\in \bN$, define $g(k) = 2^{k}\cdot\max\{f_{i}(k):\ 1\leq i \leq k\}$. Now let's show that the limit condition is satisfied. Fix an $n\in N$. Let $M\in \bN$ be arbitrary. Since $2^{k}\to \infty$ as $k\to\infty$, there exists $n_{0}$ such that $k\geq n_{0}\implies 2^{k}\geq M$. Next, by the definition of $g$, for all $k\geq n$, $g(k) \geq 2^{k}f_{n}(k)$. So if $k\geq \max(n, n_{0})$, we have that $\frac{g(k)}{f_{n}(k)}\geq \frac{2^{k}f_{n}(k)}{f_{n}(k)} = 2^{k} > M$ as desired. $\Box$
 }
+\bhard {
+    Let $f, g : \bN \to \bN$ be functions. Define the set $B(f, g) = \{ k \in \bN : f(k) = g(k) \}$. That is, $B(f, g)$ is the set of numbers on which $f$ and $g$ agree. Construct a family $\{f_{n}\}_{n\in\bN}$ of functions $f_{n}:\bN \to \bN$ with the property that for any $g : \bN \to \bN$ and any $N \in \bN$, there is an $f_{n}$ in the family such that $\lvert B(f_{n}, g)\rvert > N$.
+} {
+    For $m\in\bN$, define a set $A_{m} = \{f_{(c_{1},\dots, c_{m})}:\ (c_{1},\dots, c_{m})\in\bN^{m}\}$ where $f_{(c_{1},\dots, c_{m})}: \bN\to \bN$ is defined as below:
+    \begin{align*}
+        f_{(c_{1},\dots, c_{m})}(k) &= \begin{cases}
+            c_{k}&\text{ if }1\leq k \leq m\\
+            1 & \text{ otherwise}
+        \end{cases}
+    \end{align*}
+    By problem \ref{easyproblem:productcountable}, $\bN^{m}$ is countable for all $m\in \bN$, so $A_{m}$ is countable as well (since it is indexed by $\bN^{m}$). Concretely, the bijection maps $(c_{1},\dots, c_{m})$ to $f_{(c_{1},\dots, c_{m})}$. By problem \ref{easyproblem:countableunioncountable}, if we take $A = \bigcup_{m\in \bN}A_{m}$, this is still a countable collection of functions. We now quickly remark that this collection satisfies the conditions of the problem. Let $g:\bN\to \bN$ and $N\in \bN$ be arbitrary. Then we take $f_{(g(1),\dots, g(N), g(N+1))}\in A_{N+1}$ and we have by the construction of $f_{(g(1),\dots, g(N), g(N+1))}$ that it agrees with $g$ for all $1\leq k \leq N+1$ as desired which implies that $\lvert B(f_{(g(1),\dots, g(N), g(N+1))}, g) \rvert > N$ as desired. $\Box$
+}
+\bhard {
+    We have already proved that $(0, 1)$ is uncountable and that $\cp(\bN)$ is uncountable. Prove that these two sets are of the same cardinality. That is, construct a bijection $f : \cp(\bN) \to(0, 1)$ as explicitly as possible.
+} {
+    Since Schroder-Bernstein theorem isn't proved in this course (surprisingly), I will prove it and count that bijection as my ``explicit'' bijection. 
+
+    \begin{lemma*}
+        Let $X$ be a set. Suppose $\varphi: \cp(X)\to\cp(X)$ satisfies the condition that whenever $A\subseteq B\in \cp(X)$, then $\varphi(A)\subseteq \varphi(B)$. Then there exists a fixed point $T\in\cp(X)$ such that $\varphi(T) = T$.
+    \end{lemma*}
+    \begin{proof}
+        Define the set $T$ as below:
+        \begin{align*}
+            T = \bigcup\ \{A\in\cp(X):\ A\subseteq \varphi(A)\}
+        \end{align*}
+        We now quickly show that $\varphi(T) = T$. We first note that $T\subseteq \varphi(T)$. This is because if $x\in T$, then there exists $A_{0}\in \cp(X)$ such that  $x\in A_{0}$ and $A_{0}\subseteq \varphi(A_{0})$ (so $x\in \varphi(A_{0})$). We also have that $A_{0}\subseteq T$, so by the assumption of $\varphi$ being ``increasing'', we get that $\varphi(A_{0})\subseteq \varphi(T)$. So $x\in \varphi(T)$. Since we have that $T\subseteq \varphi(T)$, this also gives us that $\varphi(T)\subseteq \varphi(\varphi(T))$, and so $\varphi(T)$ is a set in the union in the definition of $T$. Hence $\varphi(T)\subseteq T$ as well and thus $T = \varphi(T)$.
+    \end{proof}
+    \begin{thm*}
+        Let $X$ and $Y$ be sets. If $\lvert X\rvert \leq \lvert Y\rvert$ and $\lvert Y\rvert \leq \lvert X\rvert$, then $\lvert X\rvert = \lvert Y\rvert $
+    \end{thm*}
+    \begin{proof}
+        Suppose $X$ and $Y$ are sets and $f: X\to Y$ is an injection and $g:Y\to X$ is an injection. Define $\varphi: \cp(X)\to \cp(X)$ by $\varphi(A) = X\setminus g[Y\setminus f(A)]$. We show that $\varphi$ is increasing. Suppose $A,B\in\cp(X)$ with $A\subseteq B$:
+        \begin{align*}
+            A\subseteq B &\implies f(A)\subseteq f(B)\\
+            &\implies Y\setminus f(B)\subseteq Y\setminus f(A)\\
+            &\implies g[Y\setminus f(B)]\subseteq g[Y\setminus f(A)]\\
+            &\implies \varphi(A) =X \setminus g[Y\setminus f(A)] \subseteq X\setminus g[Y\setminus f(B)] = \varphi(B)
+        \end{align*}
+        Let $T\subseteq X$ be the fixed point that is guaranteed by the lemma above. So we have that $T = X\setminus g[Y\setminus f(T)]$, which is equivalent to $X\setminus T = g[Y\setminus f(T)]$. Then define the function (which is a bijection) $h: X\to Y$ as:
+        \begin{align*}
+            h(x) &= \begin{cases}
+                f(x) &\text{ if }x\in T\\
+                g^{-1}(x) &\text{ if }x\in X\setminus T
+            \end{cases}
+        \end{align*}
+        We first note that $h$ is properly defined because $X\setminus T = g[Y\setminus f(T)]$ is in the domain of $g^{-1}$. To see injectivity, let $x\neq y\in X$. If $x$ and $y$ are either both in $T$ or both not in $T$, $h(x)\neq h(y)$ since $f$ and $g^{-1}$ will both be injections. Now WLOG, suppose $x\in T$ and $y\not\in T$. Then $h(x) = f(x) \in f(Y)$, but $h(y) = g^{-1}(y) \in Y\setminus f(T)$ and so $h(x)\neq h(y)$. Hence $h$ is injective. For surjectivity, let $y\in Y$. If $y\in f(T)$, then $y = f(x)$ for some $x\in T$, and hence $y = h(x)$. If $y\in Y\setminus f(T)$, then $x = g(y) \in X\setminus T$ and hence $h(x) = g^{-1}(x) = y$. Thus $h$ is surjective. Hence $h$ is a bijection between $X$ and $Y$.
+    \end{proof}
+    Now that Schroder-Bernstein has been proven, let's find injections from $(0,1)\to \cp(\bN)$ and from $\cp(\bN)\to (0,1)$. Define $f:\cp(\bN)\to (0,1)$ where $A\mapsto 0.a_{1}a_{2}\dots$ (in base 10 representation) where $a_{n} = 1$ if $n\in A$ and $a_{n}=2$ otherwise. This is injective because any 2 different (base 10) decimal representations that equate to the same real number must contain a tail of $0$s or $9$s, which doesn't occur in the range of $f$ so the differing decimal representations are indeed different real numbers. For an injection from $(0,1)\to \cp(\bN)$, we first define $g: (0,1)\to \cp(\bQ)$ where $g(r) = \{q\in \bQ:\ q < r\}$. This is injective because if $r_{1}\neq r_{2}$, then WLOG assume $r_{1} < r_{2}$ then there exists a rational number $q_{0}$ such that $r_{1} < q_{0} < r_{2}$ (problem \ref{medproblem:qdense}). Hence $g(r_{1})\neq g(r_{2})$. Since $\lvert \bQ\rvert = \lvert \bN\rvert$, we quickly note that $\lvert \cp(\bQ)\rvert = \lvert \cp(\bN)\rvert$, because if $h: \bQ\mapsto\bN$ is a bijection, then consider $\widetilde{h}: \cp(\bQ)\mapsto\cp(\bN)$ where $\widetilde{h}(A) = \{h(a):a\in \bQ\}$ which is a bijection since $h$ is a bijection. Thus we can compose $g$ with $\widetilde{h}$ to get an injection from $(0,1)$ to $\cp(\bN)$. Given these injections, we can construct a bijection from $(0,1)\to \cp(\bN)$ using Schroder-Bernstein. $\Box$
+}
+
+\bhard {
+    The following is a beautifully slick proof that the real numbers are uncountable. 
+
+    \vspace{1em}
+    We define a game for two players. Ahead of time, fix a subset $A \subseteq [0, 1]$. 
+    
+    \vspace{1em}
+    Player 1 starts by choosing a number $a_{1} \in (0, 1)$. Player 2 responds by choosing a number $b_{1} \in (a_{1}, 1)$. The process then repeats inside the interval $[a_{1}, b_{1}]$: Player 1 chooses a number $a_{2} \in (a_{1}, b_{1})$, and Player 2 chooses a number $b_{2} \in (a_{2}, b_{1})$. The game continues in this way for all $n\in\bN$: at stage $n + 1$, Player 1 chooses a number $a_{n+1} \in (a_{n}, b_{n})$, and Player 2 responds by choosing a number $b_{n+1} \in (a_{n+1}, b_{n})$.
+    
+    \vspace{1em}
+    At the end of the game, the two players have created a sequence of nested, closed intervals $C_{n} = [a_{n}, b_{n}]$. The sequence $\{a_{n}\}$ is increasing by construction and bounded above (by 1, for example), and so it converges by the Monotone Sequence Theorem. Let $a$ be its limit. We say that Player 1 wins the game if $a \in A$, and Player 2 wins the game if $a \not\in A$. Prove that if $A$ is countable, then Player 2 has a winning strategy. Then prove as an immediate corollary that $[0, 1]$ is uncountable.
+} {
+    First we prove a quick claim that $a < b_{n}$ for all $n\in \bN$. First we show that $a\leq b_{n}$. Suppose for contradiction that there exists an $n\in\bN$ such that $a > b_{n}$. Consider $\epsilon = \frac{a-b_{n}}{2} > 0$. By the definition of convergence, there exists an $m\in \bN$ such that $\lvert a_{m} - a\rvert < \frac{a-b_{n}}{2} \implies a_{m} > a - \frac{a-b_{n}}{2} = \frac{a}{2} + \frac{b_{n}}{2} > \frac{b_{n}}{2} + \frac{b_{n}}{2} = b_{n}$. Thus we have reached that $a_{m} > b_{n}$ which contradicts the fact that the intervals $[a_{i}, b_{i}]$ are nested (i.e $a_{i} < b_{j}$ for all $i,j\in\bN$). Thus we have that $a\leq b_{n}$ for all $n\in \bN$. We then quickly note that we can't have $a = b_{n}$ either because $b_{n} > b_{n+1}$ and so we get that $a > b_{n+1}$ a contradiction. Thus $a < b_{n}$ for all $n\in \bN$.
+
+    For the remainder of this question, let $\bN$ include 0. Now assume $A$ is countable and let $h: \bN\to A$ be a surjection (which exists by problem \ref{easyproblem:countableequiv}). Define the following strategy for Player 2. For $i\in \bN$, consider the interval $(a_{i}, b_{i})$ (and define $a_{0} = 0$ and $b_{0} = 1$). Note that if $A \cap (a_{i}, b_{i}) = \emptyset$, then Player 2 has already won since $a < b_{i}$ and $a \geq a_{i+1} > a_{i}$ (since the Monotone sequence theorem states that $\lim_{n\to\infty} a_{n} = \sup\{a_{n}:n\in\bN\}$). Hence $a\in (a_{i}, b_{i})$ and thus is not an element of $A$. Thus let's always assume that $A\cap (a_{i}, b_{i})\neq \emptyset$. Define $n_{i} = \min\{n\in \bN: h(n) = (a_{i}, b_{i})\}$. Since $h$ is surjective and $A\cap (a_{i}, b_{i})\neq \emptyset$, $n_{i}$ always exists. Then have Player 2 choose $b_{i+1} = h(n_{i})$. We first observe that for all $i\in \bN$, we have that $n_{i+1} > n_{i}$ since $(a_{i+1}, b_{i+1})$ is a strict subset of $(a_{i}, b_{i})$. Thus we have that $n_{i} \geq i$. 
+
+    Now suppose for contradiction that this strategy is not a winning strategy for Player 2 and there exists $\{a_{i}\}, \{b_{i}\}$ such that $a\in A$. Say, $a = h(N)$ for $N\in \bN$. We must also have that $a = h(N) \in (a_{N}, b_{N})$ (which is discussed above for arbitrary $i\in \bN$). Note that in this case $n_{N} \geq N$ as shown in the above paragraph, but we also have that since $n_{N}$ is defined as the minimum such $n$ with $h(n) \in A\cap (a_{n}, b_{n})$, and we have that $a = h(N)\in A \cap (a_{N}, b_{N})$, the construction of the strategy gives us that $b_{N+1} = a$. However, this is a contradiction as $a < b_{n}$ for all $n\in \bN$. Thus, this is a winning strategy for Player 2. 
+    
+    It quickly follows that $[0,1]$ is uncountable because if it were countable, then Player 2 would have a winning strategy but any limit of a sequence of elements in $[0,1]$ lies in $[0,1]$ by problem \ref{medproblem:sequenceinclosure} (and because $[0,1]$ is closed and is thus equal to it's closure). Thus Player 1 will always win contradicting the fact that Player 2 has a winning strategy. $\Box$
+}
 \end{document} 
