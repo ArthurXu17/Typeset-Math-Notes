@@ -788,4 +788,86 @@
     
     It quickly follows that $[0,1]$ is uncountable because if it were countable, then Player 2 would have a winning strategy but any limit of a sequence of elements in $[0,1]$ lies in $[0,1]$ by problem \ref{medproblem:sequenceinclosure} (and because $[0,1]$ is closed and is thus equal to it's closure). Thus Player 1 will always win contradicting the fact that Player 2 has a winning strategy. $\Box$
 }
+\section{Sequence Convergence and Countability}
+\beasy {
+    Prove that every Hausdorff space is $T_{1}$, and that every $T_{1}$ space is $T_{0}$.
+} {
+    If $X$ is Hausdorff, and $x\neq y\in X$, we have that there exists disjoint open $U_{x}$ and $U_{y}$ with $x\in U_{x}$ and $y\in U_{y}$. In particular, ($x\in U_{x}$ and $y\not\in U_{x}$) and ($y\in U_{y}$ and $y\not\in U_{x}$), hence $X$ is $T_{1}$.
+
+    Let $X$ be $T_{1}$. Let $x\neq y \in X$. Then there exists $U_{x}$ such that $x\in U_{x}$ and $y\not\in U_{y}$. Hence $X$ is $T_{0}$. $\Box$
+}
+\beasy [T1uniqueconstantlimit]{
+    Let $(X, \ct)$ be a $T_{1}$ topological space, and let $x \in X$. Show the constant sequence $x, x, x, x, \dots$ converges to $x$ and to no other point.
+} {
+    First let's show convergence. Let $U$ be an arbitrary open neighbourhood containing $x$. Take $N = 7$, and we have that $n\geq N \implies x_{n} = x\in U$ as desired.
+
+    To show that the limit is unique, let $y\neq x\in X$. Since $X$ is $T_{1}$, there exists an open set $U_{y}$ such that $y\in U_{y}$ but $x\not\in U_{y}$. Then, for all $n\in\bN$, $x_{n} = x\not\in U_{y}$ and hence $x_{n}$ cannot converge to $y$. Thus the sequence converges to $x$ and the limit is unique. $\Box$
+}
+
+\beasy [t1equiv]{
+    Let $(X, \ct )$ be a topological space. Prove that the following are equivalent.
+    \renewcommand{\labelenumi}{(\arabic{enumi})}
+    \begin{enumerate}
+        \item $X$ is $T_{1}$
+        \item Every constant sequence in X converges only to its constant value.
+        \item For all $x\in X$, $\{x\}$ is closed
+        \item Every finite subset of X is closed.
+        \item For every subset $A \subseteq X$, $A = \cap \{U \subseteq X : U \text{ is open and } A \subseteq U \}$.
+    \end{enumerate}
+    \renewcommand{\labelenumi}{\alph{enumi})}
+} {
+    $(1)\implies (2)$
+
+    This is problem \ref{easyproblem:T1uniqueconstantlimit}.
+
+    $(2)\implies (3)$
+
+    Let $x\in X$ be arbitrary, we show that $X\setminus\{x\}$ is open. Let $y\in X\setminus\{x\}$ (i.e $y\neq x$). By assumption, the constant sequence $x_{n} = (x,x,\dots)$ doesn't converge to $y$. By definition of sequence convergence, there exists a set $U_{y}$ and an $N\in\bN$, such that $x_{N}\not\in U_{y}$. Since $x_{n} = x$ for all $n\in \bN$, this gives us that $x\not\in U_{y}$. Hence $U_{y}\subseteq X\setminus \{x\}$. Since $y$ was arbitrary, $X\setminus\{x\}$ is open and thus $\{x\}$ is closed. 
+
+    $(3)\implies (1)$
+
+    Let $x\neq y \in X$. By assumption $X\setminus\{x\}$ and $X\setminus\{y\}$ are open. Since $y\in X\setminus\{x\}$ and the set is open, there exists an open set $U_{y}\subseteq X\setminus\{x\}$ containing $y$. We get that $y\in U_{y}$ and $x\not\in U_{y}$. Since $x\in X\setminus\{y\}$ and the set is open, there exists an open set $U_{x}\subseteq X\setminus\{y\}$ containing $x$. We get that $x\in U_{x}$ and $y\not\in U_{x}$. Hence $X$ is $T_{1}$. 
+
+    $(3)\implies (4)$
+
+    A finite subset of $X$ is the finite union of the singletons of its elements, i.e $\{x_{1},\dots, x_{n}\} = \bigcup_{i = 1}^{n}\{x_{i}\}$. By assumption each $\{x_{i}\}$ is closed and the finite union of closed sets is closed.
+
+    $(4)\implies (5)$
+
+    The forward inclusion is obvious because if $x\in A$, then $x$ is an element of every open set that contains $A$ (and thus is an element of the intersection of all such sets). For the converse inclusion let's use the contrapositive. Suppose $x\not\in A$. By assumption, finite sets and thus singletons are closed, so $U = X\setminus\{x\}$ is open. In particular, $U$ is an element of the intersection on the right and we have that $x\not\in U$ and thus $x$ is not an element of the intersection as desired.
+
+    $(5)\implies (3)$
+
+    Let $x\in X$ be arbitrary. Take $A = X\setminus\{x\}$ and by assumption, we have that $A$ is the intersection of all the open sets that contain $A$. Note that there are only 2 sets that contain $A$, $X$ and $A$ itself. If $A$ is not open then the only open set containing $X\setminus\{x\}$ is $X$ and we get that $X = X\setminus\{x\}$, which is a contradiction. Hence $X\setminus\{x\}$ must be open and thus $\{x\}$ is closed.
+
+    So looks like we showed $(1)\implies (2)\implies (3)\implies (1)$ and $(3)\implies (4)\implies (5)\implies(3)$ completing the proof of equivalence. $\Box$
+}
+
+\beasy {
+    Let $X$ be uncountable. Show that $(X, \ctc)$ is not first countable.
+} {
+    Fix an $x\in X$. Suppose for contradiction that $x$ has a countable local basis. Let's say the local basis is $\cb = \{U_{i}\}_{i\in\bN}$ where each $U_{i} = X\setminus C_{i}$ for some countable set $C_{i}\subseteq X$. Define $C = \bigcup_{i\in\bN} C_{i}$. Note that $C$ is a countable union of countable sets making it countable by problem \ref{easyproblem:countableunioncountable}. Note that for all $y\neq x \in X$, we have that $X\setminus\{y\}$ is an open set containing $x$ and thus can contains a local basis elements. We have that $X\setminus C_{i_{0}}\subseteq X\setminus\{y\} \implies \{y\}\subseteq C_{i_{0}}\subseteq C \implies y\in C$. Since this can be done for arbitrary $y\in X\setminus \{x\}$, we get that $X\setminus \{x\}\subseteq C$ which states that an uncountable set is a subset of a countable set, a contradiction. Thus, no countable local basis for $x$ can exist and thus $X$ is not first countable. $\Box$
+}
+
+\beasy {
+    Let $X$ be a finite set. Show that the only $T_{1}$ topology on $X$ is the discrete topology.
+} {
+    We first remark that the discrete topology is $T_{1}$ since every set is open and thus for all $x\in X$, $X\setminus \{x\}$ is open which implies $\{x\}$ is closed. Since arbitrary $\{x\}$ are closed, $(X,\ctd)$ is $T_{1}$ by problem \ref{easyproblem:t1equiv}. Now let $\ct$ be an arbitrary $T_{1}$ topology on $X$. Problem \ref{easyproblem:t1equiv} also gives us that every finite subset of $X$ is closed. Since $X$ itself is finite, this implies that every subset is closed and hence every subset is open meaning that $\ct = \ctd$ as desired. $\Box$.
+}
+
+\beasy {
+    Let $X$ be a set and let $\ct_{1}$ and $\ct_{2}$ be two distinct topologies on $X$ such that $\ct_{1}\subseteq \ct_{2}$. If $(X, \ct_{1})$ is Hausdorff, does that imply that $(X, \ct_{2})$ is Hausdorff? What about the other direction? In both cases, prove it or give a counterexample.
+} {
+    If $\ct_{1}$ is Hausdorff, then $\ct_{2}$ is Hausdorff. Let $x\neq y\in X$. Since $\ct_{1}$ is Hausdorff, there exists disjoint open sets $U_{x},U_{y}\in \ct_{1}$ with $x\in U_{x}$ and $y\in U_{y}$. Note that we also have that $U_{x}, U_{y}\in \ct_{2}$ which tells us that $\ct_{2}$ is Hausdorff.
+
+    If $\ct_{2}$ is Hausdorff, $\ct_{1}$ need not be Hausdorff. Take $X = \bR$, $\ct_{2} = \ctd$ and $\ct_{1} = \ctt$ (and we have that $\ctt\subseteq \ctd$). The discrete topology is Hausdorff because we can take $U_{x} = \{x\}$ and $U_{y} = \{y\}$. The trivial topology is not Hausdorff since if we take $x = 1$ and $y = 2$, the only open set that contains $x$ is $\bR$ and the same is true for $y$. Thus the only possible choice of $U_{x}$ and $U_{y}$ is $\bR$ for both and they are not disjoint. Hence $\ctt$ is not Hausdorff. $\Box$
+}
+
+\beasy {
+    Show that every second countable topological space is both separable and first countable.
+} {
+    First let's show that second countability implies first countability. Let $\cb$ be a countable basis for a topological space $(X, \ct)$. Let $x\in X$ be arbitrary. Consider $\cb_{x} = \{B\in \cb:\ x\in B\}$. We note that this is a local basis because for all open sets $U$ containing $x$, $U = \bigcup_{B\in \cc} B$ for some $\cc\subseteq \cb$. In particular, one of the basis elements in the union must contain $x$, let's call it $B_{0}$. We then have that $B_{0}\subseteq U$ and that $B_{0}\in \cb_{x}$ by construction. Hence, $\cb_{x}$ is a local basis for $x$ and since $x$ was arbitrary, $(X,\ct)$ is first countable.
+
+    To show that every second countable space is separable, let $\cb = \{B_{i}\}_{i\in\bN}$ be a countable basis. Invoking the axiom of choice (I probably should cite usages more frequently), for all $i\in \bN$, choose $d_{i}\in B_{i}$ and construct the set $D = \{d_{i}:i\in \bN\}$. $D$ is countable as it is index by the natural numbers, and we have that $D$ is dense because for all open sets $U$, $U$ contains a basis element $B_{i}$ and hence $d_{i}\in D\cap U$ (i.e $D\cap U\neq \emptyset$). $D$ is a countable dense subset and thus $X$ is separable. $\Box$ 
+}
 \end{document} 
