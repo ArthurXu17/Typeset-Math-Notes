@@ -630,7 +630,7 @@
     Define the map $h:A\to \bN$ by $h(a) = \min\{n\in \bN:\ s(n) = a\}$. The fact that $s$ is surjective means that the set is non empty for all $a\in A$ so that $h(a)$ actually takes on a value. Note that $h$ is injective because if $h(a) = h(b)$, then $a = s(h(a)) = s(h(b)) = b$. Thus $h$ is a bijection from $A$ to $h(A)\subseteq \bN$. Since $h(A)$ is a subset of $\bN$, it must be countable, and thus $A$ is countable as well. Since $A$ is infinite, $A$ is denumerable and thus a bijection exists. $\Box$
 }
 
-\beasy {
+\beasy [FiniteSubsetsCountable] {
     Let $A$ be a countable set. Prove that $\text{Fin}(A) := \{ X \subseteq A : X \text{ is finite} \}$ is countable.
 } {
     If $A$ is finite, say with $n$ elements, we know that $\text{Fin}(A)$ has $2^{n}$ elements (i.e is also finite). Say $A$ is denumerable, and $f: A\to\bN$ is a bijection. Define $g: \text{Fin}(A)\to \bN$ in the following way. For $i\in \bN$, let $p_{i}$ denote the $i$th smallest prime. For an arbitrary $X = \{x_{1},\dots, x_{n}\}\in \text{Fin}(A)$, reorder so that $f(x_{1}) < \dots < f(x_{n})$ (we know all values are distinct since $f$ is a bijection) and define $g(X) = p_{1}^{f(x_{1})}\dots p_{n}^{f(x_{n})}$. We simply note that $g$ is injective because if $g(X) = g(Y)$, we first note that they must $X$ and $Y$ must have the same number of elements, otherwise $g(X)$ and $g(Y)$ would have differing number of prime factors (and thus can't be equal). Then we have that $p_{1}^{f(x_{1})}\dots p_{n}^{f(x_{n})} = p_{1}^{f(y_{1})}\dots p_{n}^{f(y_{n})}$, which by prime factorization tells us that $f(x_{i}) = f(y_{i})$ for all $1\leq i \leq n$, and since $f$ is a bijection we get that $x_{i} = y_{i}$ for all $i$ and hence $X = Y$. Since we have found an injection from $\text{Fin}(A)$ into $\bN$, by problem \ref{easyproblem:countableequiv}, $\text{Fin}(A)$ is countable.
@@ -654,14 +654,14 @@
     Now suppose $\{B_{n}\}_{n\in \bN}$ is a countable collection of not necessarily disjoint sets. We then simply define $C_{n} = B_{n} \setminus\left(\bigcup_{i\leq n} B_{i}\right)$. Then the $C_{n}$ are mutually disjoint and hence by above $\bigcup_{n\in \bN}C_{n}$ is countable. Note however, that $\bigcup_{n\in \bN} B_{n} = \bigcup_{n\in \bN}C_{n}$. The converse inclusion is obvious because $C_{n}\subseteq B_{n}$ for all $n$. For the forward inclusion, if $x$ is an element of the left set, let $n_{0} = \min\{n\in \bN:\ x\in B_{n}\}$. Then $x\in C_{n_{0}}$ and hence is an element of the right set. Thus $\{B_{n}\}_{n\in \bN}$ is countable. $\Box$
 }
 
-\beasy {
+\beasy [RsecondCountable]{
     Show that $\cb_{\bQ} = \{ (a, b) \subseteq \bR : a, b \in \bQ \}$ is countable, and conclude that $\bru$ is second countable.
 } {
     Simply note that we can construct a bijection $\bQ\times \bQ\to \cb_{\bQ}$ by mapping the ordered pair $(a,b)$ to the interval $(a,b)\subseteq \bR$. This is clearly surjective. I would also say it's clearly injective but for completion we note that if $a_{1}\neq a_{2}$ or $b_{1}\neq b_{2}$, then the intervals $(a_{1}, b_{1})$ and $(a_{2}, b_{2})$ are not equal. If $a_{1} \neq a_{2}$, WLOG assume $a_{1} < a_{2}$, and take a real number $r$ such that $a_{1} < \min(b_{1}, a_{2})$. Then $r\in (a_{1}, b_{1})$ but $r\not\in (a_{2}, b_{2})$. If $b_{1}\neq b_{2}$, WLOG assume $b_{1}  < b_{2}$, choose $r$ such that $\max(a_{2}, b_{1}) < r < b_{2}$ and we get that $r\in (a_{2}, b_{2})$ but $r\not\in (a_{1}, b_{1})$. Note that $\bQ$ is countable and by problem \ref{easyproblem:productcountable} we get that $\bQ\times \bQ$ and thus $\cb_{\bQ}$ is countable. We know by \ref{easyproblem:qintervalbasis}, that $\cb_{\bQ}$ is a basis for $\bru$ and since it is countable, we have that $\bru$ is second countable. $\Box$
 }
 
 
-\beasy {
+\beasy [separableImpliesCCC]{
     A topological space $(X, \ct )$ is said to have the countable chain condition (usually we just say ``$(X, \ct )$ is ccc'') if there are no uncountable collections of mutually disjoint open subsets of $X$. In problem \ref{medproblem:qdense}, we showed that $\bru$ is ccc. Prove that any separable space is ccc.
 } {
     Let $D$ be a countable dense subset of $X$. Suppose for contradiction there was an uncountable collection $\{U_{\lambda}\}_{\lambda\in \Lambda}$ of mutually disjoint open subsets of $X$. Since $D$ is dense, for all $\lambda\in \Lambda$ there is a $d_{\lambda}\in D\cap U_{\lambda}$. By assumption the $U_{\lambda}$ are disjoint so if $\lambda_{1}\neq \lambda_{2}$, $d_{\lambda_{1}}\neq d_{\lambda_{2}}$. Note that we get an uncountable set $\{d_{\lambda}\}_{\lambda\in \Lambda}$ which is a subset of $D$. This is a contradiction as subsets of countable sets must be countable. Hence, there are no uncountable collections of mutually disjoint open subsets of $X$. $\Box$
@@ -691,7 +691,7 @@
     To show that it generates $\bru^{n}$, it suffices to show that every element of $\cb'$ can be written as a union of elements in $\cb$. First let's quickly remark that the proof in the above paragraph justifies in general that for any open ball $B_{\epsilon}(x)\subseteq \bR^{n}$, there exists a point with rational coordinates $y\in \bQ^{n}$ and rational number $q > 0$, such that $B_{\frac{2q}{3}}(y)\subseteq B_{\epsilon}(x)$. Furthermore, note that in the above proof, $x\in B_{\frac{2q}{3}}(y)$ since $d(x,y) < \frac{q}{3}$. Then let $B_{\epsilon}(x)$ be an arbitrary open ball. Since it is open in $\bru$, for all $z\in B_{\epsilon}(x)$, there exists an open ball $B_{z}$ contained in $B_{\epsilon}(x)$. By the justification above, for each $z$, there exists a rational number $q_{z}$ and vector $y^{(z)}\in \bQ^{n}$ with $B_{q_{z}}(y^{(z)})\subseteq B_{z}$. Then, we write $B_{\epsilon}(x) = \bigcup_{z\in B_{\epsilon}(x)}B_{q_{z}}(y^{(z)})$. And since every open set in $\bru^{n}$ can be written as a union of elements of $\cb'$ and every element of $\cb'$ can be written as a union of elements in $\cb$, we have that every open set in $\bru^{n}$ can be written as a union of elements in $\cb$, and hence $\cb$ generates the usual topology of $\bR^{n}$. Since $\cb'$ is countable, $\bru^{n}$ is second countable. $\Box$
 }
 
-\bmed {
+\bmed [sorgenfreyNotSecondCountable]{
     In problem \ref{easyproblem:sorgenfrey}, we showed that the collection $\cb_{\bQ}$ of intervals $[a, b)$ with rational endpoints is not a basis for the Sorgenfrey line. Take this a step further by proving that there is no countable basis for the Sorgenfrey line. That is, prove that the Sorgenfrey line is not second countable.
 } {
     Suppose for contradiction that $\cb = \{B_{n}\}_{n\in \bN}$ is a countable basis for the Sorgenfrey line. Let $\mathcal{C}\subseteq \cb$ be the collection of elements of $\cb$ that are bounded below (Note that $\mathcal{C}$ is countable as it is a subset of a countable set). Define $A = \{\inf B:\ B\in \mathcal{C}\} \subseteq \bR$ (each infimum exists by the completeness of $\bR$). Note that $A$ is a countable as it is the range of the infimum function applied to each element of $\mathcal{C}$ (i.e there is a surjection of a countable set onto it and hence it is countable by problem \ref{easyproblem:countableequiv}). Since $A$ is a countable subset of $\bR$, there exists $q\in \bR\setminus A$. Consider $U = [q, q+5)$ which is open in the Sorgenfrey Line. Since we are assuming that $\cb$ is a basis, $U$ must be equal to the union of elements in $\cb$. Say $U = \bigcup_{B\in \mathcal{D}}B$ where $\mathcal{D}\subseteq \cb$. First note that $\mathcal{D}\subseteq \mathcal{C}$ (i.e all the sets are bounded below) because $U$ is bounded below. Furthermore, for all $B\in \mathcal{D}$, we must have $\inf B \geq q$. Otherwise, if $\inf B < q$ for some $B\in \mathcal{D}$, we get that there exists $x\in B$ (and thus is an element of the right) with $x < q$, but this would imply that $x\not\in U$ which contradicts the fact that the 2 sets are equal. Hence $\inf B\geq q$ for all $B\in \mathcal{D}$. However, $q$ was chosen so that $q\not\in A$, so $q\neq \inf B$ for all $B\in \mathcal{C}\subseteq \mathcal{D}$, so this becomes a strict inequality, i.e $\inf B > q$ for all $B\in \mathcal{D}$. However, if this is the case, we would have that $q\not\in B$ for all $B\in \mathcal{D}$, but $q\in U$ and so $U\neq \bigcup_{B\in \mathcal{D}}B$ for all possible subcollections $\mathcal{D}$. Hence $\cb$ cannot be a basis implying that the Sorgenfrey has no countable basis and is thus not second countable. $\Box$
@@ -789,7 +789,7 @@
     It quickly follows that $[0,1]$ is uncountable because if it were countable, then Player 2 would have a winning strategy but any limit of a sequence of elements in $[0,1]$ lies in $[0,1]$ by problem \ref{medproblem:sequenceinclosure} (and because $[0,1]$ is closed and is thus equal to it's closure). Thus Player 1 will always win contradicting the fact that Player 2 has a winning strategy. $\Box$
 }
 \section{Sequence Convergence and Countability}
-\beasy {
+\beasy [t2t1t0]{
     Prove that every Hausdorff space is $T_{1}$, and that every $T_{1}$ space is $T_{0}$.
 } {
     If $X$ is Hausdorff, and $x\neq y\in X$, we have that there exists disjoint open $U_{x}$ and $U_{y}$ with $x\in U_{x}$ and $y\in U_{y}$. In particular, ($x\in U_{x}$ and $y\not\in U_{x}$) and ($y\in U_{y}$ and $y\not\in U_{x}$), hence $X$ is $T_{1}$.
@@ -843,7 +843,7 @@
     So looks like we showed $(1)\implies (2)\implies (3)\implies (1)$ and $(3)\implies (4)\implies (5)\implies(3)$ completing the proof of equivalence. $\Box$
 }
 
-\beasy {
+\beasy [cocountableNotFirstCountable] {
     Let $X$ be uncountable. Show that $(X, \ctc)$ is not first countable.
 } {
     Fix an $x\in X$. Suppose for contradiction that $x$ has a countable local basis. Let's say the local basis is $\cb = \{U_{i}\}_{i\in\bN}$ where each $U_{i} = X\setminus C_{i}$ for some countable set $C_{i}\subseteq X$. Define $C = \bigcup_{i\in\bN} C_{i}$. Note that $C$ is a countable union of countable sets making it countable by problem \ref{easyproblem:countableunioncountable}. Note that for all $y\neq x \in X$, we have that $X\setminus\{y\}$ is an open set containing $x$ and thus can contains a local basis elements. We have that $X\setminus C_{i_{0}}\subseteq X\setminus\{y\} \implies \{y\}\subseteq C_{i_{0}}\subseteq C \implies y\in C$. Since this can be done for arbitrary $y\in X\setminus \{x\}$, we get that $X\setminus \{x\}\subseteq C$ which states that an uncountable set is a subset of a countable set, a contradiction. Thus, no countable local basis for $x$ can exist and thus $X$ is not first countable. $\Box$
@@ -855,7 +855,7 @@
     We first remark that the discrete topology is $T_{1}$ since every set is open and thus for all $x\in X$, $X\setminus \{x\}$ is open which implies $\{x\}$ is closed. Since arbitrary $\{x\}$ are closed, $(X,\ctd)$ is $T_{1}$ by problem \ref{easyproblem:t1equiv}. Now let $\ct$ be an arbitrary $T_{1}$ topology on $X$. Problem \ref{easyproblem:t1equiv} also gives us that every finite subset of $X$ is closed. Since $X$ itself is finite, this implies that every subset is closed and hence every subset is open meaning that $\ct = \ctd$ as desired. $\Box$.
 }
 
-\beasy {
+\beasy [HausdorffRefine]{
     Let $X$ be a set and let $\ct_{1}$ and $\ct_{2}$ be two distinct topologies on $X$ such that $\ct_{1}\subseteq \ct_{2}$. If $(X, \ct_{1})$ is Hausdorff, does that imply that $(X, \ct_{2})$ is Hausdorff? What about the other direction? In both cases, prove it or give a counterexample.
 } {
     If $\ct_{1}$ is Hausdorff, then $\ct_{2}$ is Hausdorff. Let $x\neq y\in X$. Since $\ct_{1}$ is Hausdorff, there exists disjoint open sets $U_{x},U_{y}\in \ct_{1}$ with $x\in U_{x}$ and $y\in U_{y}$. Note that we also have that $U_{x}, U_{y}\in \ct_{2}$ which tells us that $\ct_{2}$ is Hausdorff.
@@ -863,11 +863,94 @@
     If $\ct_{2}$ is Hausdorff, $\ct_{1}$ need not be Hausdorff. Take $X = \bR$, $\ct_{2} = \ctd$ and $\ct_{1} = \ctt$ (and we have that $\ctt\subseteq \ctd$). The discrete topology is Hausdorff because we can take $U_{x} = \{x\}$ and $U_{y} = \{y\}$. The trivial topology is not Hausdorff since if we take $x = 1$ and $y = 2$, the only open set that contains $x$ is $\bR$ and the same is true for $y$. Thus the only possible choice of $U_{x}$ and $U_{y}$ is $\bR$ for both and they are not disjoint. Hence $\ctt$ is not Hausdorff. $\Box$
 }
 
-\beasy {
+\beasy [2ndCimpliesSepAnd1stC] {
     Show that every second countable topological space is both separable and first countable.
 } {
     First let's show that second countability implies first countability. Let $\cb$ be a countable basis for a topological space $(X, \ct)$. Let $x\in X$ be arbitrary. Consider $\cb_{x} = \{B\in \cb:\ x\in B\}$. We note that this is a local basis because for all open sets $U$ containing $x$, $U = \bigcup_{B\in \cc} B$ for some $\cc\subseteq \cb$. In particular, one of the basis elements in the union must contain $x$, let's call it $B_{0}$. We then have that $B_{0}\subseteq U$ and that $B_{0}\in \cb_{x}$ by construction. Hence, $\cb_{x}$ is a local basis for $x$ and since $x$ was arbitrary, $(X,\ct)$ is first countable.
 
     To show that every second countable space is separable, let $\cb = \{B_{i}\}_{i\in\bN}$ be a countable basis. Invoking the axiom of choice (I probably should cite usages more frequently), for all $i\in \bN$, choose $d_{i}\in B_{i}$ and construct the set $D = \{d_{i}:i\in \bN\}$. $D$ is countable as it is index by the natural numbers, and we have that $D$ is dense because for all open sets $U$, $U$ contains a basis element $B_{i}$ and hence $d_{i}\in D\cap U$ (i.e $D\cap U\neq \emptyset$). $D$ is a countable dense subset and thus $X$ is separable. $\Box$ 
+}
+
+\bmed {
+    Fill in the table :)
+} {
+    \begin{center}
+        \begin{tabular}{|c|c|c|c|c|c|c|c|}
+            \hline
+            Space & $T_{0}$ & $T_{1}$ & $T_{2}$ & Sep. & 1st C. & 2nd C. & ccc\\\hline
+            $\bru$ & T (\ref{easyproblem:t2t1t0}) & T (\ref{easyproblem:t2t1t0})& T & T (\ref{easyproblem:2ndCimpliesSepAnd1stC}) & T (\ref{easyproblem:2ndCimpliesSepAnd1stC}) & T (\ref{easyproblem:RsecondCountable})  & T (\ref{easyproblem:separableImpliesCCC})\\\hline
+            $(\bR, \ctf)$ & T (\ref{easyproblem:t2t1t0}) & T & F & T & F (\ref{easyproblem:cocountableNotFirstCountable})& F (\ref{easyproblem:2ndCimpliesSepAnd1stC})& T\\\hline
+            $(\bR, \ctc)$ & T (\ref{easyproblem:t2t1t0}) & T & F & F &  F (\ref{easyproblem:cocountableNotFirstCountable})&F (\ref{easyproblem:2ndCimpliesSepAnd1stC}) & T \\\hline
+            $(\bR, \ctd)$ & T (\ref{easyproblem:t2t1t0}) & T (\ref{easyproblem:t2t1t0})& T & F & T & F & F\\\hline
+            $(\bR, \ctr)$ & T & F & F (\ref{easyproblem:t2t1t0}) & T & T (\ref{easyproblem:2ndCimpliesSepAnd1stC}) & T & T \\\hline
+            $(\bR, \ct_{p})$ & T & F & F (\ref{easyproblem:t2t1t0}) & T &T & F & T\\\hline
+            Sorgenfrey Line & T (\ref{easyproblem:t2t1t0}) & T (\ref{easyproblem:t2t1t0})& T (\ref{easyproblem:sorgenfrey} + \ref{easyproblem:HausdorffRefine}) & T (\ref{easyproblem:sorgenfrey}) & T & F (\ref{medproblem:sorgenfreyNotSecondCountable}) & T (\ref{easyproblem:separableImpliesCCC})\\\hline
+            $(\bN, \ctf)$ & T (\ref{easyproblem:t2t1t0}) & T & F & T (\ref{medproblem:CountableSpaceSepCCC}) & T (\ref{easyproblem:2ndCimpliesSepAnd1stC}) & T & T (\ref{medproblem:CountableSpaceSepCCC}) \\\hline
+            $(\bN, \ctc)$ & T (\ref{easyproblem:t2t1t0}) & T (\ref{easyproblem:t2t1t0})& T & T (\ref{medproblem:CountableSpaceSepCCC}) & T  & T (\ref{medproblem:CountableSpaceSepCCC}) & T (\ref{medproblem:CountableSpaceSepCCC}) \\\hline
+            $(\bN, \ctd)$ & T (\ref{easyproblem:t2t1t0}) & T (\ref{easyproblem:t2t1t0})& T & T (\ref{medproblem:CountableSpaceSepCCC}) & T  & T (\ref{medproblem:CountableSpaceSepCCC}) & T (\ref{medproblem:CountableSpaceSepCCC}) \\\hline
+        \end{tabular}
+    \end{center}
+    \begin{itemize}
+        \item $\bru$ is Hausdorff because given $x\neq y$, take $\epsilon = \frac{\lvert y-x\rvert}{3}$ and then $B_{\epsilon}(x)$ and $B_{\epsilon}(y)$ are disjoint open subsets separating $x$ and $y$
+        \item $(\bR, \ctf)$ and $(\bR, \ctc)$ are $T_{1}$ because given $x\neq y$, $\bR\setminus\{y\}$ contain $x$ but not $y$ and $\bR\setminus\{x\}$ contains $y$ but not $x$ and both these sets are open in both topologies. The same argument works for $(\bN, \ctf)$.
+        \item $(\bR, \ctf)$ and $(\bR, \ctc)$ are not $T_{2}$. We note that any 2 points cannot be separated. Take $x\neq y\in \bR$. Suppose $U_{x}$ contains $x$ and $U_{y}$ contains $y$ and that they are disjoint. We know that $U_{x} = \bR\setminus V_{x}$ and $U_{y} = \bR\setminus V_{y}$ where $V_{x},V_{y}$ are finite/countable. Then, $\bR\setminus V_{x} \cap \bR\setminus V_{y} = \emptyset \implies \bR = V_{x}\cup V_{y}$ and we cannot express an uncountable set as the union of 2 finite/countable sets. Note that this also proves that both of these topologies are ccc, since the only collection of mutually disjoint non empty open sets can only contain a single set. The same argument works for $(\bN, \ctf)$.
+        \item $(\bR, \ctc)$ is not separable. Suppose for contradiction that a countable dense set $D$. Note that $U = \bR\setminus D$ is open and that $U \cap D = \emptyset$. By problem \ref{easyproblem:denseequiv}, this implies that $D$ is not dense a contradiction.
+        \item $(\bR, \ctf)$ is separable. In fact, every countable subset is dense. Let $C$ be an arbitrary countable subset. Let $U = \bR\setminus F$ be an arbitrary open set in the cofinite topology. If $U\cap C = \emptyset$, this implies that $C\subseteq \bR\setminus U = F$ which says that a countable set is a subset of a finite set, a contradiction.
+        \item $\ctd$ on any set $X$ is Hausdorff because given $x\neq y\in X$, $\{x\}$ and $\{y\}$ are disjoint open sets separating the 2 points. 
+        \item $\ctd$ on any set $X$ is first countable because $\{x\}$ is always a local basis at $x$ ($\{x\}\subseteq U$ for all sets $U$ containing $x$ ).
+        \item $\ctd$ on a set $X$ is separable if and only if $X$ is countable.This is because since every set is closed, every set is equal to its closure and thus the only dense set is $X$. So whether or not this dense set is countable is based on if $X$ is countable.
+        \item $\ctd$ on a set $X$ is ccc if and only if $X$ is countable. If $X$ is countable, then every uncountable collection must intersect at one point by pigeonhole principle. If $X$ is uncountable, then $\{\{x\}: x\in X\}$ is an uncoutnable collection of disjoint open sets.
+        \item $\ctd$ on a set $X$ is second countable if and only if $X$ is coutnable. If $X$ is countable, $\{\{x\}: x\in X\}$ is a countable basis. If $X$ is uncountable, each singleton $\{x\}$ must be a union of elements in the basis. The only 2 subsets of $\{x\}$ are $\emptyset$ and $\{x\}$, so $\{x\}$ must be in the basis. Since this is true for all $x\in X$, we get uncountable many elements in any basis.
+        \item $(\bR, \ctr)$ is not $T_{1}$ because if we take $x = 0$, and $y = 1$, every open set containing $x$ will contain $y$ as well. It is $T_{0}$ however because if $x\neq y$, WLOG take $x < y$ and $U_{y} = (\frac{x+y}{2}, \infty)$. Then $y\in U_{y}$ and $x\not\in U_{y}$.
+        \item $(\bR, \ctr)$ is separable. Not only is $\bQ$ dense, but $\bN$ is dense as well. Since every open set $U$ is of the form $(a,\infty)$, there exists a natural number in $U$ and thus the intersection is not empty.
+        \item $(\bR, \ctr)$ is second countable because we take the (countable) basis $\cb = \{(q,\infty): q\in \bQ\}$. This clearly covers $\bR$, and if $(q_{1}, \infty), (q_{2}, \infty)\in \cb$, their intersection is just $(\max(q_{1}, q_{2}),\infty)$ which is still an element of $\cb$, and thus $\cb$ is a basis. To show that it generates $\ctr$ simply note that $(a,\infty) = \bigcup_{q\in \bQ_{ \geq a}}(q, \infty)$.
+        \item $(\bR, \ctr)$ is ccc because every 2 open sets intersect, and thus the only possible collection of disjoint nonempty open contains a single element (and is thus countable).
+        \item $(\bR, \ct_{p})$ is $T_{0}$. Given $x \neq y$, WLOG assume $y\neq p$. Then consider $U_{x} = \{x, p\}$ (which is open in $\ct_{p}$). Since $y\neq x$ and $y\neq p$, $y\not\in p$, and we have that $x\in U_{x}$ as desired. Note however that it is not $T_{1}$. Consider the points $p$, and any $x\neq p\in \bR$. Note that every open set containing $x$ will also contain $p$ by the definition of $\ct_{p}$ and thus it is not $T_{1}$.
+        \item $(\bR, \ct_{p})$ is separable because $\{p\}$ is a countable dense set. Indeed every open set intersects with $\{p\}$ by the definition of $\ct_{p}$.
+        \item $(\bR, \ct_{p})$ is first countable because $\{\{x, p\}\}$ is a countable local basis at an arbitrary point $x$. $\{x,p\}$ indeed is open by the definition of $\ct_{p}$, and any open set $U$ containing $x$ will contain $p$ and thus $\{x,p\}\subseteq U$ as desired.
+        \item $(\bR, \ct_{p})$ is not second countable because for all $x\neq p\in \bR$, $\{p,x\}$ is open while $\{x\}$ is not open, so for $\{p,x\}$ to be written as a union of basis elements, $\{p, x\}$ must be an element of the basis. Since this is true for all $x\in \bR\setminus\{p\}$, we must have an uncountable basis.
+        \item $(\bR, \ct_{p})$ is ccc because every open set intersects at $p$ so there are no uncountable collections of disjoint open sets.
+        \item The Sorgenfrey Line is first countable because we can take the local basis at $x$ to be $\cb_{x} = \{(a,b): a,b\in \bQ, x\in (a,b)\}$ (recall that open intervals are open in the Sorgenfrey Line as shown in problem \ref{easyproblem:sorgenfrey}). Given any open set $U$ containing $x$, there is a basis element $[a,b)$ containing $x$ contained in $U$. We then know that there exists an interval with rational endpoints nested inside $[a,b)$ thus this is a countable local basis.
+        \item $(\bN, \ctf)$ is second countable. Note that $\text{Fin}(\bN)$ is countable by problem \ref{easyproblem:FiniteSubsetsCountable}. Note that there is a bijection from $f: \text{Fin}(\bN)\to \ctf$ where a set $A$ is mapped to $\bN\setminus A$. Thus $\ctf$ is countable. Note that any topology is itself a basis that generates itself. Thus $\ctf$ is a countable basis for $\ctf$ in this case and hence $(\bN, \ctf)$ is second countable.
+        \item $(\bN, \ctc)$ is Hausdorff because in this topology singletons are open since $\bN\setminus\{n\}$ is countable. Singletons being open also gives us that the space is first countable because $\{\{n\}\}$ forms a local basis for all $n\in \bN$.
+    \end{itemize}
+}
+
+\bmed {
+    A subset $A$ of a topological space $(X, \ct )$ is called a $G_{\delta}$ set if it equals a countable intersection of open subsets of $X$. In other words, $A \subseteq X$ is a $G_{\delta}$ set if there exist open sets $U_{n}$, $n \in \bN$, such that $A = \bigcap_{n\in\bN} U_{n}$. Show that in a first countable $T_{1}$ space, $\{x\}$ is a $G_{\delta}$ set for every $x \in X$.
+} {
+    Let $x\in X$. Since $X$ is first countable, let $\cb_{x} = \{B_{n}: n\in \bN\}$ be a countable local basis. We then quickly show that $\{x\} = \bigcap_{n\in \bN} B_{n}$. The forward direction follows by the definition of a local basis since $x\in B_{n}$ for all $n\in \bN$. For the converse inclusion, let $p\in B_{n}$ for all $n\in \bN$. Suppose for contradiction that $p\neq x$. Since $X$ is first countable, there exists an open set $U_{x}$ such that $x\in U_{x}$ and $p\not\in U_{x}$. By the definition of a local basis, there exists $B_{n_{0}}$ such that $B_{n_{0}}\subseteq U_{x}$. We reach a contradiction since $p\in B_{n_{0}}$, but $p$ is not an element of $U_{x}$. Hence $p \in B_{n}$ for all $n\in \bN$ implies that $p = x$ completing the proof of the set equality. Finally, by the definition of a local basis, each $B_{n}$ is open, and thus $\{x\}$ is $G_{\delta}$
+}
+
+\bmed {
+    A topological space is called a $G_{\delta}$ space if every closed set is $G_{\delta}$. Give an example of a space that is not a $G_{\delta}$ space.
+} {
+    Consider $(\bR, \ctf)$. $\{0\}$ is a closed set by the definition of the cofinite topology. Suppose for contradiction that $\{0\}$ is the intersection of countably many open sets. Say $U_{i} = \bR\setminus F_{i}$ are the open sets (and $F_{i}$ are finite). Then we get that $\{0\} = \bigcap_{i\in \bN} \bR\setminus F_{i} \implies \{x\} = \bR\setminus\left(\bigcup_{i\in \bN} F_{i}\right) \implies \bigcup_{i\in \bN} F_{i} = \bR\setminus\{x\}$. We get that an uncountable set is a countable union of finite sets which is a contradiction by problem \ref{easyproblem:countableunioncountable}. Hence $(\bR, \ctf)$ is not a $G_{\delta}$ space. $\Box$
+}
+
+\bmed [nestedLocalBasis] {
+    Let $(X, \ct )$ be a first countable topological space. Show that every $x \in X$ has a countable nested local basis. That is, for every $x \in X$, show that there is a local basis $B_{x} = \{ B_{n} : n \in \bN \}$ such that $B_{1} \supseteq B_{2} \supseteq B_{3} \supseteq \cdots$
+} {
+    Let $x\in X$, $\cb_{x}' = \{B_{n}': n\in \bN\}$ be a countable basis. To get a nested local basis, simply take $B_{n} = \bigcap_{i = 1}^{n}B_{i}'$. It then follows that $B_{n} = B_{n-1}\cap B_{n}'$ which implies that $B_{n}\supseteq B_{n-1}$ for all $n\in \bN$. Each $B_{n}$ remains open because finite intersections of open sets are still open. And $x\in B_{n}$ for all $n\in \bN$ because $x\in B_{i}'$ for all $1\leq i \leq n$. Finally, every open set $U$ containing $x$ contains a $B_{n}$ because there exists $B_{n}'$ contained in $U$ and $B_{n}\subseteq B_{n}'$. $\Box$
+}
+
+\bmed {
+    Let $(X, \ct )$ be a first countable topological space, and let $A \subseteq X$. Prove that $x \in \overline{A}$ if and only if there is a sequence of elements of $A$ converging to $x$.
+} {
+    For the forward inclusion, let $\cb_{x}$ be a nested local basis for $x$ (given by problem \ref{medproblem:nestedLocalBasis}). Then by the axiom of choice, for all $n\in \bN$, choose an $x_{n}\in B_{n}\cap A$ ($B_{n}\cap A\neq \emptyset$ since $x\in \overline{A}$ and $B_{n}$ is open). Note that $(x_{n})_{n = 1}^{\infty}$ converges to $x$. Given an arbitrary open set $U$ containing $x$, by the definition of a local basis, there exists a set $B_{n_{0}}\subseteq U$. Since this is a nested local basis, for all $n\geq n_{0}$, $x_{n}\in B_{n}\subseteq B_{n_{0}}\subseteq U$ and hence the sequence converges to $x$. 
+    
+    For the converse inclusion let $U$ be an arbitrary open set containing $x$. By the definition of sequence convergence, there exists $x_{n_{0}}\in U$. Since the sequence is contained in $A$, we have that $x_{n_{0}}\in U\cap A$ and thus $U\cap A\neq \emptyset$ for all open sets $U$ containing $x$. Hence, $x\in \overline{A}$. $\Box$ 
+}
+
+\bmed [CountableSpaceSepCCC] {
+    Is every countable topological space $X$ (ie. one in which the underlying set is countable) separable? What about ccc? Can a countable space be first countable but not second countable?
+} {
+    Every countable space $X$ is separable because $X$ itself is a countable dense set. It is also ccc because if there were an uncountable collection of disjoint non empty open sets, they're union will be an uncountable subset of $X$ which contradicts the fact that $X$ is countable. Finally we show that a first countable topological space with countably many elements is also second countable. Given local bases $\cb_{x}$ for all $x$, take $\cb = \bigcup_{x\in X}\cb_{x}$ This is a countable union of countable sets and is thus countable by problem \ref{easyproblem:countableunioncountable}. It covers $X$ since each $x$ is an element of a set in $\cb_{x}$. Finally, given $B_{1}, B_{2}\in \cb$ that intersect non trivially. Let $p\in B_{1}\cap B_{2}$. This is an open neighbourhood of $p$ and thus there exists a set in $\cb_{p}\subseteq \cb$ containing $p$ contained in $B_{1}\cap B_{2}$ by the definition of a local base. Thus $\cb$ is indeed a basis. To show that it generates the topology, let $U$ be open and let $x\in X$. Then by the definition of a local basis, there exists $B_{x}\in \cb_{X}\subseteq \cb$ containing $x$ that is contained in $U$. Thus by \ref{medproblem:basisequiv}, $\cb$ generates this topology. $\Box$
+}
+
+\bhard {
+    Construct a topological space $(X, \ct )$ which is countable (ie. $X$ is countable) but not first countable.
+} {
+    
 }
 \end{document} 

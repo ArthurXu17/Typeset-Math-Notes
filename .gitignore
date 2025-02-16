@@ -298,6 +298,8 @@ TSWLatexianTemp*
 # pmath 347
 PMATH 347.pdf
 PMATH 347.tex
+PMATH 352.pdf
+PMATH 352.tex
 
 # REVTeX puts footnotes in the bibliography by default, unless the nofootinbib
 # option is specified. Footnotes are the stored in a file with suffix Notes.bib.
